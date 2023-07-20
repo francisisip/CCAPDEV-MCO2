@@ -1,0 +1,256 @@
+<link rel="stylesheet" href="static/css/index.css">
+
+<header>
+    <nav>
+        <div>
+        <div class="home">
+            <a href="index-loggedin.html" class="logo">
+            <img src="images/omsilog-white.png" class="omsilog">
+            </a>
+        </div>
+        </div>
+        <div class="nav-right">
+        <input type="text" class="search" placeholder="Search" />
+        <div>
+            <a class="search-icon-container" href="web/search-loggedin.html">
+                <img id="search-icon-nav" src="images/search-icon-white.png">
+            </a>
+        </div>
+        <div class="dropdown">
+            <img src="images/icon.jpg" width="50" height="50" class="picon formargin1">
+            <div class="dropdown-content">
+            <a href="web/profile1-logged.html" class="poption">View Profile</a>
+            <a href="web/login.html" class="poption">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="welcome-container">
+    <div class="welcome-text">Welcome to the Omsilog Community!</div>
+    <div class="welcome-background"></div>
+</div>
+<div class="main-container">
+    <!--short links on left side-->
+    <aside class="side-nav-container">
+        <ul class="side-nav">
+            <li class="latest">
+                <a class="" href="web/search-loggedin.html">
+                    <i class="bi bi-list"></i>
+                    <span class="sidebar-label">Latest</span>
+                </a>
+            </li>
+            <li class="top-voted">
+                <a class="" href="web/search-loggedin.html">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span class="sidebar-label">Top Voted</span>
+                </a>
+            </li>
+            <li class="">
+                <input type="checkbox" id="side-tags">
+                <label for="side-tags" class="side-tags-label">
+                    <i class="bi bi-tags"></i>
+                    <span class="sidebar-label">Tags</span>
+                </label>
+
+                <ul class="tags-list">
+                    <li class="tags">
+                        <a href="web/search-loggedin.html">
+                            <i class="bi bi-megaphone-fill"></i>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="web/search-loggedin.html">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Review</span>  
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="web/search-loggedin.html">
+                            <i class="bi bi-question-circle-fill"></i>
+                            <span>Query</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="web/search-loggedin.html">
+                            <i class="bi bi-emoji-laughing-fill"></i>
+                            <span>Meme</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="web/search-loggedin.html">
+                            <i class="bi bi-lightbulb-fill"></i>
+                            <span>Meta</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="support">
+                <a href="#modalSupport" data-bs-toggle="modal">
+                    <i class="bi bi-headset"></i>
+                    <span class="sidebar-label">Support</span>
+                </a>
+
+                <!--support modal-->
+                <div class="modal fade" id="modalSupport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header support-title-container fs-3">
+                                Need a Hand?
+                            </div>
+                            <div class="modal-body support-body-container">
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user1.jpg" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Francis Bawa</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="francis_bawa@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>       
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user2.jpg" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Max Burce</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="vincent_burce@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user3.png" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Zach Gomez</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="zachary_gomez@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user4.png" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Ricardo Vicerra</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="ricardo_vicerra@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer support-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="support-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </aside>
+    <!--main forum content-->
+    <div class="thread-container">
+        <!--create post-->
+        <div class="create-post-container">
+            <a class="icon-container" href="">
+                <img class="user-icon" src="images/icon.jpg" alt="">
+            </a>
+            <a href="" id="create-post-button" class="create-post" data-bs-toggle="modal">
+                <div class="create-post-text">Create Post</div>
+            </a>
+
+            <!--create post modal-->
+            <div class="modal fade" id="createPostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Post</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" id="top-close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div>
+                                <div class="form-group">
+                                    <label for="create-post-title">Title:</label>
+                                    <input type="text" class="title-input" id="create-post-title" name="create-post-title" placeholder="Enter post title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag">Post-Tag:</label>
+                                    <div class="select">
+                                        <select id="tag" name="tag" onfocus='this.size=4;' onblur='this.size=0;' onchange='this.size=1; this.blur();' required>
+                                        <option value="" disabled selected>Select Tag</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Query">Query</option>
+                                        <option value="Meme">Meme</option>
+                                        <option value="Meta">Meta</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="content">Content:</label>
+                                    <div id="content" class="editor"></div>
+                                    <textarea id="content-input" name="content" style="display: none;" required></textarea>
+                                </div>
+                                <div class="create-post-footer">
+                                    <button type="button" class="btn btn-secondary" id="close-button" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-secondary" id="publish-button">Publish</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!--error modal-->
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="error-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        <!--start of forum posts/threads-->
+        <div class="posts-container" id="posts-container">
+
+            <!-- CONTENT OF POSTS WILL BE LOADED-->
+
+            <div class="see-more-container" id="see-more-container">
+                <!-- SEE MORE BUTTON -->
+                <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/index.js" defer></script>
