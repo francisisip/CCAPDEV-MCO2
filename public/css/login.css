@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap');
+
+:root{
+    --primary: #F5B301;
+    --secondary: #1e2328;
+    --heading: 'Inter', sans-serif;
+    --subheading: 'Poppins', sans-serif;
+}
+
+a, a:visited, a:hover, a:active {
+    text-decoration: none !important;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-box {
+    display: flex;
+    height: 100%;
+}
+
+#left-box {
+    width: 35%;
+}
+
+.flavor {
+    width: 100%;
+    height: 100%;
+    opacity: 70%;
+    filter: blur(2px);
+    object-fit: cover;
+}
+
+#right-box {
+    background-color: white;
+    box-shadow: -15px 0px 50px #323333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 65%;
+    padding: 15px;
+}
+
+.page-logo {
+    display: inherit;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.omsilog{
+    width: 50%;
+}
+
+.inputs {
+    font-family: var(--subheading);
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.username {
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+.password {
+    margin-bottom: 30px;
+}
+
+.remember-me {
+    font-size: 14px;
+    font-family: var(--subheading);
+    font-weight: lighter;
+}
+
+.input {
+    width: 300px;
+    font-size: 14px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+input[type=text] {
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+input[type=password] {
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--subheading);
+    margin-top: 9px;
+}
+
+.login {
+    background-color: var(--secondary);
+    color: white;
+    height: 40px;
+    width: 300px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.25s;
+}
+
+.login:hover {
+    font-weight: 500;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+    background-color: rgba(30, 35, 40, 0.9);
+}
+
+.forgot {
+    font-size: 12px;
+    font-weight: lighter;
+    margin-top: 10px;
+    color: var(--secondary);
+    cursor: pointer;
+}
+
+.forgot:hover {
+    color: rgba(30, 35, 40, 0.9);
+}
+
+.sign-in-with {
+    font-family: var(--subheading);
+    font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.signin-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--subheading);
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.g {
+    margin-left: 9px;
+}
+
+.logo {
+    width: 40px;
+    margin-right: 10px;
+    border: solid 1px rgb(30, 35, 40);
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer ;
+}
+
+.logo:hover {
+    background-color: rgba(30, 35, 40, 0.2);
+}
+
+.register {
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+.register a {
+    margin-left: 2px;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.register a:hover {
+    color: rgba(245, 179, 1, 0.8);
+}
+
+.modal-content {
+    font-family: var(--subheading);
+}
+
+.btn.btn-secondary {
+    background-color: var(--primary);
+    border: none;
+}
+
+.btn.btn-secondary:hover {
+    background-color: rgba(245, 179, 1, 0.8);
+}
+
+.form-group.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+#rMe:checked {
+    background-color: #F5B301;  
+}
+
+.modal-header {
+    background-color: #1e2328;
+    color: white;
+}

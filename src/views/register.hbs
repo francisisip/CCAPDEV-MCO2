@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/static/css/register.css">
+
+<div id="main-box">
+	<div id="left-box">
+		<img src="/static/img/flavor.jpeg" class="flavor">
+	</div>
+	<div id="right-box">
+		<div class="page-logo">
+			<img src="/static/img/omsilog-black.png" class="omsilog">
+		</div>
+		<form class="form">
+			<div class="username">
+				<input id="username" type="text" class="input" placeholder="Username" required/>
+			</div>
+			<div class="password">
+				<input id="password" type="password" class="input" placeholder="Password" required/>
+			</div>
+			<div class="email">
+				<input id="email" type="email" class="input" placeholder="Email Address" required/>
+			</div>
+			<div class="submit">
+				<button id="submit" class="register">Register</button>
+			</div>
+		</form>
+		<div class="signin-option">
+			<span class="sign-in-with">Sign in with</span>
+			<div>
+				<a href="#soon" data-bs-toggle="modal"><img src="/static/img/google.png" class="logo g"></a>
+				<a href="#soon" data-bs-toggle="modal"><img src="/static/img/apple.png" class="logo"></a>
+				<a href="#soon" data-bs-toggle="modal"><img src="/static/img/discord.png" class="logo"></a>
+				<!-- Modal -->
+				<div class="modal fade" id="soon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="exampleModalLabel">Hey there!</h1>
+							</div>
+							<div class="modal-body">
+								This feauture is still under construction and will be fully functional on the website as soon as possible!
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="login">
+				<span>Already have an account?</span>
+			<a href="/login">Log in here!</a>
+			</div>
+		</div>
+	</div>
+</div>

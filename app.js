@@ -1,40 +1,43 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const exphbs = require('express-handlebars')
-const app = express()
+const dotenv = require('dotenv');
+const express = require('express');
+const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/(insertnamehere')
+async function main() {
+  const app = express();
 
-// Set up handlebars
-app.engine('hbs', exphbs.engine({ extname: '.hbs' }));
-app.set('view engine', 'hbs');
-app.set("views", "./views");
+  dotenv.config();
+  // mongoose.connect(process.env.MONGODB_URI);
 
-// Serve static files from the "public" directory
-app.use('/static',express.static('public'));
+  // Set up handlebars
+  app.engine('hbs', exphbs.engine({ extname: '.hbs' }));
+  app.set('view engine', 'hbs');
+  app.set("views", "./src/views");
 
-//accessing json formats
-app.use(express.json())
+  // Serve static files from the "public" directory
+  app.use('/static',express.static('public'));
 
-//routes
-app.get('/', (req, res) => {
-  res.render('index', {title: "Home"})
-})
+  //accessing json formats
+  app.use(express.json());
 
-app.post('/', (req, res) => {
-  res.render('index', {title: "Home"})
-})
+  // use index routes
+  const indexRouter = require('./src/routes/index');
+  app.use('/', indexRouter);
+  app.use('/search', indexRouter);
 
-//use post routes
-const postRouter = require('./routes/posts')
-app.use('/posts', postRouter)
+  //use post routes
+  const postRouter = require('./src/routes/posts');
+  app.use('/posts', postRouter);
 
-//use user routes
-const userRouter = require('./routes/users')
-app.use('/users', userRouter)
+  //use user routes
+  const userRouter = require('./src/routes/users');
+  app.use('/users', userRouter);
 
-// Start the server
-app.listen(3000, () => {
-    console.log('Server started on http://localhost:3000');
+  // Start the server
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
   });
+}
+
+main();
 
