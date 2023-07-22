@@ -1,13 +1,13 @@
 const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
+const db = require('./src/db/db.js');
+
+
 
 async function main() {
   const app = express();
-
-  dotenv.config();
-  // mongoose.connect(process.env.MONGODB_URI);
 
   // Set up handlebars
   app.engine('hbs', exphbs.engine({ extname: '.hbs' }));
@@ -32,6 +32,9 @@ async function main() {
   //use user routes
   const userRouter = require('./src/routes/users');
   app.use('/users', userRouter);
+
+  //connect to database
+  db.connect()
 
   // Start the server
   app.listen(process.env.SERVER_PORT, () => {
