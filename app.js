@@ -4,8 +4,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const db = require('./src/db/db.js');
 
-
-
 async function main() {
   const app = express();
 
@@ -40,6 +38,7 @@ async function main() {
   app.listen(process.env.SERVER_PORT, () => {
     console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
   });
+
 
   //generate sample data
   if (process.env.NODE_ENV === "development") {
