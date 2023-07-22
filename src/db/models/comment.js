@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const commentSchema = new Schema({
+    commentID: {
+        type: String, //format: post(num*)_comment(num*)
+        required: true,
+        unique: true
+    },
     body: {
         type: String,
         required: true
@@ -11,17 +16,18 @@ const commentSchema = new Schema({
         immutable: true,
         default: Date.now
     },
-    comments: [{
-        type: Schema.Types.ObjectId, ref: 'Comment'
-    }],
-    parentPost: {
-        type: Schema.Types.ObjectId, ref: 'Post',
+    postID: {
+        type: Number,
         required: true
     },
-    user: {
-        type: Schema.Types.ObjectId, ref: 'User',
+    userID: {
+        type: Number,
         required: true
-    }
+    },
+    //not sure how to store comments yet
+    comments: [{
+        type: String
+    }]
 })
 
 module.exports = mongoose.model('Comment', commentSchema)

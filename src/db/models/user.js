@@ -7,6 +7,11 @@ const userSchema = new Schema({
         required: true,
         unique: true,
     },
+    userID: {
+        type: Number,
+        required: true,
+        unique: true
+    },
     profileImg: {
         type: String,
     },
@@ -24,12 +29,6 @@ const userSchema = new Schema({
         lowercase: true,
         required: true,
     },
-    posts: [{
-        type: Schema.Types.ObjectId, ref: 'Post',
-    }],
-    comments: [{
-        type: Schema.Types.ObjectId, ref: 'Comment',
-    }],
     password: {
         type: String,
         required: true,

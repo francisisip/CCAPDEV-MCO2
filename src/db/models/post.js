@@ -2,13 +2,18 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const postSchema = new Schema({
+    postID: {
+        type: Number,
+        required: true,
+        unique: true,
+    },
     title: {
         type: String,
         required: true,
     },
-    user: {
-        type: Schema.Types.ObjectId, ref: 'User',
-        required: true,
+    userID: {
+        type: Number,
+        required: true
     },
     tag: {
         type: String,
@@ -29,14 +34,15 @@ const postSchema = new Schema({
         default: 0,
         required: true,
     },
-    comments: [{
-        type: Schema.Types.ObjectId, ref: 'Comment',
-    }],
     isEdited: {
         type: Boolean,
         default: false,
         required: true,
-    }
+    },
+    //not sure how to store comments yet
+    comments: [{
+        type: String
+    }],
 
 })
 

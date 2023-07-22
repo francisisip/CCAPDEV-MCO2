@@ -34,12 +34,17 @@ async function main() {
   app.use('/users', userRouter);
 
   //connect to database
-  db.connect()
+  await db.connect()
 
   // Start the server
   app.listen(process.env.SERVER_PORT, () => {
     console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
   });
+
+  //generate sample data
+  if (process.env.NODE_ENV === "development") {
+    db.generateSampleData()
+  }
 }
 
 main();

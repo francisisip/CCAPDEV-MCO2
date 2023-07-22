@@ -17,9 +17,8 @@ const database = {
             console.log(err);
         });
     },
-    /*
-        inserts a single `doc` to the database based on the model `model`
-    */
+    //inserts a single `doc` to the database based on the model `model`
+
     insertOne: function(model, doc, callback) {
         model.create(doc, function(error, result) {
             if(error) return callback(false);
@@ -28,9 +27,7 @@ const database = {
         });
     },
 
-    /*
-        inserts multiple `docs` to the database based on the model `model`
-    */
+    //inserts multiple `docs` to the database based on the model `model`
     insertMany: function(model, docs) {
         model.insertMany(docs, function(error, result) {
             if(error) return callback(false);
@@ -113,9 +110,70 @@ const database = {
             console.log('Document deleted: ' + result.deletedCount);
             return callback(true);
         });
-    } 
+    },
+    
+    generateSampleData: async function() {
+        try{
+            const initialUsers = await User.create([
+                {   username: 'Fishball_Lover39', 
+                    userID: 1, 
+                    profileImg: 'static/img/icon1.jpg',
+                    fName: 'Miles',
+                    lName: 'Morales',
+                    bio: 'In the depths of my being, there flows an unyielding love for fish. Their graceful movements and vibrant colors captivate my soul, as if I am an ocean enchanted by their presence. With every breath I take, I embrace my identity as a devoted lover of these aquatic wonders, forever swimming in the depths of their beauty.',
+                    email: 'fishballs@email.com',
+                    password: '12345678'
+                },
+                {   username: 'Neonballs_6', 
+                    userID: 2, 
+                    profileImg: 'static/img/icon2.jpg',
+                    fName: 'Fedor',
+                    lName: 'Sebastian',
+                    bio: '',
+                    email: 'neonballs@email.com',
+                    password: '12345678'
+                },
+                {   username: 'radioheadlover00', 
+                    userID: 3, 
+                    profileImg: 'static/img/icon3.jpg',
+                    fName: 'Rian',
+                    lName: 'Robert',
+                    bio: '',
+                    email: 'ilovearadiohead@email.com',
+                    password: '12345678'
+                },
+                {   username: 'annoying_complainer', 
+                    userID: 4, 
+                    profileImg: 'static/img/icon4.jpg',
+                    fName: 'Patric',
+                    lName: 'Brontes',
+                    bio: '',
+                    email: 'thecomplainer@email.com',
+                    password: '12345678'
+                },
+                {   username: 'xXdestroyerOfWorldsXx', 
+                    userID: 5, 
+                    profileImg: 'static/img/icon5.jpg',
+                    fName: 'Rian',
+                    lName: 'Robert',
+                    bio: '',
+                    email: 'destroyerofworlds@email.com',
+                    password: '12345678'
+                },      
+            ])
 
+            const initialPosts = await Post.create([
 
+            ])
+
+            const initialComments = await Comment.create([
+                
+            ])
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
 }
 
