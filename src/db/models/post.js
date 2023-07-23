@@ -25,6 +25,10 @@ const postSchema = new Schema({
         immutable: true,
         default: Date.now,
     },
+    desc: {
+        type: String,
+        required: true,
+    },
     body: {
         type: String,
         required: true,

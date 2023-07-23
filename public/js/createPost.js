@@ -25,7 +25,13 @@ window.addEventListener("load", function(e){
         } else if(tag.value === ""){
             showErrorModal("Posts must have a specified tag.")
             return
-        } 
+        }
+        
+        let mark = document.querySelector(".thread-container")
+        let num = Number(mark.id.replace('mark', ''))
+
+        num++
+        console.log(num)
 
         this.fetch("/posts", 
         {
@@ -34,7 +40,7 @@ window.addEventListener("load", function(e){
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                postID: id+1,
+                postID: num,
                 userID: test,
                 title: title.value,
                 body: body.value,

@@ -85,6 +85,7 @@ const database = {
                         title: 'Tag your posts!',
                         userID: 2,
                         tag: 'Announcements',
+                        desc: "What's up, Omsiloggers! This is a friendly reminder to label your posts with the appropriate tag, as doable in the 'create post' interface. Posts without tags or are labeled with the wrong tag will be subject to removal.",
                         body: "What's up, Omsiloggers! This is a friendly reminder to label your posts with the appropriate tag, as doable in the 'create post' interface. Posts without tags or are labeled with the wrong tag will be subject to removal.",
                         comments: []
                     },
@@ -93,6 +94,7 @@ const database = {
                         title: 'What type of bean comes after 4',
                         userID: 5,
                         tag: 'Meme',
+                        desc: "Edi Lima. haha",
                         body: "Edi Lima. haha",
                         comments: ['post2_1', 'post2_2']
                     },
@@ -101,6 +103,7 @@ const database = {
                         title: "Ate Letty's Mango Blast Review",
                         userID: 3,
                         tag: 'Review',
+                        desc: "If you're looking to beat the heat, Ate Letty's Mango Blast is the best!! It's right around BGC, and has the best Mango Graham Shakes topped with caramel sauce and whipped cream, and the best part: they're buy1take1 for 150 pesos! Solid!",
                         body: "If you're looking to beat the heat, Ate Letty's Mango Blast is the best!! It's right around BGC, and has the best Mango Graham Shakes topped with caramel sauce and whipped cream, and the best part: they're buy1take1 for 150 pesos! Solid!",
                         comments: ['post3_1']
                     },
@@ -109,6 +112,7 @@ const database = {
                         title: 'Makati Pizza Places',
                         userID: 1,
                         tag: 'Query',
+                        desc: "Does anyone know of any good pizza places in the makati area? ive been to gino's and el rizzante but neither of them were very good lol. i would also prefer places that offer vegan pizza. thanks in advance.",
                         body: "Does anyone know of any good pizza places in the makati area? ive been to gino's and el rizzante but neither of them were very good lol. i would also prefer places that offer vegan pizza. thanks in advance.",
                         comments: ['post4_1']
                     },
@@ -117,6 +121,7 @@ const database = {
                         title: 'Pandemic & Food',
                         userID: 4,
                         tag: 'Meta',
+                        desc: "Filipinos love to eat. Consider that a fact! When the pandemic happened and everyone was forced to stay at home, suddenly everyone became a food blogger.From traditional adobo and sinigang to mouthwatering lechon and halo-halo, our cuisine is a treasure trove of flavors and culinary delights. Being confined to our homes gave us the perfect opportunity to explore our passion for cooking and share it with the world. In the virtual realm, social media platforms became flooded with beautifully plated dishes, step-by-step recipe tutorials, and heartfelt stories behind each creation. It was inspiring to witness the creativity and resourcefulness of our fellow Filipinos in the kitchen. People started sharing family recipes, secret ingredients, and even their own twists on classic dishes. Food blogging during the pandemic became more than just a hobby; it became a way to connect and support one another. The online food community flourished with like-minded individuals who were eager to exchange ideas, offer cooking tips, and support local food businesses. It created a sense of unity and camaraderie, even when we were physically apart. As we continue to navigate through these challenging times, let's not forget the joy that food brings us. Whether it's recreating nostalgic dishes from our childhood or discovering new flavors, let's celebrate the resilience of the Filipino spirit through our shared love for food. Together, we can turn our kitchens into creative sanctuaries and our food blogs into platforms of inspiration and connection. So, grab your aprons, sharpen your knives, and let's embark on this culinary journey together. What's your favorite Filipino dish that you've shared on your food blog? Any tips for aspiring food bloggers looking to make their mark in the digital foodie world? Let's keep the foodie revolution alive!",
                         body: "Filipinos love to eat. Consider that a fact! When the pandemic happened and everyone was forced to stay at home, suddenly everyone became a food blogger.From traditional adobo and sinigang to mouthwatering lechon and halo-halo, our cuisine is a treasure trove of flavors and culinary delights. Being confined to our homes gave us the perfect opportunity to explore our passion for cooking and share it with the world. In the virtual realm, social media platforms became flooded with beautifully plated dishes, step-by-step recipe tutorials, and heartfelt stories behind each creation. It was inspiring to witness the creativity and resourcefulness of our fellow Filipinos in the kitchen. People started sharing family recipes, secret ingredients, and even their own twists on classic dishes. Food blogging during the pandemic became more than just a hobby; it became a way to connect and support one another. The online food community flourished with like-minded individuals who were eager to exchange ideas, offer cooking tips, and support local food businesses. It created a sense of unity and camaraderie, even when we were physically apart. As we continue to navigate through these challenging times, let's not forget the joy that food brings us. Whether it's recreating nostalgic dishes from our childhood or discovering new flavors, let's celebrate the resilience of the Filipino spirit through our shared love for food. Together, we can turn our kitchens into creative sanctuaries and our food blogs into platforms of inspiration and connection. So, grab your aprons, sharpen your knives, and let's embark on this culinary journey together. What's your favorite Filipino dish that you've shared on your food blog? Any tips for aspiring food bloggers looking to make their mark in the digital foodie world? Let's keep the foodie revolution alive!",
                         comments: ['post5_1']
                     },
