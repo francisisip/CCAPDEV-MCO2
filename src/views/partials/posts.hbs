@@ -29,11 +29,11 @@
         </div>
         <div class="interactions">
             <div class="upvote">
-                <a href="" data-bs-toggle="modal" class="upvote"></a>
+                <a onclick="changeUpvote(this)" class="upvote" id="uvote{{postID}}"></a>
             </div>
             <div class="vote-count">{{voteCount}}</div>
             <div class="downvote">
-                <a href="" data-bs-toggle="modal" class="downvote"></a>
+                <a onclick="changeDownvote(this)" class="downvote" id="dvote{{postID}}"></a>
             </div>
             <div class="spacer"></div>
             <a href="/posts/{{postID}}" style="text-align: center;">

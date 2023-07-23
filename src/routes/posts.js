@@ -76,4 +76,13 @@ router.get('/:id', async (req, res) => {
   }
   });
 
+  router.put('/:id/upvote', async(req, res) => {
+    try {
+      const post = await Post.findOne({postID: req.params.postID})
+      console.log(post)
+    } catch (err) {
+      return res.status(500).json(err)
+    }
+  })
+
 module.exports = router;
