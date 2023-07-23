@@ -1,0 +1,169 @@
+<link rel="stylesheet" href="static/css/users.css">
+<link rel="stylesheet" href="static/css/index.css">
+
+ <div class="main-container">
+    <div class = "profile-container">
+        <div class = "profile" id = "profile">
+            <a class = "profile-photo-container">
+                <img class="profile-icon" src="{{user.profileImg}}" alt="">
+            </a>
+            <br>  
+            <a>
+            <p class = "profile-name">{{user.username}}</p>
+            </a>
+            <p>-------------------------------------</p>
+            <p class = "names" id = "fName">{{user.firstname}}</p> 
+            <p class = "names" id = "lName">{{user.lastname}}</p>
+            <p id = "eMail">{{user.email}}</p>
+            <p id = "password">{{user.password}}</p>
+            <p id = "bio">{{user.bio}}</p>
+            <p>-------------------------------------</p>
+                <ul class="nav profile">
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="pill" href="#edit-info">Edit profile info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="pill" href="#view-posts">View Posts </a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" data-bs-toggle="pill" href="#view-comments">View Comments</a>
+                    </li>
+                </ul>
+        </div>
+    </div>
+
+            <!--main forum content-->
+            <div class="content-container">
+                <div id = "edit-info" class ="tab-pane fade">
+                    <div class="form-section">
+                        <form method="post" id = "form" enctype="multipart/form-data">
+                            <h1>Edit Profile</h1>
+                            <div class="form-group col">
+                                <label for="profilePicture">Upload Profile picture:</label>
+                                <input type="file" class="form-control" id="pfpupload" accept="image/*"> <br>
+                                <div class = "edit-pfp-display">
+                                    <img id="profilePictureDisplay" class="profile-picture" src="../images/icon.jpg" alt="Profile Picture">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+                              </div>
+                          
+                              <div class="form-group col">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+                              </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col">
+                                  <label for="password">Old Password:</label>
+                                  <input type="password" id="opassword" name="password" placeholder="Enter password">
+                                </div>
+                            
+                                <div class="form-group col">
+                                  <label for="confirmPassword">Confirm Old Password:</label>
+                                  <input type="password" id="coPassword" name="confirmPassword" placeholder="Confirm password">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                              <div class="form-group col">
+                                <label for="password">New Password:</label>
+                                <input type="password" id="npassword" name="password" placeholder="Enter password">
+                              </div>
+                          
+                              <div class="form-group col">
+                                <label for="confirmPassword">Confirm New Password:</label>
+                                <input type="password" id="cnPassword" name="confirmPassword" placeholder="Confirm password">
+                              </div>
+                            </div>
+                          
+                            <div class="form-row">
+                              <div class="form-group col">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Enter email">
+                              </div>
+                          
+                              <div class="form-group col">
+                                <label for="confirmEmail">Confirm Email:</label>
+                                <input type="email" id="confirmEmail" name="confirmEmail" placeholder="Confirm email">
+                              </div>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="bio">Edit Bio:</label>
+                              <textarea id="edit-bio" name="bio" rows="2" cols="50" placeholder="Enter bio"></textarea>
+                            </div>
+                          
+                            <input type="submit" value="Save Changes" id = "submit" onsubmit= "submitForm()">
+                            <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                          </form>
+                    </div>
+                </div>
+
+                <div id = "view-posts" class = "tab-pane fade show active">
+                    <div class="posts-container" id="posts-container">
+                        <!-- CONTENT OF POSTS WILL BE LOADED-->
+                        {{#if posts.length}}
+                            {{#each posts}}
+                                {{> posts}}
+                            {{/each}}
+                        <div class="see-more-container" id="see-more-container">
+                             <!-- SEE MORE BUTTON -->
+                            <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                        </div>
+                        {{else}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div id = "view-comments" class ="tab-pane fade">
+                    <div class="post">
+                        <div class="post-info-container">
+                            <a class="icon-container" href="">
+                                <img class="user-icon" src="../images/icon.jpg" alt="">
+                            </a>
+                            <div class="post-info">
+                                <div class = "clickable-div" onclick="location.href='comment.html'";>
+                                    <div class="post-details">
+                                        <div class="details-icon"></div>
+                                        <i class="bi bi-pen-fill"></i>
+                                        <a href="">
+                                            <div class="username">Fishball_Lover39</div>
+                                        </a>
+                                        <div class="post-date">&nbsp;commented 6/11/2023</div>
+                                    </div>
+                                    <div class="post-description">
+                                        Hey there! I wanted to share my personal opinion on this matter, but please keep in mind that it's just my perspective. Of course, everyone is entitled to their own viewpoint, so I'm eager to hear your thoughts as well. Let's aim for a friendly and respectful discussion, so please comment kindly. Thank you in advance for your understanding and considerate engagement!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="post-info-container">
+                            <a class="icon-container" href="">
+                                <img class="user-icon" src="../images/icon.jpg" alt="">
+                            </a>
+                            <div class="post-info">
+                                <div class = "clickable-div" onclick="location.href='comment5.html'";>
+                                    <div class="post-details">
+                                        <div class="details-icon"></div>
+                                        <i class="bi bi-pen-fill"></i>
+                                        <a href="">
+                                            <div class="username">Fishball_Lover39</div>
+                                        </a>
+                                        <div class="post-date">&nbsp;commented 6/13/2023</div>
+                                    </div>
+                                    <div class="post-description">
+                                        I can totally relate, NeonBalls.6! The pandemic gave us the chance to explore our culinary skills and showcase our creations. I started my own YouTube channel where I share Filipino recipes with a modern twist. It's incredible how food brings people together, even virtually. Can't wait for the day we can all gather and have a massive potluck to taste each other's creations in person!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<script src="static/js/index.js" defer></script>
