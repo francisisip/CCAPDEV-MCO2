@@ -68,7 +68,7 @@
 
                 <!--support modal-->
                 <div class="modal fade" id="modalSupport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header support-title-container fs-3">
                                 Need a Hand?
@@ -229,10 +229,16 @@
                     <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
                 </div>
             {{else}}
+                <!-- insert note saying no more available posts -->
             {{/if}}
 
         </div>
     </div>
 </div>
 
+<script src="static/js/createPost.js" defer></script>
 <script src="static/js/index.js" defer></script>
+
+<!-- 
+    1. fix see more button, and note on all posts loaded
+-->

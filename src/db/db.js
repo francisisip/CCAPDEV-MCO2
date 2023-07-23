@@ -17,105 +17,13 @@ const database = {
             console.log(err);
         });
     },
-    //inserts a single `doc` to the database based on the model `model`
 
-    insertOne: function(model, doc, callback) {
-        model.create(doc, function(error, result) {
-            if(error) return callback(false);
-            console.log('Added ' + result);
-            return callback(true);
-        });
-    },
 
-    //inserts multiple `docs` to the database based on the model `model`
-    insertMany: function(model, docs) {
-        model.insertMany(docs, function(error, result) {
-            if(error) return callback(false);
-            console.log('Added ' + result);
-            return callback(true);
-        });
-    },
-
-    /*
-        searches for a single document based on the model `model`
-        filtered through the object `query`
-        limits the fields returned based on the string `projection`
-        callback function is called after the execution of findOne() function
-    */
-    findOne: function(model, query, projection, callback) {
-        model.findOne(query, projection, function(error, result) {
-            if(error) return callback(false);
-            return callback(result);
-        });
-    },
-
-    /*
-        searches for multiple documents based on the model `model`
-        filtered through the object `query`
-        limits the fields returned based on the string `projection`
-        callback function is called after the execution of findMany() function
-    */
-    findMany: function(model, query, projection, callback) {
-        model.find(query, projection, function(error, result) {
-            if(error) return callback(false);
-            return callback(result);
-        });
-    },
-
-    /*
-        updates the value defined in the object `update`
-        on a single document based on the model `model`
-        filtered by the object `filter`
-    */
-    updateOne: function(model, filter, update) {
-        model.updateOne(filter, update, function(error, result) {
-            if(error) return callback(false);
-            console.log('Document modified: ' + result.nModified);
-            return callback(true);
-        });
-    },
-
-    /*
-        updates the value defined in the object `update`
-        on multiple documents based on the model `model`
-        filtered using the object `filter`
-    */
-    updateMany: function(model, filter, update) {
-        model.updateMany(filter, update, function(error, result) {
-            if(error) return callback(false);
-            console.log('Documents modified: ' + result.nModified);
-            return callback(true);
-        });
-    },
-
-    /*
-        deletes a single document based on the model `model`
-        filtered using the object `conditions`
-    */
-    deleteOne: function(model, conditions) {
-        model.deleteOne(conditions, function (error, result) {
-            if(error) return callback(false);
-            console.log('Document deleted: ' + result.deletedCount);
-            return callback(true);
-        });
-    },
-
-    /*
-        deletes multiple documents based on the model `model`
-        filtered using the object `conditions`
-    */
-    deleteMany: function(model, conditions) {
-        model.deleteMany(conditions, function (error, result) {
-            if(error) return callback(false);
-            console.log('Document deleted: ' + result.deletedCount);
-            return callback(true);
-        });
-    },
-    
     generateSampleData: async function() {
-         if(countDocuments(User) == 0) {
+         if(await User.countDocuments() === 0) {
+            console.log("populating users")
             try{
-                const initialUsers = User.create([
+                const initialUsers = await User.create([
                     {   username: 'Fishball_Lover39', 
                         userID: 1, 
                         profileImg: 'static/img/icon1.jpg',
@@ -168,8 +76,9 @@ const database = {
             }
          }
         
-        if(countDocuments(Post) == 0) {
+        if(await Post.countDocuments() === 0) {
             try {
+                console.log("populating posts")
                 const initialPosts = await Post.create([
                     {
                         postID: 1,
@@ -185,7 +94,7 @@ const database = {
                         userID: 5,
                         tag: 'Meme',
                         body: "Edi Lima. haha",
-                        comments: []
+                        comments: ['post2_1', 'post2_2']
                     },
                     {
                         postID: 3,
@@ -193,7 +102,7 @@ const database = {
                         userID: 3,
                         tag: 'Review',
                         body: "If you're looking to beat the heat, Ate Letty's Mango Blast is the best!! It's right around BGC, and has the best Mango Graham Shakes topped with caramel sauce and whipped cream, and the best part: they're buy1take1 for 150 pesos! Solid!",
-                        comments: []
+                        comments: ['post3_1']
                     },
                     {
                         postID: 4,
@@ -201,7 +110,7 @@ const database = {
                         userID: 1,
                         tag: 'Query',
                         body: "Does anyone know of any good pizza places in the makati area? ive been to gino's and el rizzante but neither of them were very good lol. i would also prefer places that offer vegan pizza. thanks in advance.",
-                        comments: []
+                        comments: ['post4_1']
                     },
                     {
                         postID: 5,
@@ -209,7 +118,7 @@ const database = {
                         userID: 4,
                         tag: 'Meta',
                         body: "Filipinos love to eat. Consider that a fact! When the pandemic happened and everyone was forced to stay at home, suddenly everyone became a food blogger.From traditional adobo and sinigang to mouthwatering lechon and halo-halo, our cuisine is a treasure trove of flavors and culinary delights. Being confined to our homes gave us the perfect opportunity to explore our passion for cooking and share it with the world. In the virtual realm, social media platforms became flooded with beautifully plated dishes, step-by-step recipe tutorials, and heartfelt stories behind each creation. It was inspiring to witness the creativity and resourcefulness of our fellow Filipinos in the kitchen. People started sharing family recipes, secret ingredients, and even their own twists on classic dishes. Food blogging during the pandemic became more than just a hobby; it became a way to connect and support one another. The online food community flourished with like-minded individuals who were eager to exchange ideas, offer cooking tips, and support local food businesses. It created a sense of unity and camaraderie, even when we were physically apart. As we continue to navigate through these challenging times, let's not forget the joy that food brings us. Whether it's recreating nostalgic dishes from our childhood or discovering new flavors, let's celebrate the resilience of the Filipino spirit through our shared love for food. Together, we can turn our kitchens into creative sanctuaries and our food blogs into platforms of inspiration and connection. So, grab your aprons, sharpen your knives, and let's embark on this culinary journey together. What's your favorite Filipino dish that you've shared on your food blog? Any tips for aspiring food bloggers looking to make their mark in the digital foodie world? Let's keep the foodie revolution alive!",
-                        comments: []
+                        comments: ['post5_1']
                     },
                 ])
             }
@@ -218,8 +127,9 @@ const database = {
             }
         }
 
-        if(countDocuments(Comment) == 0) {
+        if(await Comment.countDocuments() === 0) {
             try{
+                console.log("populating comments")
                 const initialComments = await Comment.create([
                     {
                         commentID: 'post2_1',
@@ -265,12 +175,6 @@ const database = {
         
     }  
 
-}
-
-async function countDocuments(model) {
-    const count = await model.countDocuments({}).exec()
-    console.log(typeof count)
-    return count
 }
 
 //exports the object `database` (defined above)when another script exports from this file

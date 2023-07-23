@@ -26,7 +26,7 @@ let posts = []
 let postCtr = 5
 
 //-------------------------------------------------------------------------------------------------------------------------------------
-
+/*
 //POST DISPLAYING
 //hard coded post data
 //unshift to add to start of the array so that latest posts will show up first
@@ -249,7 +249,7 @@ function fadeIn(div) {
     }
   }, 30)
 }
-
+*/
 //------------------------------------------------------------------------------------------------------------------------------------
 
 //change comment icon on posts on hover
@@ -337,7 +337,7 @@ quill.on('text-change', updateTextarea);
 
 //------------------------------------------------------------------------------------------------------------------------------------
 //Submitting Created Posts
-
+/*
 let publish = document.getElementById("publish-button")
 let createModal = new bootstrap.Modal(document.getElementById("createPostModal"))
 let createButton = document.getElementById("create-post-button")
@@ -403,8 +403,7 @@ function formatTime(hours, minutes) {
   var formattedTime = hours + ":" + minutes + " " + period;
   return formattedTime;
 }
-
-
+*/
 //-------------------------------------------------------------------------------------------------------------------------------------
 
 //for initializing popovers

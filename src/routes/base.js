@@ -35,7 +35,9 @@ router.get('/', async (req, res) => {
 
     post.tagClass = tag
   }
+
   console.log(posts)
+
   res.render('index', {
     title: "Home", 
     posts: posts,
@@ -52,7 +54,7 @@ router.get("/homepage", (req, res) => {
 });
   
 router.post('/', (req, res) => {
-  res.render('index', {title: "Home"});
+  
 });
 
 router.get('/search', (req, res) => {
