@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../db/models/post.js')
 const User = require('../db/models/user.js')
+const Comment = require('../db/models/comment.js')
 
 const { toLower, calcDate } = require('../utils/helper.js')
 
@@ -51,9 +52,21 @@ router.get('/:id', async (req, res) => {
     }
     foundPost.author = await User.findOne({userID: foundPost.userID}).select('username profileImg').lean();
     foundPost.tagClass = tag;
+
+    const postComments = [];
+    for (let comment of foundPost.comments) {
+        postComments.push(await Comment.findOne({commentID: comment}).lean());
+    }
+
+    for (let user of postComments) {
+        user.author = await User.findOne({userID: user.userID}).select('username userID profileImg').lean();
+    }
+    console.log(postComments);
+
     res.render('singlePost', { 
         title: foundPost.title, 
         post: foundPost,
+        comments: postComments,
         helpers: {toLower, calcDate}
     });
     } catch (err) {
@@ -62,4 +75,5 @@ router.get('/:id', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
   });
+
 module.exports = router;

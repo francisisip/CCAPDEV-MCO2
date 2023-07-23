@@ -4,7 +4,7 @@
       <div class="title-contents">
         <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span class="tag">{{post.tag}}</span></a>
         <span id="title">{{post.title}}</span>
-        <span id="post-date">&nbsp;created {{calcDate post.date}}</span>
+        <span id="post-date">created {{calcDate post.date}}</span>
       </div>
     </div>
     <div class="box">    
@@ -136,65 +136,10 @@
     </div>
     <div class="box2" id="comments-section">
       <span class="c">Comments</span>
-      <div class="up2">
-        <div>
-          <a href="profile2-logged.html">
-            <img src="../images/icon2.jpg" class="icon2">
-          </a>
-        </div>
-        <div class="ucomment">
-          <div>
-            <a href="profile2-logged.html" class="cusername">NeonBalls.6</a>
-          </div>
-          <span class="date">6/11/2023</span>
-          <span class="truncate-text justify">
-            Oh, absolutely! The Filipino love for food is unmatched. I remember during the pandemic, I started experimenting with new recipes and sharing them on my blog. It was a great way to pass the time and connect with fellow food enthusiasts. Can't wait for things to normalize so we can explore restaurants and street food again!
-          </span>
-        </div>
-      </div>
-      <div class="down2">
-        <div>
-          <a href="comment1.html" class="reply2">See more</a>
-        </div>
-      </div>
-      <div class="up2">
-        <div class="bcd">
-          <a href="profile1-logged.html">
-            <img src="../images/icon.jpg" class="icon2">
-          </a>
-        </div>
-        <div class="ucomment">
-          <a href="profile1-logged.html" class="cusername">Fishball_Lover39</a>
-          <span class="date">6/11/2023</span>
-          <span class="truncate-text justify">
-            Hey there! I wanted to share my personal opinion on this matter, but please keep in mind that it's just my perspective. Of course, everyone is entitled to their own viewpoint, so I'm eager to hear your thoughts as well. Let's aim for a friendly and respectful discussion, so please comment kindly. Thank you in advance for your understanding and considerate engagement!
-          </span>
-        </div>
-      </div>
-      <div class="down2">
-        <div>
-          <a href="comment.html" class="reply2">See more</a>
-        </div>
-      </div>
-      <div class="up2">
-        <div>
-          <a href="profile3-logged.html">
-            <img src="../images/icon3.jpg" class="icon2">
-          </a>
-        </div>
-        <div class="ucomment">
-          <div>
-            <a href="profile3-logged.html"class="cusername">radioheadLover00</a>
-          </div>
-          <span class="date">6/12/2023</span>
-          <span class="truncate-text justify">
-            So true! Food blogging became a trending hobby during the pandemic. I loved seeing how creative Filipinos got in the kitchen. From traditional dishes to fusion experiments, it was amazing to witness the culinary talents within our community. I hope this newfound passion for cooking continues even after the pandemic.
-          </span>
-        </div>
-      </div>
-      <div class="down2">
-        <div>
-          <a href="comment2.html"><span class="reply2">See more</span></a>
-        </div>
-      </div>
+      {{#if comments.length}}
+        {{#each comments}}
+            {{> comment}}
+        {{/each}}
+      {{else}}
+      {{/if}}      
     </div>
