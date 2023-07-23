@@ -7,7 +7,7 @@
         <div>
             <a href="/users/{{author.userID}}" class="cusername">{{author.username}}</a>
         </div>
-        <span class="date">a</span>
+        <span class="date">created {{calcDate date}}</span>
         <span class="truncate-text justify">
             {{body}}
         </span>
@@ -15,6 +15,6 @@
 </div>
 <div class="down2">
     <div>
-        <a href="/{{postID}}/{{commentID}}" class="reply2">See more</a>
+        <a href="/posts/{{postID}}/{{commentID}}" class="reply2">See more</a>
     </div>
 </div>

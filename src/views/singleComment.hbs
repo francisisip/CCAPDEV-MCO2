@@ -2,27 +2,22 @@
 
 <div id="post-title">
     <div class="title-contents">
-        <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span class="tag">{{post.tag}}</span></a>
-        <span id="title">{{post.title}}</span>
-        <span id="post-date">created {{calcDate post.date}}</span>
+        <a href="/posts/{{comment.postID}}"><i class="bi bi-backspace-fill"></i><span class="tag">Go back</span></a>
+        <span id="title">Re: {{post.title}}</span>
+        <span id="post-date">created {{calcDate comment.date}}</span>
     </div>
 </div>
 <div class="box">    
     <div class="up">
         <div class="xyz">
-            <a href="/users/{{post.userID}}">
-            <img src="{{post.author.profileImg}}" class="icon">
+            <a href="/users/{{comment.userID}}">
+            <img src="{{comment.author.profileImg}}" class="icon">
             </a>
-            <div class="buttons">
-                <span id="upvote" class="upvote" onclick="changeUpvote(this)"></span>
-                <span id="count" class="num">{{post.voteCount}}</span>
-                <span id="downvote" class="downvote" onclick="changeDownvote(this)"></span>
-            </div>
         </div>       
         <div class="uinfo">
             <div class="leftnright">
             <div class="abc">
-                <a href="/users/{{post.userID}}" class="username">{{post.author.username}}</a>
+                <a href="/users/{{comment.userID}}" class="username">{{comment.author.username}}</a>
             </div>
             <div class="dropdown">
                 <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
@@ -32,7 +27,7 @@
                 </div>
             </div>
             </div>             
-            <div id="body" class="justify mpost">{{post.body}}</div>
+            <div id="body" class="justify mpost">{{comment.body}}</div>
             <div class="down">
             <a id="reply" class="reply">Reply</a>
             <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -136,8 +131,8 @@
 </div>
 <div class="box2" id="comments-section">
     <span class="c">Comments</span>  
-    {{#if comments.length}}
-        {{#each comments}}
+    {{#if nestedComments.length}}
+        {{#each nestedComments}}
             <div class="up2">
                 {{> comment}}
             {{/each}}
