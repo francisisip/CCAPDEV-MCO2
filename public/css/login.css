@@ -41,16 +41,25 @@ body {
     align-items: center;
     width: 65%;
     padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .page-logo {
     display: inherit;
     justify-content: center;
     margin-top: 30px;
+    position: relative;
+}
+
+.goBack {
+    display: block;
+    width: 50%;
 }
 
 .omsilog{
-    width: 50%;
+    width: 100%;
+    height: auto;
 }
 
 .inputs {

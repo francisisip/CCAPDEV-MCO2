@@ -36,4 +36,24 @@ const userSchema = new Schema({
 
 })
 
-module.exports = mongoose.model('User', userSchema)
+async function checkCredentials(username, password) {
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return false; // Username not found
+        }
+
+        if (user.password === password) {
+            return true; // Passwords match
+        } else {
+            return false; // Passwords do not match
+        }
+    } catch (error) {
+        console.error('Error while checking credentials:', error);
+        return false;
+    }
+}
+
+module.exports = mongoose.model('User', userSchema);
+module.exports.checkCredentials = checkCredentials;
