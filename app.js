@@ -39,11 +39,12 @@ async function main() {
     console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
   });
 
-
+  
   //generate sample data
   if (process.env.NODE_ENV === "development") {
     db.generateSampleData()
   }
+
 }
 
 main();

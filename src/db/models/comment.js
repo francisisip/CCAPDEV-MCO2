@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const commentSchema = new Schema({
     commentID: {
-        type: String, //format: post(num*)_comment(num*)
+        type: String, //format: post(id*)_comment(num*)
         required: true,
         unique: true
     },
