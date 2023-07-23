@@ -346,7 +346,7 @@ createButton.addEventListener("click", e=> {
   createModal.show()
 })
 
-/*
+
 publish.addEventListener("click", e => {
   e.preventDefault()
 
@@ -403,7 +403,7 @@ function formatTime(hours, minutes) {
   var formattedTime = hours + ":" + minutes + " " + period;
   return formattedTime;
 }
-*/
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 

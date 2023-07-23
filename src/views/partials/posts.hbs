@@ -1,0 +1,51 @@
+<div class="post">
+    <div class="post-info-container">
+        <a class="icon-container" href="/users/{{userID}}">
+            <img class="user-icon" src="{{author.profileImg}}" alt="">
+        </a>
+        <div class="post-info">
+            <a href="/posts/{{postID}}">
+                <div class="post-title">{{title}}</div>
+            </a>
+            <div class="post-tags-container">
+                <div class="post-tag {{toLower tag}}-tag">
+                    <a href="/search">
+                        <i class="bi {{tagClass}}"></i>
+                        <span>{{tag}}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="post-details">
+                <div class="details-icon"></div>
+                <i class="bi bi-pen-fill"></i>
+                <a href="/user/{{userID}}">
+                    <div class="username">{{author.username}}</div>
+                </a>
+                <div class="post-date">&nbsp;created {{calcDate date}}</div>
+            </div>
+            <div class="post-description">
+                {{body}}
+            </div>
+        </div>
+        <div class="interactions">
+            <div class="upvote">
+                <a href="" data-bs-toggle="modal" class="upvote"></a>
+            </div>
+            <div class="vote-count">{{voteCount}}</div>
+            <div class="downvote">
+                <a href="" data-bs-toggle="modal" class="downvote"></a>
+            </div>
+            <div class="spacer"></div>
+            <a href="/posts/{{postID}}" style="text-align: center;">
+                <i onmouseenter="changeComment(this)" onmouseleave="changeComment(this)" class="bi bi-chat-left comment-icon"></i>
+            </a>
+            <div class="comment-count">{{commentsNo}}</div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    TO DO:
+    1. Double Check Linking
+    2. Implement Upvote Downvote
+-->

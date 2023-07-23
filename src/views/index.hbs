@@ -217,13 +217,20 @@
 
         <!--start of forum posts/threads-->
         <div class="posts-container" id="posts-container">
-
             <!-- CONTENT OF POSTS WILL BE LOADED-->
+            {{#if posts.length}}
+                {{#each posts}}
+                    {{> posts}}
+                {{/each}}
 
-            <div class="see-more-container" id="see-more-container">
-                <!-- SEE MORE BUTTON -->
-                <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
-            </div>
+
+                <div class="see-more-container" id="see-more-container">
+                    <!-- SEE MORE BUTTON -->
+                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                </div>
+            {{else}}
+            {{/if}}
+
         </div>
     </div>
 </div>

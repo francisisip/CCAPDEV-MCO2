@@ -19,9 +19,8 @@ async function main() {
   app.use(express.json());
 
   // use index routes
-  const indexRouter = require('./src/routes/index');
+  const indexRouter = require('./src/routes/base');
   app.use('/', indexRouter);
-  app.use('/search', indexRouter);
 
   //use post routes
   const postRouter = require('./src/routes/posts');
