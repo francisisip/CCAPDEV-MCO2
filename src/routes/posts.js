@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../db/models/post.js')
+const User = require('../db/models/user.js')
+
+const { toLower, calcDate } = require('../utils/helper.js')
 
 router.get('/', (req, res) => {
     res.send("In posts")
@@ -18,4 +21,45 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    const resourceId = req.params.id;
+
+    try {
+        const foundPost = await Post.findOne({ postID: resourceId }).lean();
+    
+        if (!foundPost) {
+          // Handle the case when the post is not found
+          return res.status(404).send("Post not found");
+        }
+
+    let tag;
+    switch(foundPost.tag) {
+      case "Announcements":
+          tag = "bi-megaphone-fill";
+          break;
+        case "Review":
+          tag = "bi-check-circle-fill";
+          break;
+        case "Query":
+          tag = "bi-question-circle-fill";
+          break;
+        case "Meme":
+          tag = "bi-emoji-laughing-fill";
+          break;
+        case "Meta":
+          tag = "bi-lightbulb-fill";
+    }
+    foundPost.author = await User.findOne({userID: foundPost.userID}).select('username profileImg').lean();
+    foundPost.tagClass = tag;
+    res.render('singlePost', { 
+        title: foundPost.title, 
+        post: foundPost,
+        helpers: {toLower, calcDate}
+    });
+    } catch (err) {
+    // Handle any errors that occur during the database operations
+    console.log("ERROR:", err);
+    res.status(500).send("Internal Server Error");
+  }
+  });
 module.exports = router;

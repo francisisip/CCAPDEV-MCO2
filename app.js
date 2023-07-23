@@ -22,6 +22,9 @@ async function main() {
   const indexRouter = require('./src/routes/base');
   app.use('/', indexRouter);
 
+  const authRouter = require('./src/routes/auth');
+  app.use('/auth', authRouter);
+
   //use post routes
   const postRouter = require('./src/routes/posts');
   app.use('/posts', postRouter);

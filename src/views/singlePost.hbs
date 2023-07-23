@@ -1,0 +1,200 @@
+<link rel="stylesheet" href="/static/css/singlePost.css">
+
+<div id="post-title">
+      <div class="title-contents">
+        <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span class="tag">{{post.tag}}</span></a>
+        <span id="title">{{post.title}}</span>
+        <span id="post-date">&nbsp;created {{calcDate post.date}}</span>
+      </div>
+    </div>
+    <div class="box">    
+      <div class="up">
+        <div class="xyz">
+          <a href="/users/{{post.userID}}">
+            <img src="{{post.author.profileImg}}" class="icon">
+          </a>
+          <div class="buttons">
+            <span id="upvote" class="upvote" onclick="changeUpvote(this)"></span>
+            <span id="count" class="num">{{post.voteCount}}</span>
+            <span id="downvote" class="downvote" onclick="changeDownvote(this)"></span>
+          </div>
+        </div>       
+        <div class="uinfo">
+          <div class="leftnright">
+            <div class="abc">
+              <a href="/users/{{post.userID}}" class="username">{{post.author.username}}</a>
+            </div>
+            <div class="dropdown">
+              <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
+              <div class="dropdown-content">
+                <a id="edit" href="#">Edit</a>
+                <a id="delete" href="#">Delete</a>
+              </div>
+            </div>
+          </div>             
+          <div id="body" class="justify mpost">{{post.body}}</div>
+          <div class="down">
+            <a id="reply" class="reply">Reply</a>
+            <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Post</h1>
+                  </div>
+                  <div class="modal-body">
+                    <form id="comment-form">
+                      <div>
+                        <div class="form-group">
+                          <label for="create-post-title">Title:</label>
+                          <input type="text" class="title-input" id="create-post-title" name="create-post-title" placeholder="Enter post title" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="tag">Post-Tag:</label>
+                          <div class="select">
+                            <select id="tag" name="tag" onfocus='this.size=4;' onblur='this.size=0;' onchange='this.size=1; this.blur();' required>
+                            <option value="" disabled selected>Select Tag</option>
+                              <option value="review">Review</option>
+                              <option value="query">Query</option>
+                              <option value="meme">Meme</option>
+                              <option value="meta">Meta</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="content">Content:</label>
+                          <div id="content" class="editor"></div>
+                          <textarea id="content-input" name="content" style="display: none;"></textarea>
+                        </div>
+                        <div class="create-post-footer">
+                          <button type="button" class="btn btn-secondary" id="close-button" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-secondary" id="publish-button">Publish</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="replyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel-reply">New Reply</h1>
+                  </div>
+                  <div class="modal-body">
+                    <form id="reply-form">
+                      <div>
+                        <div class="form-group">
+                          <label for="reply-content">Content:</label>
+                          <div id="reply-content" class="editor"></div>
+                          <textarea id="reply-content-input" name="content" style="display: none;"></textarea>
+                        </div>
+                        <div class="create-post-footer">
+                          <button type="button" class="btn btn-secondary" id="close-button-reply" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-secondary" id="publish-button-reply">Publish</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p id="error-message"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="commentErrorModal" tabindex="-1" aria-labelledby="commentErrorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="commentErrorModalLabel">Error</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p id="comment-error-message"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box2" id="comments-section">
+      <span class="c">Comments</span>
+      <div class="up2">
+        <div>
+          <a href="profile2-logged.html">
+            <img src="../images/icon2.jpg" class="icon2">
+          </a>
+        </div>
+        <div class="ucomment">
+          <div>
+            <a href="profile2-logged.html" class="cusername">NeonBalls.6</a>
+          </div>
+          <span class="date">6/11/2023</span>
+          <span class="truncate-text justify">
+            Oh, absolutely! The Filipino love for food is unmatched. I remember during the pandemic, I started experimenting with new recipes and sharing them on my blog. It was a great way to pass the time and connect with fellow food enthusiasts. Can't wait for things to normalize so we can explore restaurants and street food again!
+          </span>
+        </div>
+      </div>
+      <div class="down2">
+        <div>
+          <a href="comment1.html" class="reply2">See more</a>
+        </div>
+      </div>
+      <div class="up2">
+        <div class="bcd">
+          <a href="profile1-logged.html">
+            <img src="../images/icon.jpg" class="icon2">
+          </a>
+        </div>
+        <div class="ucomment">
+          <a href="profile1-logged.html" class="cusername">Fishball_Lover39</a>
+          <span class="date">6/11/2023</span>
+          <span class="truncate-text justify">
+            Hey there! I wanted to share my personal opinion on this matter, but please keep in mind that it's just my perspective. Of course, everyone is entitled to their own viewpoint, so I'm eager to hear your thoughts as well. Let's aim for a friendly and respectful discussion, so please comment kindly. Thank you in advance for your understanding and considerate engagement!
+          </span>
+        </div>
+      </div>
+      <div class="down2">
+        <div>
+          <a href="comment.html" class="reply2">See more</a>
+        </div>
+      </div>
+      <div class="up2">
+        <div>
+          <a href="profile3-logged.html">
+            <img src="../images/icon3.jpg" class="icon2">
+          </a>
+        </div>
+        <div class="ucomment">
+          <div>
+            <a href="profile3-logged.html"class="cusername">radioheadLover00</a>
+          </div>
+          <span class="date">6/12/2023</span>
+          <span class="truncate-text justify">
+            So true! Food blogging became a trending hobby during the pandemic. I loved seeing how creative Filipinos got in the kitchen. From traditional dishes to fusion experiments, it was amazing to witness the culinary talents within our community. I hope this newfound passion for cooking continues even after the pandemic.
+          </span>
+        </div>
+      </div>
+      <div class="down2">
+        <div>
+          <a href="comment2.html"><span class="reply2">See more</span></a>
+        </div>
+      </div>
+    </div>

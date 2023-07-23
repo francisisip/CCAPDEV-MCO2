@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/static/css/register.css">
+<script type="module" src="/static/js/register.js" defer></script>
 
 <div id="main-box">
 	<div id="left-box">
@@ -10,18 +11,19 @@
 				<img src="/static/img/omsilog-black.png" class="omsilog">
 			</a>
 		</div>
-		<form class="form">
+		<form id="createUser" class="form">
 			<div class="username">
-				<input id="username" type="text" class="input" placeholder="Username" required/>
+				<input id="username" type="text" class="input" placeholder="Username" />
 			</div>
 			<div class="password">
-				<input id="password" type="password" class="input" placeholder="Password" required/>
+				<input id="password" type="password" class="input" placeholder="Password" />
 			</div>
 			<div class="email">
-				<input id="email" type="email" class="input" placeholder="Email Address" required/>
+				<input id="email" type="email" class="input" placeholder="Email Address" />
 			</div>
 			<div class="submit">
 				<button id="submit" class="register">Register</button>
+				<p class="text-error"></p>
 			</div>
 		</form>
 		<div class="signin-option">
