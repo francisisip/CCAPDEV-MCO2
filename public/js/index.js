@@ -1,26 +1,4 @@
-class Post {
-  constructor(title, id, user, tag, date, body, voteCount, commentCount, listOfComments, edited) {
-    this.title = title
-    this.id = id
-    this.user = user
-    this.tag = tag
-    this.date = date
-    this.body = body
-    this.voteCount = voteCount
-    this.commentCount = commentCount
-    this.listOfComments = listOfComments
-    this.edited = edited
-  }
-}
-
-class Comment {
-  constructor(user, date, body) {
-    this.user = user
-    this.date = date
-    this.body = body
-    this.listOfComments = []
-  }
-}
+//old js for index page
 
 let posts = []
 let postCtr = 5
@@ -258,6 +236,26 @@ function changeComment(x) {
   x.classList.toggle("bi-chat-left"); 
 }
 
+function changeUpvote(x) {
+  let postID = x.id.replace("uvote", "")
+  let currUser = 1
+
+  this.fetch('/posts/${postID}/upvote',
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userID: currUser,
+      postID: postID,
+    })
+  })
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+
+}
+/*
 //update upvote and downvote
 function changeUpvote(x) {
   let downID = x.id.replace("uvote", "dvote")
@@ -281,7 +279,9 @@ function changeUpvote(x) {
   console.log(posts[posts.length-index])
   updateCount(index)
 }
+*/
 
+/*
 function changeDownvote(x) {
   let upID = x.id.replace("dvote", "uvote")
   let index = Number(x.id.replace("dvote", ""))
@@ -304,6 +304,7 @@ function changeDownvote(x) {
 
   updateCount(index)
 }
+*/
 
 function updateCount(index) {
   element = document.getElementById("votecount" + index)
@@ -336,75 +337,6 @@ function updateTextarea() {
 quill.on('text-change', updateTextarea);
 
 //------------------------------------------------------------------------------------------------------------------------------------
-//Submitting Created Posts
-/*
-let publish = document.getElementById("publish-button")
-let createModal = new bootstrap.Modal(document.getElementById("createPostModal"))
-let createButton = document.getElementById("create-post-button")
-
-createButton.addEventListener("click", e=> {
-  createModal.show()
-})
-
-
-publish.addEventListener("click", e => {
-  e.preventDefault()
-
-  let modal = bootstrap.Modal.getInstance(document.getElementById("createPostModal"))
-
-  let inpTitle = document.getElementById("create-post-title")
-  let inpTag = document.getElementById("tag")
-  let inpBody = document.getElementById("content-input")
-
-  if(inpTitle.value.trim() === "" && inpBody.value.trim() === ""){
-    showErrorModal("Title and Body of the post can not be blank.")
-    return
-  } else if(inpTag.value === ""){
-    showErrorModal("Posts must have a specified tag.")
-    return
-  } 
-
-  postCtr++
-  let publishDate = new Date()
-  formattedDate = formatDate(publishDate) + " - " + formatTime(publishDate.getHours(), publishDate.getMinutes());
-  posts.unshift(new Post(inpTitle.value, postCtr, "curr User", inpTag.value, formattedDate, inpBody.value, 0, 0, [], false))
-
-  modal.hide()
-  loadInitialItems()
-})
-
-function showErrorModal(errorMessage) {
-  const errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
-  const errorMessageElement = document.getElementById("error-message");
-  errorMessageElement.textContent = errorMessage;
-  errorModal.show();
-}
-
-function formatDate(date) {
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-  var month = monthNames[date.getMonth()];
-  var day = date.getDate();
-  var year = date.getFullYear();
-
-  var formattedDate = month + " " + day + ", " + year;
-  return formattedDate;
-}
-
-function formatTime(hours, minutes) {
-
-  var period = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-
-  var formattedTime = hours + ":" + minutes + " " + period;
-  return formattedTime;
-}
-*/
-//-------------------------------------------------------------------------------------------------------------------------------------
 
 //for initializing popovers
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')

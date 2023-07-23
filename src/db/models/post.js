@@ -33,12 +33,18 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
-    voteCount: {
-        type: Number,
-        default: 0,
+    upvoteList: [{
+        type: Number
+    }],
+    downvoteList: [{
+        type: Number
+    }],
+    isEdited: {
+        type: Boolean,
+        default: false,
         required: true,
     },
-    isEdited: {
+    isDeleted:{
         type: Boolean,
         default: false,
         required: true,

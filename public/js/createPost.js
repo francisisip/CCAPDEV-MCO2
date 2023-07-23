@@ -26,6 +26,11 @@ window.addEventListener("load", function(e){
             showErrorModal("Posts must have a specified tag.")
             return
         }
+
+        let htmlContent = body.value
+        let tempElement = document.createElement('div');
+        tempElement.innerHTML = htmlContent;
+        let textContent = tempElement.textContent || tempElement.innerText
         
         let mark = document.querySelector(".thread-container")
         let num = Number(mark.id.replace('mark', ''))
@@ -43,6 +48,7 @@ window.addEventListener("load", function(e){
                 postID: num,
                 userID: test,
                 title: title.value,
+                desc: textContent,
                 body: body.value,
                 tag: tag.value
             })
