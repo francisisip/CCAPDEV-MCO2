@@ -27,7 +27,9 @@ window.addEventListener("load", function(e){
         let tag = this.document.querySelector('#tag')
         let body = this.document.querySelector('#content-input')
 
-        let test = 1
+        let currUser = document.querySelector(".usernow")
+        console.log(currUser)
+        let user = Number(currUser.id.replace('now', ''))
 
         if(title.value.trim() === "" && body.value.trim() === ""){
             showErrorModal("Title and Body of the post can not be blank.")
@@ -56,7 +58,7 @@ window.addEventListener("load", function(e){
             },
             body: JSON.stringify({
                 postID: num,
-                userID: test,
+                userID: user,
                 title: title.value,
                 desc: textContent,
                 body: body.value,
