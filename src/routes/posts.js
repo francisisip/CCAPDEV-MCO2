@@ -123,7 +123,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
+//UPVOTE
 router.put('/:id/upvote', async(req, res) => {
     const resourceID = req.params.id
     const user = req.body.userID
@@ -164,6 +164,7 @@ router.put('/:id/upvote', async(req, res) => {
     }
 })
 
+//DOWNVOTE
 router.put('/:id/downvote', async(req, res) => {
     const resourceID = req.params.id
     const user = req.body.userID
