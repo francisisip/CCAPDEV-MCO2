@@ -89,20 +89,13 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.put("/setActiveUser", async (req, res) => {
-    const user = await User.findOne({username: req.body.username})
-    const newID = user.userID
-    const sname = 'session-user'
-
-    console.log(newID)
+router.post('/logout', async (req, res) => {
     try{
-        await currUser.findOneAndUpdate({name: sname}, {userID: newID})
+        await currUser.findOneAndUpdate({name: 'session-user'}, {userID: 0})
         res.status(200)
-        return
     }
     catch(err) {
-        res.status(500).json(err);
-        return
+        console.log(err)
     }
 })
 

@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="/static/css/navbar.css">
 
+{{#if user}}
+<script src="/static/js/navbar.js" defer></script>
+{{/if}}
+
 <header>
 	<nav>
 		<div>
@@ -15,11 +19,11 @@
 				</a>
 			</div>
 			{{#if user}}
-			<div class="dropdown usernow" id="now{{user}}">
+			<div class="dropdown" id="now{{user}}">
 				<img src="/static/img/icon{{user}}.jpg" width="50" height="50" class="picon formargin1">
 				<div class="dropdown-content">
 					<a href="/user" class="poption">View Profile</a>
-					<a href="/logout" class="poption">Logout</a>
+					<a href="" class="poption" id="logout-button">Logout</a>
 				</div>
 			</div>
 			{{else}}
