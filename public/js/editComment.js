@@ -42,7 +42,6 @@ function capitalizeFLetter(tag) {
 window.addEventListener("load", function(e) {
 
     const body = document.getElementById('body')
-    const titleInput = document.getElementById('create-post-title');
     const contentInput = document.getElementById('content-input');
     const edit = document.getElementById("edit");
     const modalTitle = document.getElementById("staticBackdropLabel");

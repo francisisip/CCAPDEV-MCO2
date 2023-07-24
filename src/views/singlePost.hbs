@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
 <script type="module" src="/static/js/editPost.js" defer></script>
+<script type="module" src="/static/js/deletePost.js" defer></script>
+
 
 
 <div id="post-title">
@@ -19,7 +21,7 @@
             <a href="/users/{{post.userID}}">
             <img src="{{post.author.profileImg}}" class="icon">
             </a>
-            <div class="buttons">
+            <div class="buttons{{post.isDeleted}}">
                 <span id="upvote" class="upvote" onclick="changeUpvote(this)"></span>
                 <span id="count" class="num">{{post.voteCount}}</span>
                 <span id="downvote" class="downvote" onclick="changeDownvote(this)"></span>
@@ -40,7 +42,7 @@
             </div>             
             <div id="body" class="justify mpost">{{post.desc}}</div>
             <div class="down">
-            <a id="reply" class="reply">Reply</a>
+            <a id="reply" class="reply{{post.isDeleted}}">Reply</a>
             <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                 <div class="modal-content">

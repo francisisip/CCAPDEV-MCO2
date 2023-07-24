@@ -57,6 +57,20 @@ router.get('/:id/:cID', async (req, res) => {
 
         // Fetch additional information about the comment's author
         foundComment.author = await User.findOne({userID: foundComment.userID}).select('username userID profileImg').lean();
+
+        if (activeID === foundComment.author.userID){
+            foundComment.isUser = ""
+        } else {
+            foundComment.isUser = " hidden"
+        }
+
+        if (foundComment.isDeleted === true) {
+            foundComment.isUser = " hidden"
+            foundComment.isDeleted = " hidden"
+        } else {
+            foundComment.isDeleted = ""
+        }
+
         res.render('singleComment', {
             title: foundComment.author.username,
             post: foundPost,
@@ -114,6 +128,13 @@ router.get('/:id', async (req, res) => {
         foundPost.isUser = ""
     } else {
         foundPost.isUser = " hidden"
+    }
+
+    if (foundPost.isDeleted === true) {
+        foundPost.isUser = " hidden"
+        foundPost.isDeleted = " hidden"
+    } else {
+        foundPost.isDeleted = ""
     }
 
     const postComments = [];
@@ -258,5 +279,39 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async(req, res) => {
+    const postID = req.params.id;
+
+    try {
+        const post = await Post.findOne({postID: postID});
+
+        post.desc = "This post has been deleted.";
+        post.body = "This post has been deleted.";
+        post.isDeleted = true;
+        post.isEdited = false;
+
+        await post.save();
+        return res.status(200).json({ message: 'Post deleted successfully', post });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error deleting post'})
+    }
+})
+
+router.delete('/:id/:cID', async(req, res) => {
+    const commentID = req.params.cID;
+   
+    try {
+        const comment = await Comment.findOne({commentID: commentID});
+        
+        comment.body = "This post has been deleted.";
+        comment.isDeleted = true;
+        comment.isEdited = false;
+        console.log("ako")
+        await comment.save();
+        return res.status(200).json({ message: 'Comment deleted successfully' });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error deleting post'})
+    }
+})
 
 module.exports = router;

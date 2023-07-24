@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
 <script type="module" src="/static/js/editComment.js" defer></script>
+<script type="module" src="/static/js/deleteComment.js" defer></script>
 
 <div id="post-title">
     <div class="title-contents">
@@ -25,7 +26,7 @@
                 <a href="/users/{{comment.userID}}" class="username">{{comment.author.username}}</a>
             </div>
             <div class="dropdown">
-                <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
+                <button class="three-dots dropbtn{{comment.isUser}}"><i class="bi bi-three-dots iconsize"></i></button>
                 <div class="dropdown-content">
                 <a id="edit" href="#">Edit</a>
                 <a id="delete" href="#">Delete</a>
@@ -34,7 +35,7 @@
             </div>             
             <div id="body" class="justify mpost">{{comment.body}}</div>
             <div class="down">
-            <a id="reply" class="reply">Reply</a>
+            <a id="reply" class="reply{{comment.isDeleted}}">Reply</a>
             <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                 <div class="modal-content">
