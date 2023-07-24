@@ -1,4 +1,12 @@
 //old js for index page
+if (localStorage.getItem('user') === null) {
+  empty = "";
+  localStorage.setItem('user', JSON.stringify(empty));
+}
+if (localStorage.getItem('userID') === null) {
+  empty = 0;
+  localStorage.setItem('userID', JSON.stringify(empty));
+}
 
 window.addEventListener("load", function(e){
   try {
