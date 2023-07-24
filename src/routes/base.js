@@ -1,4 +1,5 @@
 const authRouter = require('./auth');
+const searchRouter = require('./search');
 const express = require('express');
 const router = express.Router();
 
@@ -58,7 +59,6 @@ router.get('/', async (req, res) => {
     post.voteCount = post.upvoteList.length - post.downvoteList.length
   }
 
-
   res.render('index', {
     title: "Home", 
     posts: posts,
@@ -79,11 +79,8 @@ router.post('/', (req, res) => {
   
 });
 
-router.get('/search', (req, res) => {
-  res.render('index', {title: "Home"});
-});
-
 router.use(authRouter);
+router.use(searchRouter);
 
 // router.use((req, res) => {
 //   res.render("error", {
