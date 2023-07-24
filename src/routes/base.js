@@ -41,11 +41,11 @@ router.get('/', async (req, res) => {
           tag = "bi-lightbulb-fill";
     }
 
-    if(post.upvoteList.includes(currUser)){
+    if(post.upvoteList.includes(activeID)){
       post.uvoteClass = 'upvote-2'
       post.dvoteClass = 'downvote'
     }
-    else if(post.downvoteList.includes(currUser)){
+    else if(post.downvoteList.includes(activeID)){
       post.uvoteClass = 'upvote'
       post.dvoteClass = 'downvote-2'
     }
