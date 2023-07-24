@@ -14,7 +14,7 @@ router.get('/search', async (req, res) => {
         let sort = req.query.sort || "date"; 
         let tags = req.query.tag || "All"; // 
 
-        req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]); //doesn't split?
+        req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]); 
 
         let sortBy = {}
         if (sort[1]) {
@@ -23,16 +23,19 @@ router.get('/search', async (req, res) => {
             sortBy[sort[0]] = "desc"; // sort most recent default
         }
 
-        let query = Post.find({ title: { $regex: search, $options: "i" } });
+        let query = Post.find({
+            $or: [
+              { title: { $regex: search, $options: "i" } }, // Search for 'search' term in the title
+              { body: { $regex: search, $options: "i" } }   // Search for 'search' term in the body
+            ]
+        });
 
         if (tags !== "All") {
             query = query.where("tag", new RegExp(tags, "i"));
         }
 
         const posts = await query.sort(sortBy).lean();
-        const users = await User.find().collation({ locale: 'en', strength: 2 }).sort({"username": 1}).lean()
-
-        console.log(sortBy);
+        //const users = await User.find().collation({ locale: 'en', strength: 2 }).sort({"username": 1}).lean()
 
         for(let post of posts) {
             post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()

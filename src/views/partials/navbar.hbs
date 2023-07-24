@@ -11,12 +11,14 @@
 				<img src="/static/img/omsilog-white.png" class="omsilog">
 			</a>
 		</div>
-		<div class="nav-right">
-			<input type="text" class="search" placeholder="Search" />
+		<div class="nav-right" action="/search" method="GET">
+			<form action="/search" method="GET">
+				<input type="text" name="search" class="search" placeholder="Search" />
+			</form>
 			<div>
-				<a class="search-icon-container" href="/search">
+				{{!-- <a class="search-icon-container" action="/search" method="GET" href="/search">
 					<img id="search-icon-nav" src="/static/img/search-icon-white.png">
-				</a>
+				</a> --}}
 			</div>
 			{{#if user}}
 			<div class="dropdown" id="now{{user}}">

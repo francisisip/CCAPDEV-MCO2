@@ -163,7 +163,7 @@ nav {
     align-items: center;
 }
 
-.search-box{
+#search-box{
     width: 970px;
     background-color: #ecebeb;
     border-radius: 50px;

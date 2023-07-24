@@ -6,12 +6,12 @@
 </div>
 <div class="search-container">
     <div class="search-bar">
-        <form>
-            <input type="text" class="search-box" placeholder="Search anything!">
+        <form action="/search" method="GET">
+            <input type="text" name="search" id="search-box" placeholder="Search anything!">
         </form>
-        <a class="search-icon-container" href="">
+        {{!-- <a id="search-icon-container" href="">
             <img id="search-icon" src="static/img/search-icon.png">
-        </a>
+        </a> --}}
     </div>
     <div class="filter-container">
         <div class="filter-btn-container">
@@ -19,8 +19,8 @@
                 Type
             </button>
             <div class="filter-dropdown" id="type">
-                <button class="btn-search-posts">Posts</button>
-                <button class="btn-search-users">Users</button>
+                <button id="btn-search-posts">Posts</button>
+                <button id="btn-search-users">Users</button>
             </div>
         </div>
 
@@ -29,10 +29,10 @@
                 Sort By
             </button>
             <div class="filter-dropdown" id="sort">
-                <button class="btn-most-votes">Most Upvoted</button>
-                <button class="btn-least-votes">Least Upvoted</button>
-                <button class="btn-recent">Recent</button>
-                <button class="btn-oldest">Oldest</button>
+                <button id="btn-most-votes">Most Upvoted</button>
+                <button id="btn-least-votes">Least Upvoted</button>
+                <button id="btn-recent">Recent</button>
+                <button id="btn-oldest">Oldest</button>
             </div>
         </div>
 
@@ -41,12 +41,12 @@
                 Tags
             </button>
             <div class="filter-dropdown" id="tagsf">
-                <button class="btn-ann">(All)</button>
-                <button class="btn-ann">Announcements</button>
-                <button class="btn-mem">Meme</button>
-                <button class="btn-rev">Review</button>
-                <button class="btn-que">Query</button>
-                <button class="btn-met">Meta</button>
+                <button id="btn-ann">(All)</button>
+                <button id="btn-ann">Announcements</button>
+                <button id="btn-mem">Meme</button>
+                <button id="btn-rev">Review</button>
+                <button id="btn-que">Query</button>
+                <button id="btn-met">Meta</button>
             </div>
         </div>
     </div>
@@ -209,7 +209,7 @@
 
         </div>
 
-        <div class="users-container" id="users-container">
+        {{!-- <div class="users-container" id="users-container">
             {{#if users.length}}
                 {{#each users}}
                     {{> users}}
@@ -223,9 +223,10 @@
             {{else}}
             {{/if}}
 
-        </div>
+        </div> --}}
         
     </div>
 </div>
 
+{{!-- <script src="static/js/searchQuery.js" defer></script> --}}
 <script src="static/js/search.js" defer></script>
