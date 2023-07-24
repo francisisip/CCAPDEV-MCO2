@@ -1,10 +1,15 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
+<script type="module" src="/static/js/editComment.js" defer></script>
 
 <div id="post-title">
     <div class="title-contents">
         <a href="/posts/{{comment.postID}}"><i class="bi bi-backspace-fill"></i><span class="tag">Go back</span></a>
         <span id="title">Re: {{post.title}}</span>
-        <span id="post-date">created {{calcDate comment.date}}</span>
+        <span id="post-date">created {{calcDate comment.date}}
+            {{#if comment.isEdited}}
+                --edited--
+            {{/if}}
+        </span>
     </div>
 </div>
 <div class="box">    
@@ -39,22 +44,6 @@
                     <div class="modal-body">
                     <form id="comment-form">
                         <div>
-                        <div class="form-group">
-                            <label for="create-post-title">Title:</label>
-                            <input type="text" class="title-input" id="create-post-title" name="create-post-title" placeholder="Enter post title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tag">Post-Tag:</label>
-                            <div class="select">
-                            <select id="tag" name="tag" onfocus='this.size=4;' onblur='this.size=0;' onchange='this.size=1; this.blur();' required>
-                            <option value="" disabled selected>Select Tag</option>
-                                <option value="review">Review</option>
-                                <option value="query">Query</option>
-                                <option value="meme">Meme</option>
-                                <option value="meta">Meta</option>
-                            </select>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="content">Content:</label>
                             <div id="content" class="editor"></div>

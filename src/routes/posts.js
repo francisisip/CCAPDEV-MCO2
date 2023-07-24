@@ -221,6 +221,26 @@ router.put('/:id/downvote', async(req, res) => {
     }
 })
 
+
+router.put('/:id/:cID', async (req, res) => {
+    const commentID = req.params.cID;
+    try {
+        const comment = await Comment.findOne({commentID: commentID});
+        
+        comment.body = req.body.body;
+   
+        comment.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
+        
+        
+        await comment.save();
+
+        console.log("andito ako")
+        return res.status(200).json({ message: 'Post updated successfully' });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error updating post'})
+    }
+});
+
 router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findOne({postID: req.body.id});
@@ -238,18 +258,5 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.put('/:id/:cID', async (req, res) => {
-    try {
-        const comment = await Comment.findOne({commentID: req.body.id});
-        comment.body = req.body.body;
-        comment.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
-
-        await comment.save();
-
-        return res.status(200).json({ message: 'Post updated successfully', post });
-    } catch (err) {
-        return res.status(500).json({ message: 'Error updating post'})
-    }
-});
 
 module.exports = router;
