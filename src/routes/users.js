@@ -96,7 +96,22 @@ router.get("/:userID", async (req, res)=>{
             title: "Page not Found."
         });
     }
-
+    
  });
 
+router.put("/:userID/edit", async (req, res)=>{
+    try {
+        const userID = req.params.userID; // Get the userID from the URL parameter
+        const { firstName, lastName, bio, pfp } = req.body;
+    
+        // Call the function to update the user information in the database
+        await updateUser(userID, { firstName, lastName, bio, pfp });
+    
+        // Respond with a success message or any relevant data
+        res.json({ success: true, message: "User information updated successfully." });
+      } catch (err) {
+        // Handle any errors that occur during the update process
+        res.status(500).json({ success: false, message: "Failed to update user information." });
+      }
+})
 module.exports = router;

@@ -25,7 +25,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function cancelForm();{
-  res.redirect('/:userID');
+  res.render("users", {
+    user: activeID,
+    match: valid,
+    loadedProfile: userProfile,
+    posts: postsArray,
+    comments: commentsArray,
+    helpers: {toLower, calcDate}
+});
 }
 
 function submitEditProfile() {
@@ -63,6 +70,7 @@ function submitEditProfile() {
       })
       .then((res) => res.json())
       .then((json) => console.log(json))
+      res.redirect('/:userID');
   }}
   catch (error) {
     console.error('Error updating user:', error);
