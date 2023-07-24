@@ -1,3 +1,13 @@
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
+
+function showError(str) {
+    const para =  document.querySelector(".text-error");
+
+    para.innerHTML = str;
+}
+
 window.addEventListener("load", function(e){
     const username = this.document.querySelector("#username");
     const password = this.document.querySelector("#password");
@@ -5,7 +15,8 @@ window.addEventListener("load", function(e){
     // const error = this.document.querySelector(".text-error");
     let fields = [username, password];
 
-    login.addEventListener("click", (e)=> {
+    login?.addEventListener("click", async (e)=> {
+        
         e.preventDefault();
 
         let emptyFields = [];
@@ -15,31 +26,40 @@ window.addEventListener("load", function(e){
             }
         }
 
-        // if(isEmptyOrSpaces(username.value) || isEmptyOrSpaces(password.value)){
-        //     showError(error, "Please fill out all fields.", emptyFields);
-        //     return;
-        // }
-        // if(!username.value.match(usernameRegex)){
-        //     showError(error, "Please enter a valid username.",[username]);
-        //     return;
-        // }
+        if(isEmptyOrSpaces(username.value) || isEmptyOrSpaces(password.value)){
+            showError("Please fill out all fields.");
+            return;
+        }
 
-        this.fetch("/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username.value,
-                password: password.value
-            })
-        }).then(res => {
-            if(res.status >= 400){
-                showError(error, "Invalid username or password.", fields);
-                return;
+        const myObj = { 
+            username: username.value,
+            password: password.value
+        };
+
+        const jString = JSON.stringify(myObj);
+
+
+        try {
+            const response = await fetch("/login", {
+                method: 'POST',
+                body: jString,
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            });
+
+            console.log(response);
+            if (response.status === 200) {
+                const data = await response.json(); 
+                const user = data.message;
+                this.window.location.href = window.location.origin + "/" + user;
+            } else {
+                const data = await response.json(); 
+                const message = data.message; 
+                showError(message);
             }
-            if(res.status == 200)
-                this.window.location.href = window.location.origin + "/";
-        }).catch(err => console.log(err))
+        } catch (err) {
+            console.error(err);
+        }
     });
 });

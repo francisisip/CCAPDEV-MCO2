@@ -50,6 +50,7 @@ body {
     justify-content: center;
     margin-top: 30px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .goBack {
@@ -70,7 +71,6 @@ body {
 }
 
 .username {
-    margin-top: 20px;
     margin-bottom: 35px;
 }
 
@@ -221,4 +221,10 @@ input[type=password] {
 .modal-header {
     background-color: #1e2328;
     color: white;
+}
+
+.text-error {
+    color: red;
+    font-family: var(--subheading);
+    font-size: 12px;
 }

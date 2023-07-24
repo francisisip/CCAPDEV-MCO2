@@ -52,7 +52,6 @@ router.get('/:id/:cID', async (req, res) => {
             user.author = await User.findOne({userID: user.userID}).select('username userID profileImg').lean();
         }
 
-        console.log(postComments);
         // Fetch additional information about the comment's author
         foundComment.author = await User.findOne({userID: foundComment.userID}).select('username userID profileImg').lean();
         res.render('singleComment', {

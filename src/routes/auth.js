@@ -15,26 +15,25 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/login', async (req,res)=>{
-  try{
-      const user = await User.findOne({username: req.body.username});
-      if(!user){
-          res.status(404).json("User not found.");
-          return;
-      }
+    try{
+        const user = await User.findOne({username: req.body.username});
+        if(!user){
+            res.status(400).json({message: "User not found."});
+            return;
+        }
 
-      const isMatch = comparePasswords(req.body.password, user.password)
-      if(!isMatch){
-          res.status(400).json("Incorrect password.");
-          return;
-      }
-      // req.session.user=user;
-      console.log('password match')
-      //Respond with the user
-      res.sendStatus(200);
-  }catch(err){
-      res.status(500).json(err);
-      return;
-  }
+        const isMatch = comparePasswords(req.body.password, user.password)
+        if(!isMatch){
+            res.status(400).json({message: "Incorrect password."});
+            return;
+        }
+
+        //Respond with the user
+        res.status(200).json({message: user.username});
+    }catch(err){
+        res.status(500).json(err);
+        return;
+    }
 });
 
 router.post('/register', async (req,res)=>{
