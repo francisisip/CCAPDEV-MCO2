@@ -47,12 +47,7 @@ window.addEventListener("load", async function(e){
             });
 
             if (response.status === 200) {
-                const name = await response.json(); 
-                const user = name.username;
-                const id = name.userID;
-
-                
-                window.location.href = "/home";
+                window.location.href = "/";
             } else {
                 const data = await response.json(); 
                 const message = data.message; 

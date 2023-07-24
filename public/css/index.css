@@ -400,7 +400,7 @@ input[type="checkbox"]:checked +label {
     font-size: 0.95rem;
 }
 
-.announcement-tag{
+.announcements-tag{
     background-color: #1e2328;
 }
 

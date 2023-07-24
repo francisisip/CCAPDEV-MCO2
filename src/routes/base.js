@@ -12,9 +12,12 @@ const { toLower, calcDate } = require('../utils/helper.js');
 router.get('/', async (req, res) => {
   
   const posts = await Post.find({}).sort({"_id": -1}).lean();
-  const activeUser = await currUser.find({})
+  let activeID
 
-  console.log(activeUser)
+  await currUser.findOne({}).then(doc => {
+    activeID = doc.get("userID", Number)
+  })
+  console.log(activeID)
 
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -59,7 +62,7 @@ router.get('/', async (req, res) => {
   res.render('index', {
     title: "Home", 
     posts: posts,
-    user: activeUser,
+    user: activeID,
     helpers: {toLower, calcDate}
   });
 });

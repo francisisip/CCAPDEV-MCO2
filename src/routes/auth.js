@@ -4,7 +4,8 @@ function comparePasswords(plaintext, password){
 
 const express = require('express');
 const router = express.Router();
-const User = require('../db/models/user');
+const User = require('../db/models/user.js');
+const currUser = require('../db/models/currUser.js');
 
 router.get('/login', (req, res) => {
   res.render('login', { layout: 'auth', title: "Home"});
@@ -30,7 +31,20 @@ router.post('/login', async (req,res)=>{
         }
 
         //Respond with the user
-        res.status(200).json({username: user.username, userID: user.userID});
+        const testuser = await User.findOne({username: req.body.username})
+        const newID = testuser.userID
+        const sname = 'session-user'
+
+        console.log(newID)
+        try{
+            await currUser.findOneAndUpdate({name: sname}, {userID: newID})
+            res.status(200).json({username: user.username, userID: user.userID});
+            return
+        }
+        catch(err) {
+            res.status(500).json(err);
+            return
+        }
     }catch(err){
         res.status(500).json(err);
         return;
@@ -74,5 +88,22 @@ router.post("/register", async (req, res) => {
         return;
     }
 });
+
+router.put("/setActiveUser", async (req, res) => {
+    const user = await User.findOne({username: req.body.username})
+    const newID = user.userID
+    const sname = 'session-user'
+
+    console.log(newID)
+    try{
+        await currUser.findOneAndUpdate({name: sname}, {userID: newID})
+        res.status(200)
+        return
+    }
+    catch(err) {
+        res.status(500).json(err);
+        return
+    }
+})
 
 module.exports = router;
