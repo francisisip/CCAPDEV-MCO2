@@ -1,0 +1,23 @@
+<div class="post">
+    <div class="post-info-container">
+        <a class="icon-container" href="">
+            <img class="user-icon" src="{{author.profileImg}}" alt="">
+        </a>
+        <div class="post-info">
+            <div class = "clickable-div" onclick="location.href='/posts/{{postID}}/{{commentID}}'";>
+                <div class="post-details">
+                    <div class="details-icon"></div>
+                    <i class="bi bi-pen-fill"></i>
+                    <a href="">
+                        <div class="username">{{author.username}}</div>
+                    </a>
+                    <div class="post-date">&nbsp;commented {{calcDate date}}</div>
+                </div>
+                <div class="post-description">
+                    {{body}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

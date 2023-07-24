@@ -18,9 +18,11 @@
             <p id = "bio">{{loadedProfile.bio}}</p> 
             <p>-------------------------------------</p>
             <ul class="nav profile">
+                {{#if match}}
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="pill" href="#edit-info">Edit profile info</a>
                 </li>
+                {{/if}}
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="pill" href="#view-posts">View Posts </a>
                 </li>
@@ -102,12 +104,57 @@
 
         <div id = "view-posts" class = "tab-pane fade show active">
             <!--view posts-->
+            {{#if posts.length}}
+                {{#each posts}}
+                    {{> posts}}
+                {{/each}}
+
+                <!--
+                <div class="see-more-container" id="see-more-container">
+                     //SEE MORE BUTTON
+                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                </div>
+                -->
+            {{else}}
+                <!-- insert note saying no more available posts -->
+            {{/if}}
             
         </div>
         <div id = "view-comments" class ="tab-pane fade">
-            <!-- view comments -->
+            <!--view posts-->
+            {{#if comments.length}}
+                {{#each comments}}
+                    {{> profileComments}}
+                {{/each}}
+
+                <!--
+                <div class="see-more-container" id="see-more-container">
+                     //SEE MORE BUTTON
+                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                </div>
+                -->
+            {{else}}
+                <!-- insert note saying no more available posts -->
+            {{/if}}
         </div>
     </div>
 </div>
 
-<script src="static/js/index.js" defer></script>
+<!--error modal-->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+        </div>
+        <div class="modal-body">
+            <p id="error-message"></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/index.js" defer></script>
