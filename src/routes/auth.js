@@ -57,21 +57,19 @@ router.post('/register', async (req,res)=>{
           res.status(200).json({message: "User created"});
       }
       else{
-          let message = "", errorFields = [];
+          let message = "";
           if(usernameExist){
               message = "Username already exist.";
-              errorFields = ["email", "username"];
           }
           else if(emailExist){
-              message = " already exists.";
-              errorFields = ["email"];
+              message = "Email already exists.";
           }
-          res.status(400).json({error: message, fields: errorFields});            
+          res.status(400).json({message: message});            
       }
   }catch(err){
       console.log("ERROR-IN-AUTH");
       console.log(err);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "Internal  Error" });
       return;
   }
 });

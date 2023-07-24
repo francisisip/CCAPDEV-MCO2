@@ -4,7 +4,6 @@ function isEmptyOrSpaces(str) {
 
 function showError(str) {
     const para =  document.querySelector(".text-error");
-
     para.innerHTML = str;
 }
 
@@ -12,7 +11,6 @@ window.addEventListener("load", function(e){
     const username = this.document.querySelector("#username");
     const password = this.document.querySelector("#password");
     const login = this.document.querySelector(".login");
-    // const error = this.document.querySelector(".text-error");
     let fields = [username, password];
 
     login?.addEventListener("click", async (e)=> {
