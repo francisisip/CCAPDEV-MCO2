@@ -1,10 +1,14 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
 <script type="module" src="/static/js/editPost.js" defer></script>
 <script type="module" src="/static/js/deletePost.js" defer></script>
-
-
+<script type="module" src="/static/js/replyPost.js" defer></script>
 
 <div id="post-title">
+    <div class="curruser" id="mhm{{user}}">
+    </div>
+    <div class="numofcomments" id="aye{{post.comments.length}}">
+
+    </div>
     <div class="title-contents">
         <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span id="tagName" class="tag">{{post.tag}}</span></a>
         <span id="title">{{post.title}}</span>

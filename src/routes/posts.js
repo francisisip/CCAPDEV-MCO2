@@ -314,4 +314,40 @@ router.delete('/:id/:cID', async(req, res) => {
     }
 })
 
+router.post('/:id/:cID', async (req, res) => {
+    const postId = req.params.id;
+    const commentId = req.params.cID; // Extract commentId from :cID
+    const { userId, body } = req.body; // Extract userId and body from the request body
+
+    try {
+        const post = await Post.findOne({ postID: postId });
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Create a new Comment instance using the Comment model
+        const newComment = new Comment({
+            postId: postId,
+            userId: userId,
+            body: body,
+            commentId: commentId
+        });
+        console.log("hello")
+        // Save the new comment to the database
+        await newComment.save();
+
+        // Add the commentId to the post's comments array
+        post.comments.push(commentId);
+
+        // Save the updated post with the new commentId in the comments array
+        await post.save();
+
+        return res.status(200).json({ message: 'Comment added successfully' });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+
 module.exports = router;
