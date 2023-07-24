@@ -54,7 +54,7 @@
                         <input type="text" id="lastName" name="lastName" placeholder="{{loadedProfile.lName}}">
                         </div>
                     </div>
-                    
+                    <!--
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="password">Old Password:</label>
@@ -90,14 +90,14 @@
                         <input type="email" id="confirmEmail" name="confirmEmail" placeholder="{{loadedProfile.email}}">
                         </div>
                     </div>
-                    
+                    -->
                     <div class="form-group">
                         <label for="bio">Edit Bio:</label>
                         <textarea id="bio" name="bio" rows="2" cols="50" placeholder="E{{loadedProfile.bio}}"></textarea>
                     </div>
                     
-                   <input type="submit" value="Save Changes" id = "submit" onsubmit= "submitEditProfile()">
-                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+                   <input type="submit" value="Save Changes" id = "submit" onsubmit= submitEditProfile()>
+                    <button type="button" class="cancel" onclick=cancelForm()>Cancel</button>
                 </form>
             </div>
         </div>
