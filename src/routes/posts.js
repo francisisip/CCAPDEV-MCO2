@@ -99,6 +99,13 @@ router.get('/:id', async (req, res) => {
     foundPost.tagClass = tag;
     foundPost.voteCount = foundPost.upvoteList.length - foundPost.downvoteList.length
 
+    console.log(currUser);
+    console.log(foundPost.author.username);
+    if (currUser === foundPost.author.username){
+        foundPost.isUser = ""
+    } else {
+        foundPost.isUser = " hidden"
+    }
 
     const postComments = [];
     for (let comment of foundPost.comments) {
@@ -108,6 +115,7 @@ router.get('/:id', async (req, res) => {
     for (let user of postComments) {
         user.author = await User.findOne({userID: user.userID}).select('username userID profileImg').lean();
     }
+
     res.render('singlePost', { 
         title: foundPost.title, 
         post: foundPost,
@@ -203,5 +211,25 @@ router.put('/:id/downvote', async(req, res) => {
         return res.status(500).json(err)
     }
 })
+
+router.put('/:id', async (req, res) => {
+    try {
+        const post = await Post.findOne({postID: req.body.id});
+        post.title = req.body.title;
+        post.tag = req.body.tag;
+        post.desc = req.body.desc;
+        post.body = req.body.body;
+        post.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
+        console.log(post.date);
+        post.date = new Date();
+        console.log(post.date);
+
+        await post.save();
+
+        return res.status(200).json({ message: 'Post updated successfully', post });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error updating post'})
+    }
+});
 
 module.exports = router;

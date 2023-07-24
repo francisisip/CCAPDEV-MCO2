@@ -544,3 +544,7 @@ option:hover {
 .tag {
     margin-left: 5px;
 }
+
+.hidden{
+    display: none;
+}

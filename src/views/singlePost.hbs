@@ -27,7 +27,7 @@
                 <a href="/users/{{post.userID}}" class="username">{{post.author.username}}</a>
             </div>
                 <div class="dropdown">
-                    <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
+                    <button class="three-dots dropbtn{{post.isUser}}"><i class="bi bi-three-dots iconsize"></i></button>
                     <div class="dropdown-content">
                     <a id="edit" href="#">Edit</a>
                     <a id="delete" href="#">Delete</a>
