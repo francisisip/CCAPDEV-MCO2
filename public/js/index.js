@@ -240,7 +240,29 @@ function changeUpvote(x) {
   let postID = x.id.replace("uvote", "")
   let currUser = 1
 
-  this.fetch('/posts/${postID}/upvote',
+  let downID = x.id.replace("uvote", "dvote")
+  let countID = x.id.replace("uvote", "vcount")
+  let element = document.getElementById(downID)
+  let voteCount = document.getElementById(countID)
+
+  if(element.classList.contains("downvote-2")){
+    element.classList.toggle("downvote-2")
+    element.classList.toggle("downvote")
+    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+  }
+  
+  if(x.classList.contains("upvote-2")){
+    x.classList.toggle("upvote-2");
+    x.classList.toggle("upvote");
+    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+  }
+  else {
+    x.classList.toggle("upvote-2");
+    x.classList.toggle("upvote");
+    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+  }
+
+  this.fetch('/posts/'+ postID + '/upvote',
   {
     method: "PUT",
     headers: {
@@ -255,6 +277,48 @@ function changeUpvote(x) {
   .then((json) => console.log(json))
 
 }
+
+function changeDownvote(x) {
+  let postID = x.id.replace("dvote", "")
+  let currUser = 1
+  
+  let upID = x.id.replace("dvote", "uvote")
+  let countID = x.id.replace("dvote", "vcount")
+  let element = document.getElementById(upID)
+  let voteCount = document.getElementById(countID)
+
+  if(element.classList.contains("upvote-2")) {
+    element.classList.toggle("upvote-2")
+    element.classList.toggle("upvote")
+    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+  }
+
+  if(x.classList.contains("downvote-2")) {
+    x.classList.toggle("downvote");
+    x.classList.toggle("downvote-2");
+    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+  } else {
+    x.classList.toggle("downvote");
+    x.classList.toggle("downvote-2");
+    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+  }
+
+  this.fetch('/posts/'+ postID + '/downvote',
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userID: currUser,
+      postID: postID,
+    })
+  })
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+
+}
+
 /*
 //update upvote and downvote
 function changeUpvote(x) {
