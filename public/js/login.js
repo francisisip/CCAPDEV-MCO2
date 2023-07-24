@@ -50,8 +50,7 @@ window.addEventListener("load", async function(e){
                 const name = await response.json(); 
                 const user = name.username;
                 const id = name.userID;
-                localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('userID', JSON.stringify(id));
+
                 
                 window.location.href = "/home";
             } else {

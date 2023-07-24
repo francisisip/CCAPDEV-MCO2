@@ -4,15 +4,17 @@ const router = express.Router();
 
 const Post = require('../db/models/post.js')
 const User = require('../db/models/user.js')
+const currUser = require('../db/models/currUser.js');
 
 //helpers
 const { toLower, calcDate } = require('../utils/helper.js');
-const currUser = require('../db/models/currUser');
 
 router.get('/', async (req, res) => {
   
-  const posts = await Post.find({}).sort({"_id": -1}).lean()
-  const currUser = await currUser.find({}).lean
+  const posts = await Post.find({}).sort({"_id": -1}).lean();
+  const activeUser = await currUser.find({})
+
+  console.log(activeUser)
 
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -57,7 +59,7 @@ router.get('/', async (req, res) => {
   res.render('index', {
     title: "Home", 
     posts: posts,
-    user: currUser,
+    user: activeUser,
     helpers: {toLower, calcDate}
   });
 });
@@ -77,13 +79,6 @@ router.post('/', (req, res) => {
 router.get('/search', (req, res) => {
   res.render('index', {title: "Home"});
 });
-
-router.post('/currUser', (req, res) => {
-  const receivedObject = req.body
-  global.currUser = receivedObject.userID
-  console.log(global.currUser)
-  res.status(200).json({message: 'Object stored successfully'})
-})
 
 router.use(authRouter);
 

@@ -1,30 +1,3 @@
-//old js for index page
-if (localStorage.getItem('user') === null) {
-  empty = "";
-  localStorage.setItem('user', JSON.stringify(empty));
-}
-if (localStorage.getItem('userID') === null) {
-  empty = 0;
-  localStorage.setItem('userID', JSON.stringify(empty));
-}
-
-window.addEventListener("load", function(e){
-  try {
-    const storedObject = JSON.parse(localStorage.getItem('userID')) // Parse the JSON back to an object
-    let item = {userID : storedObject}
-    // Make sure storedObject is an object before sending it in the POST request
-    this.fetch('/currUser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item)
-    })
-
-  } catch (err) {
-    console.log(err);
-  }
-})
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 /*
