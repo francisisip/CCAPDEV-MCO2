@@ -22,24 +22,50 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const editProfileLink = document.querySelector('a[href="#edit-info"]');
   editProfileLink.addEventListener('click', openForm);
 
-});
+  submit = document.getElementById("submit-btn")
 
-function cancelForm();{
-  res.render("users", {
-    user: activeID,
-    match: valid,
-    loadedProfile: userProfile,
-    posts: postsArray,
-    comments: commentsArray,
-    helpers: {toLower, calcDate}
-});
-}
+  submit.addEventListener("click", e => {
+    e.preventDefault()
 
-function submitEditProfile() {
-  try {
     let currUser = document.querySelector(".usernow")
     console.log(currUser)
     let user = Number(currUser.id.replace('now', ''))
+
+    const ibio = document.getElementById("bio").value
+    console.log(ibio)
+    console.log(user)
+    try {
+      this.fetch('/users/' + user + '/edit', {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          bio: ibio
+        })
+      })
+    }
+    catch(err) {
+      console.log(err)
+    }
+    window.location.href = "/users/" + user;
+
+  })
+
+});
+
+function cancelForm();{
+
+}
+
+
+
+function submitEditProfile() {
+    let currUser = document.querySelector(".usernow")
+    console.log(currUser)
+    let user = Number(currUser.id.replace('now', ''))
+
+    const bio = document.getElementById("bio")
 
     if(user) {
       const nfirstName = document.getElementById('firstName').value;
@@ -71,11 +97,7 @@ function submitEditProfile() {
       .then((res) => res.json())
       .then((json) => console.log(json))
       res.redirect('/:userID');
-  }}
-  catch (error) {
-    console.error('Error updating user:', error);
-    res.status(500).send('Failed to update user');
-  }
+  }  
 }
 
 

@@ -101,17 +101,15 @@ router.get("/:userID", async (req, res)=>{
 
 router.put("/:userID/edit", async (req, res)=>{
     try {
-        const userID = req.params.userID; // Get the userID from the URL parameter
-        const { firstName, lastName, bio, pfp } = req.body;
-    
-        // Call the function to update the user information in the database
-        await updateUser(userID, { firstName, lastName, bio, pfp });
-    
-        // Respond with a success message or any relevant data
+        const inp = req.params.userID; // Get the userID from the URL parameter
+        console.log('in editing bio')
+        console.log(req.body.bio)
+        await User.findOneAndUpdate({userID: inp}, {bio: req.body.bio})
         res.json({ success: true, message: "User information updated successfully." });
       } catch (err) {
         // Handle any errors that occur during the update process
         res.status(500).json({ success: false, message: "Failed to update user information." });
       }
 })
+
 module.exports = router;
