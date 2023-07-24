@@ -1,0 +1,231 @@
+<link rel="stylesheet" href="static/css/search.css">
+
+<div class="welcome-container">
+    <div class="welcome-text">Looking for Something?</div>
+    <div class="welcome-background"></div>
+</div>
+<div class="search-container">
+    <div class="search-bar">
+        <form>
+            <input type="text" class="search-box" placeholder="Search anything!">
+        </form>
+        <a class="search-icon-container" href="">
+            <img id="search-icon" src="static/img/search-icon.png">
+        </a>
+    </div>
+    <div class="filter-container">
+        <div class="filter-btn-container">
+            <button class="filter-btn" id="type-btn">
+                Type
+            </button>
+            <div class="filter-dropdown" id="type">
+                <button class="btn-search-posts">Posts</button>
+                <button class="btn-search-users">Users</button>
+            </div>
+        </div>
+
+        <div class="filter-btn-container">
+            <button class="filter-btn" id="sort-btn">
+                Sort By
+            </button>
+            <div class="filter-dropdown" id="sort">
+                <button class="btn-most-votes">Most Upvoted</button>
+                <button class="btn-least-votes">Least Upvoted</button>
+                <button class="btn-recent">Recent</button>
+                <button class="btn-oldest">Oldest</button>
+            </div>
+        </div>
+
+        <div class="filter-btn-container">
+            <button class="filter-btn" id="tags-btn">
+                Tags
+            </button>
+            <div class="filter-dropdown" id="tagsf">
+                <button class="btn-ann">(All)</button>
+                <button class="btn-ann">Announcements</button>
+                <button class="btn-mem">Meme</button>
+                <button class="btn-rev">Review</button>
+                <button class="btn-que">Query</button>
+                <button class="btn-met">Meta</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-container">
+    <!--short links on left side-->
+    <aside class="side-nav-container">
+        <ul class="side-nav">
+            <li class="latest">
+                <a class="" href="">
+                    <i class="bi bi-list"></i>
+                    <span class="sidebar-label">Latest</span>
+                </a>
+            </li>
+            <li class="top-voted">
+                <a class="" href="">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span class="sidebar-label">Top Voted</span>
+                </a>
+            </li>
+            <li class="">
+                <input type="checkbox" id="side-tags">
+                <label for="side-tags" class="side-tags-label">
+                    <i class="bi bi-tags"></i>
+                    <span class="sidebar-label">Tags</span>
+                </label>
+
+                <ul class="tags-list">
+                    <li class="tags">
+                        <a href="">
+                            <i class="bi bi-megaphone-fill"></i>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Review</span>  
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="">
+                            <i class="bi bi-question-circle-fill"></i>
+                            <span>Query</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="">
+                            <i class="bi bi-emoji-laughing-fill"></i>
+                            <span>Meme</span>
+                        </a>
+                    </li>
+                    <li class="tags">
+                        <a href="">
+                            <i class="bi bi-lightbulb-fill"></i>
+                            <span>Meta</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="support">
+                <a href="#modalSupport" data-bs-toggle="modal">
+                    <i class="bi bi-headset"></i>
+                    <span class="sidebar-label">Support</span>
+                </a>
+
+                <!--support modal-->
+                <div class="modal fade" id="modalSupport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header support-title-container fs-3">
+                                Need a Hand?
+                            </div>
+                            <div class="modal-body support-body-container">
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user1.jpg" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Francis Bawa</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="francis_bawa@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>       
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user2.jpg" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Max Burce</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="vincent_burce@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user3.png" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Zach Gomez</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="zachary_gomez@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="contact-container">
+                                    <a href="" class="support-icon-container">
+                                        <img src="images/user4.png" alt="" class="support-icon">
+                                    </a>
+                                    <div class="support-name">Ricardo Vicerra</div>
+                                    <div class="contact-container-sub">
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="ricardo_vicerra@dlsu.edu.ph">
+                                            <i class="bi bi-envelope-fill contact-icon"></i>
+                                        </a>
+                                        <a tabindex="0" role="button" class="contact-icon-container" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" data-bs-content="0987 654 3210">
+                                            <i class="bi bi-telephone-fill contact-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer support-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="support-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </aside>
+
+    <!--main forum content-->
+    <div class="thread-container">
+
+        <!--start of forum posts/threads-->
+        <div class="posts-container" id="posts-container">
+            <!-- CONTENT OF POSTS WILL BE LOADED-->
+            {{#if posts.length}}
+                {{#each posts}}
+                    {{> posts}}
+                {{/each}}
+
+
+                <div class="see-more-container" id="see-more-container">
+                    <!-- SEE MORE BUTTON -->
+                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                </div>
+            {{else}}
+            {{/if}}
+
+        </div>
+
+        <div class="users-container" id="users-container">
+            {{#if users.length}}
+                {{#each users}}
+                    {{> users}}
+                {{/each}}
+
+
+                <div class="see-more-container" id="see-more-container">
+                    <!-- SEE MORE BUTTON -->
+                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                </div>
+            {{else}}
+            {{/if}}
+
+        </div>
+        
+    </div>
+</div>
+
+<script src="static/js/search.js" defer></script>
