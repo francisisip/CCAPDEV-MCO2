@@ -14,8 +14,13 @@ window.addEventListener("load", function(e){
     const createAcc = this.document.querySelector("#submit");
     let fields = [username,password,email];
 
+
     createAcc?.addEventListener("click", async (e)=> {
         e.preventDefault();
+
+        let mark = document.querySelector(".thread-container")
+        let num = Number(mark.id.replace('mark', ''))
+        num++
         
         let emptyFields = [];
         for(const input of fields){
@@ -32,7 +37,8 @@ window.addEventListener("load", function(e){
         const myObj = { 
             username: username.value,
             password: password.value,
-            email: email.value
+            email: email.value,
+            num: num
         };
 
         const jString = JSON.stringify(myObj);
@@ -46,11 +52,11 @@ window.addEventListener("load", function(e){
                 }
             });
             
-            console.log(response);
             if (response.status === 200) {
                 const name = await response.json(); 
                 const user = name.username;
                 const id = name.userID;
+                console.log("here");
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('userID', JSON.stringify(id));
                 this.window.location.href = window.location.origin + "/";
@@ -62,7 +68,5 @@ window.addEventListener("load", function(e){
         } catch (err) {
             console.error(err);
         }
-        
-        
     });
 });
