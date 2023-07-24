@@ -56,7 +56,6 @@ router.post("/register", async (req, res) => {
               // Save the new user to the database
             const result = await newUser.save();
             const user = await User.findOne({username: req.body.username});
-            console.log(result);
             res.status(200).json({username: user.username, userID: user.userID});
         }
         else{
