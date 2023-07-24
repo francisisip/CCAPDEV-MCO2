@@ -11,6 +11,7 @@ const { toLower, calcDate } = require('../utils/helper.js')
 router.get('/', async (req, res) => {
   
   const posts = await Post.find({}).sort({"_id": -1}).lean()
+  const currUser = 1;
 
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -32,6 +33,19 @@ router.get('/', async (req, res) => {
           break;
         case "Meta":
           tag = "bi-lightbulb-fill";
+    }
+
+    if(post.upvoteList.includes(currUser)){
+      post.uvoteClass = 'upvote-2'
+      post.dvoteClass = 'downvote'
+    }
+    else if(post.downvoteList.includes(currUser)){
+      post.uvoteClass = 'upvote'
+      post.dvoteClass = 'downvote-2'
+    }
+    else {
+      post.uvoteClass = 'upvote'
+      post.dvoteClass = 'downvote'
     }
 
     post.tagClass = tag

@@ -250,7 +250,7 @@ function changeUpvote(x) {
     element.classList.toggle("downvote")
     voteCount.innerHTML = Number(voteCount.innerHTML) + 1
   }
-  
+
   if(x.classList.contains("upvote-2")){
     x.classList.toggle("upvote-2");
     x.classList.toggle("upvote");
@@ -261,6 +261,8 @@ function changeUpvote(x) {
     x.classList.toggle("upvote");
     voteCount.innerHTML = Number(voteCount.innerHTML) + 1
   }
+
+  //updateCount(index)
 
   this.fetch('/posts/'+ postID + '/upvote',
   {
@@ -303,6 +305,8 @@ function changeDownvote(x) {
     voteCount.innerHTML = Number(voteCount.innerHTML) - 1
   }
 
+  //updateCount(index)
+
   this.fetch('/posts/'+ postID + '/downvote',
   {
     method: "PUT",
@@ -318,57 +322,6 @@ function changeDownvote(x) {
   .then((json) => console.log(json))
 
 }
-
-/*
-//update upvote and downvote
-function changeUpvote(x) {
-  let downID = x.id.replace("uvote", "dvote")
-  let index = Number(x.id.replace("uvote", ""))
-  let element = document.getElementById(downID)
-
-  if(element.classList.contains("downvote-2")) {
-    element.classList.toggle("downvote-2")
-    element.classList.toggle("downvote")
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount + 1
-  }
-  if(x.classList.contains("upvote-2")) {
-    x.classList.toggle("upvote-2");
-    x.classList.toggle("upvote");
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount - 1
-  } else {
-    x.classList.toggle("upvote-2");
-    x.classList.toggle("upvote");
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount + 1
-  }
-  console.log(posts[posts.length-index])
-  updateCount(index)
-}
-*/
-
-/*
-function changeDownvote(x) {
-  let upID = x.id.replace("dvote", "uvote")
-  let index = Number(x.id.replace("dvote", ""))
-  let element = document.getElementById(upID)
-
-  if(element.classList.contains("upvote-2")) {
-    element.classList.toggle("upvote-2")
-    element.classList.toggle("upvote")
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount - 1
-  }
-  if(x.classList.contains("downvote-2")) {
-    x.classList.toggle("downvote");
-    x.classList.toggle("downvote-2");
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount + 1
-  } else {
-    x.classList.toggle("downvote");
-    x.classList.toggle("downvote-2");
-    posts[posts.length-index].voteCount = posts[posts.length-index].voteCount - 1
-  }
-
-  updateCount(index)
-}
-*/
 
 function updateCount(index) {
   element = document.getElementById("votecount" + index)
