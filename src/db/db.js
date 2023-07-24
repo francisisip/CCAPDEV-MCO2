@@ -5,6 +5,7 @@ const options = { useUnifiedTopology: true };
 const User = require('./models/user.js')
 const Post = require('./models/post.js')
 const Comment = require('./models/comment.js')
+const currUser = require('./models/currUser.js')
 
 const database = {
     //connect to database
@@ -26,7 +27,7 @@ const database = {
                 const initialUsers = await User.create([
                     {   username: 'Fishball_Lover39', 
                         userID: 1, 
-                        profileImg: 'static/img/icon1.jpg',
+                        profileImg: '/static/img/icon1.jpg',
                         fName: 'Miles',
                         lName: 'Morales',
                         bio: 'In the depths of my being, there flows an unyielding love for fish. Their graceful movements and vibrant colors captivate my soul, as if I am an ocean enchanted by their presence. With every breath I take, I embrace my identity as a devoted lover of these aquatic wonders, forever swimming in the depths of their beauty.',
@@ -35,7 +36,7 @@ const database = {
                     },
                     {   username: 'Neonballs_6', 
                         userID: 2, 
-                        profileImg: 'static/img/icon2.jpg',
+                        profileImg: '/static/img/icon2.jpg',
                         fName: 'Fedor',
                         lName: 'Sebastian',
                         bio: '',
@@ -44,7 +45,7 @@ const database = {
                     },
                     {   username: 'radioheadlover00', 
                         userID: 3, 
-                        profileImg: 'static/img/icon3.jpg',
+                        profileImg: '/static/img/icon3.jpg',
                         fName: 'Rian',
                         lName: 'Robert',
                         bio: '',
@@ -53,7 +54,7 @@ const database = {
                     },
                     {   username: 'mrbrightside', 
                         userID: 4, 
-                        profileImg: 'static/img/icon4.jpg',
+                        profileImg: '/static/img/icon4.jpg',
                         fName: 'Patric',
                         lName: 'Brontes',
                         bio: '',
@@ -62,7 +63,7 @@ const database = {
                     },
                     {   username: 'xXdestroyerOfWorldsXx', 
                         userID: 5, 
-                        profileImg: 'static/img/icon5.jpg',
+                        profileImg: '/static/img/icon5.jpg',
                         fName: 'Rian',
                         lName: 'Robert',
                         bio: '',
@@ -181,6 +182,16 @@ const database = {
                 ])
             }
             catch(err) {
+                console.log(err)
+            }
+        }
+
+        if(await currUser.countDocuments() === 0) {
+            try{
+                console.log("setting initial user")
+                const initalUser = await currUser.create({})
+            }
+            catch (err){
                 console.log(err)
             }
         }
