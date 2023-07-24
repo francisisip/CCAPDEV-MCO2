@@ -7,7 +7,7 @@ function showError(str) {
     para.innerHTML = str;
 }
 
-window.addEventListener("load", function(e){
+window.addEventListener("load", async function(e){
     const username = this.document.querySelector("#username");
     const password = this.document.querySelector("#password");
     const login = this.document.querySelector(".login");
@@ -46,14 +46,14 @@ window.addEventListener("load", function(e){
                 }
             });
 
-            console.log(response);
             if (response.status === 200) {
                 const name = await response.json(); 
                 const user = name.username;
                 const id = name.userID;
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('userID', JSON.stringify(id));
-                this.window.location.href = window.location.origin + "/";
+                
+                window.location.href = "/home";
             } else {
                 const data = await response.json(); 
                 const message = data.message; 

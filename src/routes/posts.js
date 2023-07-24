@@ -6,10 +6,6 @@ const Comment = require('../db/models/comment.js')
 
 const { toLower, calcDate } = require('../utils/helper.js')
 
-router.get('/', (req, res) => {
-    res.send("In posts")
-})
-
 //post creation
 router.post('/', async (req, res) => {
     try {
@@ -26,6 +22,7 @@ router.post('/', async (req, res) => {
 router.get('/:id/:cID', async (req, res) => {
     const postID = req.params.id;
     const commentID = req.params.cID;
+    const currUser = global.currUser;
 
     try {
         // Find the post with the given postID
@@ -59,6 +56,7 @@ router.get('/:id/:cID', async (req, res) => {
             post: foundPost,
             comment: foundComment,
             nestedComments: postComments,
+            user: currUser,
             helpers: { toLower, calcDate }
         });
     } catch (err) {
@@ -70,6 +68,7 @@ router.get('/:id/:cID', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const resourceId = req.params.id;
+    const currUser = global.currUser;
 
     try {
         const foundPost = await Post.findOne({ postID: resourceId }).lean();
@@ -113,6 +112,7 @@ router.get('/:id', async (req, res) => {
         title: foundPost.title, 
         post: foundPost,
         comments: postComments,
+        user: currUser,
         helpers: {toLower, calcDate}
     });
     } catch (err) {
