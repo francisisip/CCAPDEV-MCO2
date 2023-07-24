@@ -5,6 +5,7 @@ const options = { useUnifiedTopology: true };
 const User = require('./models/user.js')
 const Post = require('./models/post.js')
 const Comment = require('./models/comment.js')
+const currUser = require('./models/currUser.js')
 
 const database = {
     //connect to database
@@ -181,6 +182,16 @@ const database = {
                 ])
             }
             catch(err) {
+                console.log(err)
+            }
+        }
+
+        if(await currUser.countDocuments() === 0) {
+            try{
+                console.log("setting initial user")
+                const initalUser = await currUser.create({})
+            }
+            catch (err){
                 console.log(err)
             }
         }

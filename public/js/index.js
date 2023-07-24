@@ -260,90 +260,112 @@ function changeComment(x) {
 }
 
 function changeUpvote(x) {
-  let postID = x.id.replace("uvote", "")
-  let currUser = document.addEventListener()
+  let currUser = document.querySelector(".usernow")
+  let user = Number(currUser.id.replace('now', ''))
 
-  let downID = x.id.replace("uvote", "dvote")
-  let countID = x.id.replace("uvote", "vcount")
-  let element = document.getElementById(downID)
-  let voteCount = document.getElementById(countID)
 
-  if(element.classList.contains("downvote-2")){
-    element.classList.toggle("downvote-2")
-    element.classList.toggle("downvote")
-    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
-  }
+  if(user) {
+    let postID = x.id.replace("uvote", "")
 
-  if(x.classList.contains("upvote-2")){
-    x.classList.toggle("upvote-2");
-    x.classList.toggle("upvote");
-    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
-  }
-  else {
-    x.classList.toggle("upvote-2");
-    x.classList.toggle("upvote");
-    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
-  }
+    let downID = x.id.replace("uvote", "dvote")
+    let countID = x.id.replace("uvote", "vcount")
+    let element = document.getElementById(downID)
+    let voteCount = document.getElementById(countID)
 
-  //updateCount(index)
+    if(element.classList.contains("downvote-2")){
+      element.classList.toggle("downvote-2")
+      element.classList.toggle("downvote")
+      voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+    }
 
-  this.fetch('/posts/'+ postID + '/upvote',
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      userID: currUser,
-      postID: postID,
+    if(x.classList.contains("upvote-2")){
+      x.classList.toggle("upvote-2");
+      x.classList.toggle("upvote");
+      voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+    }
+    else {
+      x.classList.toggle("upvote-2");
+      x.classList.toggle("upvote");
+      voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+    }
+
+    //updateCount(index)
+
+    this.fetch('/posts/'+ postID + '/upvote',
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userID: user,
+        postID: postID,
+      })
     })
-  })
-  .then((res) => res.json())
-  .then((json) => console.log(json))
-
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+  }
+  else{
+    showErrorModal("You must login to do that!")
+  }
 }
 
 function changeDownvote(x) {
-  let postID = x.id.replace("dvote", "")
-  let currUser = 1
+  let currUser = document.querySelector(".usernow")
+  let user = Number(currUser.id.replace('now', ''))
+
+  if(user) {
+    let postID = x.id.replace("dvote", "")
   
-  let upID = x.id.replace("dvote", "uvote")
-  let countID = x.id.replace("dvote", "vcount")
-  let element = document.getElementById(upID)
-  let voteCount = document.getElementById(countID)
+    let upID = x.id.replace("dvote", "uvote")
+    let countID = x.id.replace("dvote", "vcount")
+    let element = document.getElementById(upID)
+    let voteCount = document.getElementById(countID)
 
-  if(element.classList.contains("upvote-2")) {
-    element.classList.toggle("upvote-2")
-    element.classList.toggle("upvote")
-    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
-  }
+    if(element.classList.contains("upvote-2")) {
+      element.classList.toggle("upvote-2")
+      element.classList.toggle("upvote")
+      voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+    }
 
-  if(x.classList.contains("downvote-2")) {
-    x.classList.toggle("downvote");
-    x.classList.toggle("downvote-2");
-    voteCount.innerHTML = Number(voteCount.innerHTML) + 1
-  } else {
-    x.classList.toggle("downvote");
-    x.classList.toggle("downvote-2");
-    voteCount.innerHTML = Number(voteCount.innerHTML) - 1
-  }
+    if(x.classList.contains("downvote-2")) {
+      x.classList.toggle("downvote");
+      x.classList.toggle("downvote-2");
+      voteCount.innerHTML = Number(voteCount.innerHTML) + 1
+    } else {
+      x.classList.toggle("downvote");
+      x.classList.toggle("downvote-2");
+      voteCount.innerHTML = Number(voteCount.innerHTML) - 1
+    }
 
-  //updateCount(index)
+    //updateCount(index)
 
-  this.fetch('/posts/'+ postID + '/downvote',
-  {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      userID: currUser,
-      postID: postID,
+    this.fetch('/posts/'+ postID + '/downvote',
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userID: user,
+        postID: postID,
+      })
     })
-  })
-  .then((res) => res.json())
-  .then((json) => console.log(json))
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+  }
+  else {
+    showErrorModal("You must login to do that!")
+  }
 
+
+}
+
+function showErrorModal(errorMessage) {
+  const errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
+  const errorMessageElement = document.getElementById("error-message");
+  errorMessageElement.textContent = errorMessage;
+  errorModal.show();
 }
 
 function updateCount(index) {
