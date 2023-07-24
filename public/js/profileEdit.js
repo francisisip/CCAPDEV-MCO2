@@ -1,9 +1,78 @@
+window.addEventListener('DOMContentLoaded', (event) => {
+  //profile info
+  var firstName = document.getElementById('fName').textContent;
+  var lastName = document.getElementById('lName').textContent;
+  var email = document.getElementById('eMail').textContent;
+  var bio = document.getElementById('bio').innerText; 
 
+  //update form default vals
+  document.getElementById('firstName').value = firstName;
+  document.getElementById('lastName').value = lastName;
+  document.getElementById('email').value = email;
+  document.getElementById('confirmEmail').value = email;
+  document.getElementById('edit-bio').value = bio;
 
-cancelForm();{
+  // Add event listeners to the form fields
+  document.getElementById('firstName').addEventListener('input', updateProfileTab);
+  document.getElementById('lastName').addEventListener('input', updateProfileTab);
+  document.getElementById('email').addEventListener('input', updateProfileTab);
+  document.getElementById('edit-bio').addEventListener('input', updateProfileTab);
 
+  //listener for opening form
+  const editProfileLink = document.querySelector('a[href="#edit-info"]');
+  editProfileLink.addEventListener('click', openForm);
+
+});
+
+function cancelForm();{
+  res.redirect('/:userID');
 }
-submitEditProfile();{
+
+function submitEditProfile() {
+  try {
+    let currUser = document.querySelector(".usernow")
+    console.log(currUser)
+    let user = Number(currUser.id.replace('now', ''))
+
+    if(user) {
+      const nfirstName = document.getElementById('firstName').value;
+      const nlastName = document.getElementById('lastName').value;
+      //const nemail = document.getElementById('email').value;
+      const nbio = document.getElementById('edit-bio').value;
+      const npfp = document.getElementById('pfpupload').value;
+
+
+      currUser.firstName = nfirstName;
+      currUser.lastName = nlastName;
+      //currUser.email = nemail;
+      currUser.bio = nbio; 
+
+      this.fetch('/users/' + user + 'edit',
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          firstName: nfirstName,
+          lastName: nlastName,
+          //email: nemail;
+          bio: nbio,
+          pfp: npfp, 
+        })
+      })
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+  }}
+  catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).send('Failed to update user');
+  }
+}
+
+
+
+/* function submitEditProfile();{
     try {
         let User = req.session.user;
         let newfName = User.firstName;
@@ -30,8 +99,8 @@ submitEditProfile();{
       console.error('Error updating user:', error);
       res.status(500).send('Failed to update user');
     }
-}
-
+}*/ 
+/*
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 function uploadPicture() {
@@ -59,55 +128,5 @@ axios.put(url, formData, {
 .catch(error => {
   console.error('Error uploading picture:', error);
 });
-}
+}*/
 
-function changeUpvote(x) {
-  let currUser = document.querySelector(".usernow")
-  console.log(currUser)
-  let user = Number(currUser.id.replace('now', ''))
-
-
-  if(user) {
-    let postID = x.id.replace("uvote", "")
-
-    let downID = x.id.replace("uvote", "dvote")
-    let countID = x.id.replace("uvote", "vcount")
-    let element = document.getElementById(downID)
-    let voteCount = document.getElementById(countID)
-
-    if(element.classList.contains("downvote-2")){
-      element.classList.toggle("downvote-2")
-      element.classList.toggle("downvote")
-      voteCount.innerHTML = Number(voteCount.innerHTML) + 1
-    }
-
-    if(x.classList.contains("upvote-2")){
-      x.classList.toggle("upvote-2");
-      x.classList.toggle("upvote");
-      voteCount.innerHTML = Number(voteCount.innerHTML) - 1
-    }
-    else {
-      x.classList.toggle("upvote-2");
-      x.classList.toggle("upvote");
-      voteCount.innerHTML = Number(voteCount.innerHTML) + 1
-    }
-
-    //updateCount(index)
-
-    this.fetch('/posts/'+ postID + '/upvote',
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        userID: user,
-        postID: postID,
-      })
-    })
-    .then((res) => res.json())
-    .then((json) => console.log(json))
-  }
-  else{
-    showErrorModal("You must login to do that!")
-  }
