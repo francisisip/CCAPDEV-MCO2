@@ -50,9 +50,11 @@ window.addEventListener("load", function(e){
 
             console.log(response);
             if (response.status === 200) {
-                const data = await response.json(); 
-                const user = data.message;
+                const name = await response.json(); 
+                const user = name.username;
+                const id = name.userID;
                 localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('userID', JSON.stringify(id));
                 this.window.location.href = window.location.origin + "/";
             } else {
                 const data = await response.json(); 

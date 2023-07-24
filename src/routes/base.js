@@ -52,7 +52,6 @@ router.get('/', async (req, res) => {
     post.voteCount = post.upvoteList.length - post.downvoteList.length
   }
 
-  console.log(posts)
 
   res.render('index', {
     title: "Home", 
