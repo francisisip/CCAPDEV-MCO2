@@ -11,7 +11,7 @@ const { toLower, calcDate } = require('../utils/helper.js')
 router.get('/', async (req, res) => {
   
   const posts = await Post.find({}).sort({"_id": -1}).lean()
-  const currUser = 1;
+  const currUser = global.currUser;
 
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -75,6 +75,13 @@ router.post('/', (req, res) => {
 router.get('/search', (req, res) => {
   res.render('index', {title: "Home"});
 });
+
+router.post('/currUser', (req, res) => {
+  const receivedObject = req.body
+  global.currUser = receivedObject.userID
+  console.log(global.currUser)
+  res.status(200).json({message: 'Object stored successfully'})
+})
 
 router.use(authRouter);
 

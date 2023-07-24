@@ -46,7 +46,6 @@ async function main() {
   if (process.env.NODE_ENV === "development") {
     db.generateSampleData()
   }
-
 }
 
 main();

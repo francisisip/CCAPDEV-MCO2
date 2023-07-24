@@ -1,7 +1,22 @@
 //old js for index page
 
-let posts = []
-let postCtr = 5
+window.addEventListener("load", function(e){
+  try {
+    const storedObject = JSON.parse(localStorage.getItem('userID')) // Parse the JSON back to an object
+    let item = {userID : storedObject}
+    // Make sure storedObject is an object before sending it in the POST request
+    this.fetch('/currUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    })
+
+  } catch (err) {
+    console.log(err);
+  }
+})
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 /*
