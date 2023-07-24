@@ -21,7 +21,8 @@ router.get("/:userID", async (req, res)=>{
         activeID = doc.get("userID", Number)
     })
 
-    if(activeID === req.params.userID){
+    if(Number(activeID) === Number(req.params.userID)){
+        console.log('in here')
         valid = 1
     }
 
