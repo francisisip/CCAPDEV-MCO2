@@ -4,9 +4,19 @@ window.addEventListener("load", function(e){
 
     let publish = document.getElementById("publish-button")
 
+    let currUser = document.querySelector(".usernow")
+    let user = Number(currUser.id.replace('now', ''))
+
     createButton.addEventListener("click", e=> {
-        createModal.show()
+
+        if(user){
+            createModal.show() 
+        }
+        else{
+            showErrorModal("You must login to do that!")
+        }
     })
+
 
     publish.addEventListener("click", async e =>{
         e.preventDefault()
