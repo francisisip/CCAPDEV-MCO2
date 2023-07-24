@@ -56,13 +56,13 @@
     <aside class="side-nav-container">
         <ul class="side-nav">
             <li class="latest">
-                <a class="" href="">
+                <a class="" href="http://localhost:3000/search?sort=date">
                     <i class="bi bi-list"></i>
                     <span class="sidebar-label">Latest</span>
                 </a>
             </li>
             <li class="top-voted">
-                <a class="" href="">
+                <a class="" href="http://localhost:3000/search?sort=upvoteList">
                     <i class="bi bi-graph-up-arrow"></i>
                     <span class="sidebar-label">Top Voted</span>
                 </a>
@@ -76,31 +76,31 @@
 
                 <ul class="tags-list">
                     <li class="tags">
-                        <a href="">
+                        <a href="http://localhost:3000/search?tag=announcements">
                             <i class="bi bi-megaphone-fill"></i>
                             <span>Announcements</span>
                         </a>
                     </li>
                     <li class="tags">
-                        <a href="">
+                        <a href="http://localhost:3000/search?tag=review">
                             <i class="bi bi-check-circle-fill"></i>
                             <span>Review</span>  
                         </a>
                     </li>
                     <li class="tags">
-                        <a href="">
+                        <a href="http://localhost:3000/search?tag=query">
                             <i class="bi bi-question-circle-fill"></i>
                             <span>Query</span>
                         </a>
                     </li>
                     <li class="tags">
-                        <a href="">
+                        <a href="http://localhost:3000/search?tag=meme">
                             <i class="bi bi-emoji-laughing-fill"></i>
                             <span>Meme</span>
                         </a>
                     </li>
                     <li class="tags">
-                        <a href="">
+                        <a href="http://localhost:3000/search?tag=meta">
                             <i class="bi bi-lightbulb-fill"></i>
                             <span>Meta</span>
                         </a>
@@ -189,7 +189,7 @@
     </aside>
 
     <!--main forum content-->
-    <div class="thread-container">
+    <div class="thread-container usernow" id="now{{user}}">
 
         <!--start of forum posts/threads-->
         <div class="posts-container" id="posts-container">
@@ -228,5 +228,23 @@
     </div>
 </div>
 
+<!--error modal-->
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="error-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
 {{!-- <script src="static/js/searchQuery.js" defer></script> --}}
+<script src="static/js/index.js" defer></script>
 <script src="static/js/search.js" defer></script>

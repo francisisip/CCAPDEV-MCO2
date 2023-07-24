@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Post = require('../db/models/post');
 const User = require('../db/models/user');
+const currUser = require('../db/models/currUser.js');
 
 //helpers
 const { toLower, calcDate } = require('../utils/helper.js')
@@ -13,6 +14,13 @@ router.get('/search', async (req, res) => {
         let search = req.query.search || "";
         let sort = req.query.sort || "date"; 
         let tags = req.query.tag || "All"; // 
+
+        let activeID
+
+        await currUser.findOne({}).then(doc => {
+            activeID = doc.get("userID", Number)
+        })
+        console.log(activeID)
 
         req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]); 
 
@@ -59,6 +67,19 @@ router.get('/search', async (req, res) => {
                 tag = "bi-lightbulb-fill";
             }
 
+            if(post.upvoteList.includes(activeID)){
+                post.uvoteClass = 'upvote-2'
+                post.dvoteClass = 'downvote'
+              }
+              else if(post.downvoteList.includes(activeID)){
+                post.uvoteClass = 'upvote'
+                post.dvoteClass = 'downvote-2'
+              }
+              else {
+                post.uvoteClass = 'upvote'
+                post.dvoteClass = 'downvote'
+              }
+
             post.tagClass = tag
             post.voteCount = post.upvoteList.length - post.downvoteList.length
         }
@@ -68,7 +89,7 @@ router.get('/search', async (req, res) => {
         res.render('search', {
             title: "Home", 
             posts: posts,
-            //users: users,
+            user: activeID,
             helpers: {toLower, calcDate}
         });
 
