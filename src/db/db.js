@@ -106,7 +106,7 @@ const database = {
                         title: "Ate Letty's Mango Blast Review",
                         userID: 3,
                         tag: 'Review',
-                        date: new Date('2023-10-25'),
+                        date: new Date('2022-10-25'),
                         desc: "If you're looking to beat the heat, Ate Letty's Mango Blast is the best!! It's right around BGC, and has the best Mango Graham Shakes topped with caramel sauce and whipped cream, and the best part: they're buy1take1 for 150 pesos! Solid!",
                         body: "If you're looking to beat the heat, Ate Letty's Mango Blast is the best!! It's right around BGC, and has the best Mango Graham Shakes topped with caramel sauce and whipped cream, and the best part: they're buy1take1 for 150 pesos! Solid!",
                         comments: ['post3_1']
@@ -116,7 +116,7 @@ const database = {
                         title: 'Makati Pizza Places',
                         userID: 1,
                         tag: 'Query',
-                        date: new Date('2023-12-25'),
+                        date: new Date('2022-12-25'),
                         desc: "Does anyone know of any good pizza places in the makati area? ive been to gino's and el rizzante but neither of them were very good lol. i would also prefer places that offer vegan pizza. thanks in advance.",
                         body: "Does anyone know of any good pizza places in the makati area? ive been to gino's and el rizzante but neither of them were very good lol. i would also prefer places that offer vegan pizza. thanks in advance.",
                         comments: ['post4_1']
