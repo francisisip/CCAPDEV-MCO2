@@ -9,6 +9,7 @@ const User = require('../db/models/user.js')
 const { toLower, calcDate } = require('../utils/helper.js')
 
 router.get('/', async (req, res) => {
+  
   const posts = await Post.find({}).sort({"_id": -1}).lean()
 
   for(let post of posts) {

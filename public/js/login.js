@@ -52,7 +52,8 @@ window.addEventListener("load", function(e){
             if (response.status === 200) {
                 const data = await response.json(); 
                 const user = data.message;
-                this.window.location.href = window.location.origin + "/" + user;
+                localStorage.setItem('user', JSON.stringify(user));
+                this.window.location.href = window.location.origin + "/";
             } else {
                 const data = await response.json(); 
                 const message = data.message; 
