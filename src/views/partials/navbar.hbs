@@ -14,13 +14,19 @@
 					<img id="search-icon-nav" src="/static/img/search-icon-white.png">
 				</a>
 			</div>
+			{{#if user}}
 			<div class="dropdown">
 				<img src="/static/img/icon1.jpg" width="50" height="50" class="picon formargin1">
 				<div class="dropdown-content">
 					<a href="/user" class="poption">View Profile</a>
-					<a href="/login" class="poption">Logout</a>
+					<a href="/logout" class="poption">Logout</a>
 				</div>
 			</div>
+			{{else}}
+				<a href="/login" class="lp formargin"><span >Log In</span></a>
+                <a href="/register" class="lp"><span >Register</span></a>
+			{{/if}}
+
 		</div>
 	</nav>
 </header>

@@ -253,7 +253,7 @@ function changeComment(x) {
 
 function changeUpvote(x) {
   let postID = x.id.replace("uvote", "")
-  let currUser = 1
+  let currUser = document.addEventListener()
 
   let downID = x.id.replace("uvote", "dvote")
   let countID = x.id.replace("uvote", "vcount")
