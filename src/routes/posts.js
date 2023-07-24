@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require('../db/models/post.js')
 const User = require('../db/models/user.js')
 const Comment = require('../db/models/comment.js')
+const currUser = require('../db/models/currUser.js');
 
 const { toLower, calcDate } = require('../utils/helper.js')
 
@@ -22,7 +23,12 @@ router.post('/', async (req, res) => {
 router.get('/:id/:cID', async (req, res) => {
     const postID = req.params.id;
     const commentID = req.params.cID;
-    const currUser = global.currUser;
+
+    let activeID
+
+    await currUser.findOne({}).then(doc => {
+        activeID = doc.get("userID", Number)
+    })
 
     try {
         // Find the post with the given postID
@@ -56,7 +62,7 @@ router.get('/:id/:cID', async (req, res) => {
             post: foundPost,
             comment: foundComment,
             nestedComments: postComments,
-            user: currUser,
+            user: activeID,
             helpers: { toLower, calcDate }
         });
     } catch (err) {
@@ -68,7 +74,12 @@ router.get('/:id/:cID', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const resourceId = req.params.id;
-    const currUser = global.currUser;
+
+    let activeID
+
+    await currUser.findOne({}).then(doc => {
+        activeID = doc.get("userID", Number)
+    })
 
     try {
         const foundPost = await Post.findOne({ postID: resourceId }).lean();
@@ -95,13 +106,11 @@ router.get('/:id', async (req, res) => {
         case "Meta":
           tag = "bi-lightbulb-fill";
     }
-    foundPost.author = await User.findOne({userID: foundPost.userID}).select('username profileImg').lean();
+    foundPost.author = await User.findOne({userID: foundPost.userID}).select('userID username profileImg').lean();
     foundPost.tagClass = tag;
     foundPost.voteCount = foundPost.upvoteList.length - foundPost.downvoteList.length
-
-    console.log(currUser);
-    console.log(foundPost.author.username);
-    if (currUser === foundPost.author.username){
+  
+    if (activeID === foundPost.author.userID){
         foundPost.isUser = ""
     } else {
         foundPost.isUser = " hidden"
@@ -120,7 +129,7 @@ router.get('/:id', async (req, res) => {
         title: foundPost.title, 
         post: foundPost,
         comments: postComments,
-        user: currUser,
+        user: activeID,
         helpers: {toLower, calcDate}
     });
     } catch (err) {
@@ -220,11 +229,22 @@ router.put('/:id', async (req, res) => {
         post.desc = req.body.desc;
         post.body = req.body.body;
         post.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
-        console.log(post.date);
-        post.date = new Date();
-        console.log(post.date);
 
         await post.save();
+
+        return res.status(200).json({ message: 'Post updated successfully', post });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error updating post'})
+    }
+});
+
+router.put('/:id/:cID', async (req, res) => {
+    try {
+        const comment = await Comment.findOne({commentID: req.body.id});
+        comment.body = req.body.body;
+        comment.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
+
+        await comment.save();
 
         return res.status(200).json({ message: 'Post updated successfully', post });
     } catch (err) {

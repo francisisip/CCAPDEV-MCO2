@@ -548,3 +548,7 @@ option:hover {
 .hidden{
     display: none;
 }
+
+.true {
+    display: none;
+}

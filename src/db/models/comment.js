@@ -24,6 +24,16 @@ const commentSchema = new Schema({
         type: Number,
         required: true
     },
+    isEdited: {
+        type: Boolean,
+        default: false,
+        required: true,
+    },
+    isDeleted:{
+        type: Boolean,
+        default: false,
+        required: true,
+    },
     //not sure how to store comments yet
     comments: [{
         type: String

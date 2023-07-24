@@ -41,7 +41,6 @@ window.addEventListener("load", function(e) {
 
     edit.addEventListener("click", e => {
         
-
         modalTitle.textContent = "Edit Post";
         titleInput.value = title.textContent;
         tagSelect.value = tag.textContent.toLowerCase();

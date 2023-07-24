@@ -6,7 +6,11 @@
     <div class="title-contents">
         <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span id="tagName" class="tag">{{post.tag}}</span></a>
         <span id="title">{{post.title}}</span>
-        <span id="post-date">created {{calcDate post.date}}</span>
+        <span id="post-date">created {{calcDate post.date}}
+            {{#if post.isEdited}}
+                --edited--
+            {{/if}}
+        </span>
     </div>
 </div>
 <div class="box">    
