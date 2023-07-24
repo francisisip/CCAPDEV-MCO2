@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
+<script type="module" src="/static/js/editPost.js" defer></script>
+
 
 <div id="post-title">
     <div class="title-contents">
-        <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span class="tag">{{post.tag}}</span></a>
+        <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span id="tagName" class="tag">{{post.tag}}</span></a>
         <span id="title">{{post.title}}</span>
         <span id="post-date">created {{calcDate post.date}}</span>
     </div>
@@ -24,15 +26,15 @@
             <div class="abc">
                 <a href="/users/{{post.userID}}" class="username">{{post.author.username}}</a>
             </div>
-            <div class="dropdown">
-                <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
-                <div class="dropdown-content">
-                <a id="edit" href="#">Edit</a>
-                <a id="delete" href="#">Delete</a>
+                <div class="dropdown">
+                    <button class="three-dots dropbtn"><i class="bi bi-three-dots iconsize"></i></button>
+                    <div class="dropdown-content">
+                    <a id="edit" href="#">Edit</a>
+                    <a id="delete" href="#">Delete</a>
+                    </div>
                 </div>
-            </div>
             </div>             
-            <div id="body" class="justify mpost">{{post.body}}</div>
+            <div id="body" class="justify mpost">{{post.desc}}</div>
             <div class="down">
             <a id="reply" class="reply">Reply</a>
             <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
