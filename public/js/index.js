@@ -240,7 +240,7 @@ function changeUpvote(x) {
   let postID = x.id.replace("uvote", "")
   let currUser = 1
 
-  this.fetch('/posts/${postID}/upvote',
+  this.fetch('/posts/'+ postID + '/upvote',
   {
     method: "PUT",
     headers: {
@@ -255,6 +255,27 @@ function changeUpvote(x) {
   .then((json) => console.log(json))
 
 }
+
+function changeDownvote(x) {
+  let postID = x.id.replace("dvote", "")
+  let currUser = 1
+
+  this.fetch('/posts/'+ postID + '/downvote',
+  {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userID: currUser,
+      postID: postID,
+    })
+  })
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+
+}
+
 /*
 //update upvote and downvote
 function changeUpvote(x) {

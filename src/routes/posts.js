@@ -125,12 +125,83 @@ router.get('/:id', async (req, res) => {
 
 
 router.put('/:id/upvote', async(req, res) => {
-try {
-    const post = await Post.findOne({postID: req.params.postID})
-    console.log(post)
-} catch (err) {
-    return res.status(500).json(err)
-}
+    const resourceID = req.params.id
+    const user = req.body.userID
+    try {
+        const post = await Post.findOne({postID: resourceID}).lean()
+        console.log(post)
+        console.log(typeof user)
+
+        //if not upvoted and currently downvoted
+        if(!post.upvoteList.includes(user) && post.downvoteList.includes(user)) {
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $push: { upvoteList: user }, $pull: { downvoteList: user } }
+            );
+
+            return res.status(200).json("Post is upvoted!");
+        }
+        //if user has not voted on it
+        else if(!post.upvoteList.includes(user) && !post.downvoteList.includes(user)) {
+            console.log('in')
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $push: { upvoteList: user } }
+            );
+            return res.status(200).json("Post is upvoted!");
+        }
+        //if already upvoted
+        else if(post.upvoteList.includes(user)) {
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $pull: { upvoteList: user } }
+            );
+            return res.status(200).json("Post is no longer upvoted!");
+        }
+        else console.log('no updates made')
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+})
+
+router.put('/:id/downvote', async(req, res) => {
+    const resourceID = req.params.id
+    const user = req.body.userID
+    try {
+        const post = await Post.findOne({postID: resourceID}).lean()
+        console.log(post)
+        console.log(typeof user)
+
+        //if not upvoted and currently downvoted
+        if(!post.downvoteList.includes(user) && post.upvoteList.includes(user)) {
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $push: { downvoteList: user }, $pull: { upvoteList: user } }
+            );
+
+            return res.status(200).json("Post is downvoted!");
+        }
+        //if user has not voted on it
+        else if(!post.upvoteList.includes(user) && !post.downvoteList.includes(user)) {
+            console.log('in')
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $push: { downvoteList: user } }
+            );
+            return res.status(200).json("Post is downvoted!");
+        }
+        //if already upvoted
+        else if(post.downvoteList.includes(user)) {
+            await Post.findOneAndUpdate(
+                { postID: resourceID },
+                { $pull: { downvoteList: user } }
+            );
+            return res.status(200).json("Post is no longer downvoted!");
+        }
+        else console.log('no updates made')
+    } catch (err) {
+        return res.status(500).json(err)
+    }
 })
 
 module.exports = router;
