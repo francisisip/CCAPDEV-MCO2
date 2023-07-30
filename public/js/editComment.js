@@ -28,6 +28,18 @@ function extractNumberFromURL(url) {
     }
   }
 
+  function extractPostIdFromURL(url) {
+    const pathnameParts = url.pathname.split('/'); // Split the URL pathname using '/'
+    const postIdIndex = pathnameParts.indexOf('posts') + 1; // Find the index of 'posts' and add 1 to get the postId index
+  
+  if (postIdIndex !== 0 && postIdIndex < pathnameParts.length) {
+    return pathnameParts[postIdIndex]; // Return the postId value
+  } else {
+    return null; // Return null if postId is not found in the URL
+  }
+}
+  
+
 function getLastPathSegment(url) {
     const parsedUrl = new URL(url);
     const pathname = parsedUrl.pathname;
@@ -104,4 +116,73 @@ window.addEventListener("load", function(e) {
             console.error(err);
         }
     })
+
+    const reply = document.getElementById("reply");
+    const replyModalTitle = document.getElementById("staticBackdropLabel-reply");
+    let replyModal = new bootstrap.Modal(document.getElementById("replyModal"));
+    const replyPublish = document.getElementById("publish-button-reply");
+  
+    reply.addEventListener("click", e => {
+      e.preventDefault();
+      replyModalTitle.textContent = "New Reply";
+      quill.root.innerHTML = ''; // Set the Quill editor's content directly
+      replyModal.show();
+    });
+  
+    function showErrorModalComment(errorMessage) {
+          const errorModalComment = new bootstrap.Modal(document.getElementById("commentErrorModal"));
+          const errorMessageElement = document.getElementById("comment-error-message");
+          errorMessageElement.textContent = errorMessage;
+          errorModalComment.show();
+    }
+  
+    replyPublish.addEventListener('click', async function handlePublishClick(e) {
+        e.preventDefault();
+  
+
+        const replyContent = replyQuill.getText().trim(); // Get the content from Quill
+
+          if (replyContent === "") {
+            showErrorModalComment("Comment cannot be blank.");
+            return;
+        }
+  
+          const url = new URL(window.location.href);
+          const postId = extractPostIdFromURL(url);
+  
+          let mark = document.querySelector(".curruser")
+          let num = Number(mark.id.replace('mhm', ''))
+
+          const userId = num;
+          const body = replyContent;
+
+          
+          const commentId = getLastPathSegment(url);
+          const myObj = {
+              postId: postId,
+              userId: userId,
+              body: body,
+          }
+          const jString = JSON.stringify(myObj);
+          
+          try {
+              const response = await fetch(`/posts/${postId}/${commentId}`, {
+                  method: "POST",
+                  body: jString,
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              });
+              console.log(response.status)
+
+              if (response.status === 200) {
+                  replyModal.hide()
+                  window.location.reload();
+              } else {
+                  console.log("nay");
+              }
+          } catch (err) {
+              console.error(err);
+          }
+      })
 });

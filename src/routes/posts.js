@@ -5,6 +5,34 @@ const User = require('../db/models/user.js')
 const Comment = require('../db/models/comment.js')
 const currUser = require('../db/models/currUser.js');
 
+async function countComments(comment) {
+    let totalComments = comment.comments.length;
+  
+    for (const nestedCommentId of comment.comments) {
+      const nestedComment = await Comment.findOne({ commentID: nestedCommentId });
+      if (nestedComment && nestedComment.comments && nestedComment.comments.length > 0) {
+        const recursiveTotal = await countComments(nestedComment);
+        totalComments += recursiveTotal;
+      }
+    }
+  
+    return totalComments;
+  }
+  
+  async function countTotalComments(post) {
+    let totalComments = post.comments.length;
+  
+    for (const commentId of post.comments) {
+      const comment = await Comment.findOne({ commentID: commentId });
+      if (comment && comment.comments && comment.comments.length > 0) {
+        const recursiveTotal = await countComments(comment);
+        totalComments += recursiveTotal;
+      }
+    }
+  
+    return totalComments;
+  }
+
 const { toLower, calcDate } = require('../utils/helper.js')
 
 //post creation
@@ -166,8 +194,7 @@ router.put('/:id/upvote', async(req, res) => {
     const user = req.body.userID
     try {
         const post = await Post.findOne({postID: resourceID}).lean()
-        console.log(post)
-        console.log(typeof user)
+    
 
         //if not upvoted and currently downvoted
         if(!post.upvoteList.includes(user) && post.downvoteList.includes(user)) {
@@ -207,8 +234,7 @@ router.put('/:id/downvote', async(req, res) => {
     const user = req.body.userID
     try {
         const post = await Post.findOne({postID: resourceID}).lean()
-        console.log(post)
-        console.log(typeof user)
+    
 
         //if not upvoted and currently downvoted
         if(!post.downvoteList.includes(user) && post.upvoteList.includes(user)) {
@@ -255,7 +281,6 @@ router.put('/:id/:cID', async (req, res) => {
         
         await comment.save();
 
-        console.log("andito ako")
         return res.status(200).json({ message: 'Post updated successfully' });
     } catch (err) {
         return res.status(500).json({ message: 'Error updating post'})
@@ -306,7 +331,6 @@ router.delete('/:id/:cID', async(req, res) => {
         comment.body = "This post has been deleted.";
         comment.isDeleted = true;
         comment.isEdited = false;
-        console.log("ako")
         await comment.save();
         return res.status(200).json({ message: 'Comment deleted successfully' });
     } catch (err) {
@@ -314,26 +338,28 @@ router.delete('/:id/:cID', async(req, res) => {
     }
 })
 
-router.post('/:id/:cID', async (req, res) => {
+router.post('/:id', async (req, res) => {
     const postId = req.params.id;
-    const commentId = req.params.cID; // Extract commentId from :cID
     const { userId, body } = req.body; // Extract userId and body from the request body
 
     try {
         const post = await Post.findOne({ postID: postId });
-
+       
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
-
+        let addComments = await countTotalComments(post) + 1;
+        console.log(addComments)
+        const commentId = "post" + postId + "_" + addComments;
+        console.log(commentId)
         // Create a new Comment instance using the Comment model
         const newComment = new Comment({
-            postId: postId,
-            userId: userId,
+            commentID: commentId,
             body: body,
-            commentId: commentId
+            postID: postId,
+            userID: userId
         });
-        console.log("hello")
+        console.log(newComment);
         // Save the new comment to the database
         await newComment.save();
 
@@ -342,6 +368,49 @@ router.post('/:id/:cID', async (req, res) => {
 
         // Save the updated post with the new commentId in the comments array
         await post.save();
+
+        return res.status(200).json({ message: 'Comment added successfully' });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.post('/:id/:cID', async (req, res) => {
+    const postId = req.params.id;
+    const cID = req.params.cID;
+    const { userId, body } = req.body;
+
+    try {
+        const post = await Post.findOne({ postID: postId });
+       
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        let addComments = await countTotalComments(post) + 1;
+        console.log(addComments)
+        const commentId = "post" + postId + "_" + addComments;
+        console.log(commentId)
+
+        const foundComment = await Comment.findOne({commentID: cID});
+        if (!foundComment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        // Create a new Comment instance using the Comment model
+        const newComment = new Comment({
+            commentID: commentId,
+            body: body,
+            postID: postId,
+            userID: userId
+        });
+        console.log(newComment);
+        // Save the new comment to the database
+        await newComment.save();
+
+
+        foundComment.comments.push(commentId);
+        foundComment.save();
 
         return res.status(200).json({ message: 'Comment added successfully' });
     } catch (err) {

@@ -156,7 +156,7 @@ const database = {
                         body: "hahahahha XDDDDDDD",
                         postID: 2 ,
                         userID: 1,
-                        comments: ['post2_1_2']
+                        comments: ['post2_3']
                     },
                     {
                         commentID: 'post2_2',
@@ -187,7 +187,7 @@ const database = {
                         comments: []
                     },
                     {
-                        commentID: 'post2_1_2',
+                        commentID: 'post2_3',
                         body: "ye",
                         postID: 2,
                         userID: 5,

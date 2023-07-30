@@ -113,7 +113,6 @@ window.addEventListener("load", function(e) {
         }
     })
 
-    const replyContentInput = document.getElementById('reply-content-input');
     const reply = document.getElementById("reply");
     const replyModalTitle = document.getElementById("staticBackdropLabel-reply");
     let replyModal = new bootstrap.Modal(document.getElementById("replyModal"));
@@ -134,10 +133,10 @@ window.addEventListener("load", function(e) {
     }
   
     replyPublish.addEventListener('click', async function handlePublishClick(e) {
-          e.preventDefault();
+        e.preventDefault();
   
 
-          const replyContent = replyQuill.getText().trim() // Get the content from Quill
+        const replyContent = replyQuill.getText().trim(); // Get the content from Quill
 
           if (replyContent === "") {
             showErrorModalComment("Comment cannot be blank.");
@@ -154,28 +153,26 @@ window.addEventListener("load", function(e) {
           let aye = document.querySelector(".numofcomments")
           let comments = Number(aye.id.replace('aye', ''))
           comments++
-  
           const userId = num;
-          const body = replyContentInput.value;
+          const body = replyContent;
           const commentId = "post" + postId + "_" + comments;
           const myObj = {
               postId: postId,
               userId: userId,
-              body: body,
-              commentId: commentId
+              body: body
           }
-  
+          console.log(myObj.userId)
           const jString = JSON.stringify(myObj);
           
           try {
-              const response = await fetch(`/posts/${postId}/${commentId}`, {
+              const response = await fetch(`/posts/${postId}`, {
                   method: "POST",
                   body: jString,
                   headers: {
                       'Content-Type': 'application/json'
                   }
               });
-              console.log("anditoako")
+              console.log(response.status)
 
               if (response.status === 200) {
                   replyModal.hide()
