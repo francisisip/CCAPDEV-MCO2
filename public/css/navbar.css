@@ -87,3 +87,9 @@ header {
     font-size: 14px;
     font-weight: 600;
 }
+
+#search-icon-btn-nav {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}

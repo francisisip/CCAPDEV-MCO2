@@ -9,9 +9,9 @@
         <form action="/search" method="GET">
             <input type="text" name="search" id="search-box" placeholder="Search anything!">
         </form>
-        {{!-- <a id="search-icon-container" href="">
+        <button id="search-icon-btn">
             <img id="search-icon" src="static/img/search-icon.png">
-        </a> --}}
+        </button>
     </div>
     <div class="filter-container">
         <div class="filter-btn-container">
@@ -20,7 +20,7 @@
             </button>
             <div class="filter-dropdown" id="type">
                 <button id="btn-search-posts">Posts</button>
-                <button id="btn-search-users">Users</button>
+                {{!-- <button id="btn-search-users">Users</button> --}}
             </div>
         </div>
 
@@ -31,8 +31,8 @@
             <div class="filter-dropdown" id="sort">
                 <button id="btn-most-votes">Most Upvoted</button>
                 <button id="btn-least-votes">Least Upvoted</button>
-                <button id="btn-recent">Recent</button>
-                <button id="btn-oldest">Oldest</button>
+                <button id="btn-recent" onclick="window.location.href = '/search?sort=date'">Recent</button>
+                <button id="btn-oldest" onclick="window.location.href = '/search?sort=date,asc'">Oldest</button>
             </div>
         </div>
 
@@ -41,12 +41,12 @@
                 Tags
             </button>
             <div class="filter-dropdown" id="tagsf">
-                <button id="btn-ann">(All)</button>
-                <button id="btn-ann">Announcements</button>
-                <button id="btn-mem">Meme</button>
-                <button id="btn-rev">Review</button>
-                <button id="btn-que">Query</button>
-                <button id="btn-met">Meta</button>
+                <button id="btn-ann" onclick="window.location.href = '/search'">(All)</button>
+                <button id="btn-ann" onclick="window.location.href = '/search?tag=announcements'">Announcements</button>
+                <button id="btn-mem" onclick="window.location.href = '/search?tag=meme'">Meme</button>
+                <button id="btn-rev" onclick="window.location.href = '/search?tag=review'">Review</button>
+                <button id="btn-que" onclick="window.location.href = '/search?tag=query'">Query</button>
+                <button id="btn-met" onclick="window.location.href = '/search?tag=meta'">Meta</button>
             </div>
         </div>
     </div>
@@ -245,6 +245,6 @@
             </div>
             </div>
 
-{{!-- <script src="static/js/searchQuery.js" defer></script> --}}
+<script src="static/js/searchQuery.js" defer></script>
 <script src="static/js/index.js" defer></script>
-<script src="static/js/search.js" defer></script>
+{{!-- <script src="static/js/search.js" defer></script> --}}

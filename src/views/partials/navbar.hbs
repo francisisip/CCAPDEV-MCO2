@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/static/css/navbar.css">
 
-{{#if user}}
+{{!-- {{#if user}} NOTE: NEED THIS TO MAKE SEARCH BUTTON WORK EVEN IF LOGGED OUT -MAX --}} 
 <script src="/static/js/navbar.js" defer></script>
-{{/if}}
+{{!-- {{/if}} --}}
 
 <header>
 	<nav>
@@ -11,14 +11,14 @@
 				<img src="/static/img/omsilog-white.png" class="omsilog">
 			</a>
 		</div>
-		<div class="nav-right" action="/search" method="GET">
+		<div class="nav-right">
 			<form action="/search" method="GET">
-				<input type="text" name="search" class="search" placeholder="Search" />
+				<input type="text" id="search-box-nav" name="search" class="search" placeholder="Search" />
 			</form>
 			<div>
-				{{!-- <a class="search-icon-container" action="/search" method="GET" href="/search">
+				<button id="search-icon-btn-nav">
 					<img id="search-icon-nav" src="/static/img/search-icon-white.png">
-				</a> --}}
+				</button>
 			</div>
 			{{#if user}}
 			<div class="dropdown" id="now{{user}}">

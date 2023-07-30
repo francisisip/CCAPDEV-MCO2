@@ -721,3 +721,9 @@ input[type="checkbox"]:checked +label {
      display: flex;
      justify-content: center;
 }
+
+#search-icon-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
