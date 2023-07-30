@@ -84,7 +84,15 @@ router.get('/search', async (req, res) => {
             post.voteCount = post.upvoteList.length - post.downvoteList.length
         }
 
-        // console.log(users)
+        console.log(posts);
+
+        if (req.query.sort === "upvoteList") {
+          posts.sort((a, b) => b.voteCount - a.voteCount);
+          console.log("highest");
+        } else if (req.query.sort === "downvoteList") {
+          posts.sort((a, b) => a.voteCount - b.voteCount);
+          console.log("lowest");
+        }
 
         res.render('search', {
             title: "Home", 

@@ -29,8 +29,8 @@
                 Sort By
             </button>
             <div class="filter-dropdown" id="sort">
-                <button id="btn-most-votes">Most Upvoted</button>
-                <button id="btn-least-votes">Least Upvoted</button>
+                <button id="btn-most-votes" onclick="window.location.href = '/search?sort=upvoteList'">Most Upvoted</button>
+                <button id="btn-least-votes" onclick="window.location.href = '/search?sort=downvoteList'">Least Upvoted</button>
                 <button id="btn-recent" onclick="window.location.href = '/search?sort=date'">Recent</button>
                 <button id="btn-oldest" onclick="window.location.href = '/search?sort=date,asc'">Oldest</button>
             </div>
