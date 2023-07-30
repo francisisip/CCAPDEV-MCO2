@@ -10,10 +10,13 @@ const currUser = require('../db/models/currUser.js');
 //helpers
 const { toLower, calcDate } = require('../utils/helper.js');
 
+//initial display
+const initialPost = 2
+
 router.get('/', async (req, res) => {
-  
   const posts = await Post.find({}).sort({"_id": -1}).lean();
   let activeID
+  let i = 0
 
   await currUser.findOne({}).then(doc => {
     activeID = doc.get("userID", Number)
@@ -23,6 +26,14 @@ router.get('/', async (req, res) => {
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
     post.commentsNo = post.comments.length
+    post.displayNum = i
+    i++
+
+    if(post.displayNum < initialPost) {
+      post.shown = ''
+    } else {
+      post.shown = 'hidden'
+    }
 
     let tag
     switch(post.tag) {
