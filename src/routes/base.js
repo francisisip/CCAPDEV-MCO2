@@ -11,17 +11,25 @@ const currUser = require('../db/models/currUser.js');
 const { toLower, calcDate } = require('../utils/helper.js');
 
 //initial display
-const initialPost = 2
+const initialPosts = 15
 
 router.get('/', async (req, res) => {
   const posts = await Post.find({}).sort({"_id": -1}).lean();
   let activeID
   let i = 0
+  let buttonShown
 
   await currUser.findOne({}).then(doc => {
     activeID = doc.get("userID", Number)
   })
   console.log(activeID)
+
+  if(posts.length <= initialPosts) {
+    buttonShown = 'none'
+  } else {
+    buttonShown = 'flex'
+  }
+
 
   for(let post of posts) {
     post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -29,7 +37,7 @@ router.get('/', async (req, res) => {
     post.displayNum = i
     i++
 
-    if(post.displayNum < initialPost) {
+    if(post.displayNum < initialPosts) {
       post.shown = 'post-shown'
     } else {
       post.shown = 'post-hidden'
@@ -74,7 +82,8 @@ router.get('/', async (req, res) => {
     title: "Home", 
     posts: posts,
     user: activeID,
-    initialShown: initialPost,
+    initialShown: initialPosts,
+    buttonShown: buttonShown,
     helpers: {toLower, calcDate}
   });
 });
