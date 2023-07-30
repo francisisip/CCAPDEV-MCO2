@@ -128,6 +128,58 @@ function updateCount(index) {
     element.innerHTML= posts[posts.length-index].voteCount;
   }
 }
+//------------------------------------------------------------------------------------------------------------------------------------
+//see more functionality
+const seeMoreButton = document.getElementById("see-more")
+const nextLoad = 2
+
+seeMoreButton.addEventListener("click", e => {
+  e.preventDefault();
+
+  let posts = document.querySelectorAll(".post")
+  let indexHolder = document.querySelector(".posts-container")
+  let shownIndex = Number(indexHolder.id.replace("posts-container", ""))
+
+  let totalNumHolder = document.querySelector(".thread-container")
+  let totalNum = Number(totalNumHolder.id.replace("mark", ""))
+
+  const buttonCont = document.getElementById("see-more-container")
+
+  try {
+    console.log('in here')
+    for(i = shownIndex; i < shownIndex + nextLoad && i < totalNum; i++) {
+      posts[i].style.opacity = 0
+      posts[i].classList.toggle("post-hidden")
+      posts[i].classList.toggle("post-shown")
+
+      fadeIn(posts[i])
+    }
+
+    indexHolder.id = "posts-container" + i
+
+    if(i === totalNum) {
+      buttonCont.style.display = 'none'
+    }
+
+  } catch (err) {
+    console.log(err)
+  }
+
+})
+
+//fade in effect for new loaded posts
+function fadeIn(div) {
+  let opacity = 0
+
+  let interval = setInterval(function(){
+    if(opacity <= 1) {
+      opacity = opacity +0.1
+      div.style.opacity = opacity
+    }else {
+      clearInterval(interval)
+    }
+  }, 30)
+}
 
 //------------------------------------------------------------------------------------------------------------------------------------
 //quill library for rich text-editor

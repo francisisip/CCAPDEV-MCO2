@@ -30,9 +30,9 @@ router.get('/', async (req, res) => {
     i++
 
     if(post.displayNum < initialPost) {
-      post.shown = ''
+      post.shown = 'post-shown'
     } else {
-      post.shown = 'hidden'
+      post.shown = 'post-hidden'
     }
 
     let tag
@@ -74,6 +74,7 @@ router.get('/', async (req, res) => {
     title: "Home", 
     posts: posts,
     user: activeID,
+    initialShown: initialPost,
     helpers: {toLower, calcDate}
   });
 });
