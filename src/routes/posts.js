@@ -105,13 +105,17 @@ router.get('/:id/:cID', async (req, res) => {
         } else {
             foundComment.goBack = foundComment.postID + "/" + foundComment.parentComment
         }
+
+        const userObject = await User.findOne({userID: activeID}).lean();
+
         res.render('singleComment', {
             title: foundComment.author.username,
             post: foundPost,
             comment: foundComment,
             nestedComments: postComments,
             user: activeID,
-            helpers: { toLower, calcDate }
+            helpers: { toLower, calcDate },
+            userObject: userObject
         });
     } catch (err) {
         // Handle any errors that occur during the database operations
@@ -193,12 +197,15 @@ router.get('/:id', async (req, res) => {
     foundPost.dvoteClass = 'downvote'
     }
 
+    const userObject = await User.findOne({userID: activeID}).lean();
+
     res.render('singlePost', { 
         title: foundPost.title, 
         post: foundPost,
         comments: postComments,
         user: activeID,
-        helpers: {toLower, calcDate}
+        helpers: {toLower, calcDate},
+        userObject: userObject
     });
     } catch (err) {
     // Handle any errors that occur during the database operations

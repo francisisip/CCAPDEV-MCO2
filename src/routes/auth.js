@@ -64,7 +64,8 @@ router.post("/register", async (req, res) => {
                 username: req.body.username,
                 password: req.body.password,
                 userID: req.body.num,
-                email: req.body.email
+                email: req.body.email, 
+                profileImg: "/static/img/icon0.jpg"
               });
           
               // Save the new user to the database

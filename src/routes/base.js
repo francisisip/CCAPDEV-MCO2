@@ -79,6 +79,8 @@ router.get('/', async (req, res) => {
     post.voteCount = post.upvoteList.length - post.downvoteList.length
   }
 
+  const userObject = await User.findOne({userID: activeID}).lean();
+
   res.render('index', {
     title: "Home", 
     posts: posts,
@@ -86,7 +88,8 @@ router.get('/', async (req, res) => {
     user: activeID,
     initialShown: initialPosts,
     buttonShown: buttonShown,
-    helpers: {toLower, calcDate}
+    helpers: {toLower, calcDate},
+    userObject: userObject
   });
 });
 
