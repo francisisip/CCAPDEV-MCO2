@@ -300,6 +300,7 @@ router.put('/:id/:cID', async (req, res) => {
     try {
         const comment = await Comment.findOne({commentID: commentID});
         
+        comment.desc = req.body.desc;
         comment.body = req.body.body;
    
         comment.isEdited = true; // Set isEdited to true, assuming this indicates the post has been edited
@@ -354,6 +355,7 @@ router.delete('/:id/:cID', async(req, res) => {
     try {
         const comment = await Comment.findOne({commentID: commentID});
         
+        comment.desc = "This post has been deleted.";
         comment.body = "This post has been deleted.";
         comment.isDeleted = true;
         comment.isEdited = false;
@@ -366,8 +368,8 @@ router.delete('/:id/:cID', async(req, res) => {
 
 router.post('/:id', async (req, res) => {
     const postId = req.params.id;
-    const { userId, body } = req.body; // Extract userId and body from the request body
-
+    const { userId, desc, body } = req.body; // Extract userId and body from the request body
+    console.log(desc)
     try {
         const post = await Post.findOne({ postID: postId });
        
@@ -381,6 +383,7 @@ router.post('/:id', async (req, res) => {
         // Create a new Comment instance using the Comment model
         const newComment = new Comment({
             commentID: commentId,
+            desc: desc,
             body: body,
             postID: postId,
             userID: userId
@@ -405,7 +408,7 @@ router.post('/:id', async (req, res) => {
 router.post('/:id/:cID', async (req, res) => {
     const postId = req.params.id;
     const cID = req.params.cID;
-    const { userId, body } = req.body;
+    const { userId, desc, body } = req.body;
 
     try {
         const post = await Post.findOne({ postID: postId });
@@ -426,6 +429,7 @@ router.post('/:id/:cID', async (req, res) => {
         // Create a new Comment instance using the Comment model
         const newComment = new Comment({
             commentID: commentId,
+            desc: desc,
             body: body,
             parentComment: cID,
             postID: postId,

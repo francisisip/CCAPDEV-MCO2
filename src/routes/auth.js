@@ -58,7 +58,6 @@ router.post('/login', async (req,res)=>{
 
 router.post("/register", async (req, res) => {
     console.log("POST request received for /register");
-    console.log(req.body);
     try {
 
         const validEmail = validateEmail(req.body.email);

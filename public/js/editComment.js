@@ -4,7 +4,7 @@ var quill = new Quill('#content', {
   });
   
   // Initialize Quill editor for the "reply-content" element
-var replyQuill = new Quill('#reply-content.editor', {
+var replyQuill = new Quill('#reply-content', {
     theme: 'snow'
   });
   
@@ -63,7 +63,7 @@ window.addEventListener("load", function(e) {
       e.preventDefault();
 
       modalTitle.textContent = "Edit Post";
-      quill.root.innerHTML = body.textContent; // Set the Quill editor's content directly
+      quill.root.innerHTML = body.innerHTML; // Set the Quill editor's content directly
       quill.on('text-change', updateTextarea);
 
       editModal.show();
@@ -84,7 +84,8 @@ window.addEventListener("load", function(e) {
             showErrorModal("Body cannot be blank.");
             return;
         }
-
+        
+        const body = quill.root.innerHTML; // Get the HTML content
         const url = new URL(window.location.href);
         const url2 = window.location.pathname;
         const commentID = getLastPathSegment(url);
@@ -93,7 +94,8 @@ window.addEventListener("load", function(e) {
         console.log(commentID);
         const myObj = {
             id: commentID,
-            body: contentInput.value
+            desc: contentInput.value,
+            body: body
         }
 
         const jString = JSON.stringify(myObj);
@@ -163,14 +165,16 @@ window.addEventListener("load", function(e) {
           let num = Number(mark.id.replace('mhm', ''))
 
           const userId = num;
-          const body = replyContent;
+          const desc = replyContent;
+          const body = replyQuill.root.innerHTML; // Get the HTML content
 
           
           const commentId = getLastPathSegment(url);
           const myObj = {
               postId: postId,
               userId: userId,
-              body: body,
+              desc: desc,
+              body: body
           }
           const jString = JSON.stringify(myObj);
           

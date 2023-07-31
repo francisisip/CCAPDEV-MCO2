@@ -49,7 +49,7 @@ window.addEventListener("load", function(e) {
         modalTitle.textContent = "Edit Post";
         titleInput.value = title.textContent;
         tagSelect.value = tag.textContent.toLowerCase();
-        quill.root.innerHTML = body.textContent; // Set the Quill editor's content directly
+        quill.root.innerHTML = body.innerHTML; // Set the Quill editor's content directly
         quill.on('text-change', updateTextarea);
 
         editModal.show();
@@ -76,6 +76,7 @@ window.addEventListener("load", function(e) {
         return;
         }
 
+        const body = quill.root.innerHTML; // Get the HTML content
         const url = new URL(window.location.href);
         const urlParts = url.pathname.split('/');
         const postId = urlParts[urlParts.length - 1];   
@@ -86,7 +87,7 @@ window.addEventListener("load", function(e) {
             title: titleInput.value,
             tag: capitalizeFLetter(tagSelect.value),
             desc: contentInput.value,
-            body: contentInput.value
+            body: body
         }
 
         const jString = JSON.stringify(myObj);
@@ -162,11 +163,13 @@ window.addEventListener("load", function(e) {
           let comments = Number(aye.id.replace('aye', ''))
           comments++
           const userId = num;
-          const body = replyContent;
+          const desc = replyContent;
+          const body = replyQuill.root.innerHTML;
           const commentId = "post" + postId + "_" + comments;
           const myObj = {
               postId: postId,
               userId: userId,
+              desc: desc,
               body: body
           }
           console.log(myObj.userId)

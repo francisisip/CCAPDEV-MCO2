@@ -7,6 +7,11 @@ const commentSchema = new Schema({
         required: true,
         unique: true
     },
+    desc: {
+        type: String,
+        required: true,
+
+    },
     body: {
         type: String,
         required: true

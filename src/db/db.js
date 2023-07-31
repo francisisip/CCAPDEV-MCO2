@@ -153,6 +153,7 @@ const database = {
                 const initialComments = await Comment.create([
                     {
                         commentID: 'post2_1',
+                        desc: "hahahahha XDDDDDDD",
                         body: "hahahahha XDDDDDDD",
                         postID: 2 ,
                         userID: 1,
@@ -160,6 +161,7 @@ const database = {
                     },
                     {
                         commentID: 'post2_2',
+                        desc: "delete this",
                         body: "delete this",
                         postID: 2,
                         userID: 3,
@@ -167,6 +169,7 @@ const database = {
                     },
                     {
                         commentID: 'post3_1',
+                        desc: "Will go try this out some time!",
                         body: "Will go try this out some time!",
                         postID: 3,
                         userID: 5,
@@ -174,6 +177,7 @@ const database = {
                     },
                     {
                         commentID: 'post4_1',
+                        desc: "I'd suggest Crosta though I'm not too sure on their vegan options.",
                         body: "I'd suggest Crosta though I'm not too sure on their vegan options.",
                         postID: 4,
                         userID: 4,
@@ -181,6 +185,7 @@ const database = {
                     },
                     {
                         commentID: 'post5_1',
+                        desc: "Nice read!",
                         body: "Nice read!",
                         postID: 5,
                         userID: 5,
@@ -188,6 +193,7 @@ const database = {
                     },
                     {
                         commentID: 'post2_3',
+                        desc: "ye",
                         body: "ye",
                         parentComment: "post2_1",
                         postID: 2,
