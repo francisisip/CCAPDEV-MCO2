@@ -104,7 +104,6 @@ router.get('/:id/:cID', async (req, res) => {
         } else {
             foundComment.goBack = foundComment.postID + "/" + foundComment.parentComment
         }
-
         res.render('singleComment', {
             title: foundComment.author.username,
             post: foundPost,
@@ -178,6 +177,19 @@ router.get('/:id', async (req, res) => {
 
     for (let user of postComments) {
         user.author = await User.findOne({userID: user.userID}).select('username userID profileImg').lean();
+    }
+
+    if(foundPost.upvoteList.includes(activeID)){
+    foundPost.uvoteClass = 'upvote-2'
+    foundPost.dvoteClass = 'downvote'
+    }
+    else if(foundPost.downvoteList.includes(activeID)){
+    foundPost.uvoteClass = 'upvote'
+    foundPost.dvoteClass = 'downvote-2'
+    }
+    else {
+    foundPost.uvoteClass = 'upvote'
+    foundPost.dvoteClass = 'downvote'
     }
 
     res.render('singlePost', { 
@@ -407,6 +419,7 @@ router.post('/:id/:cID', async (req, res) => {
         const newComment = new Comment({
             commentID: commentId,
             body: body,
+            parentComment: cID,
             postID: postId,
             userID: userId
         });
@@ -415,7 +428,7 @@ router.post('/:id/:cID', async (req, res) => {
         await newComment.save();
 
 
-        foundComment.comments.push(commentId);
+        foundComment.comments.push(commentId);  
         foundComment.save();
 
         return res.status(200).json({ message: 'Comment added successfully' });

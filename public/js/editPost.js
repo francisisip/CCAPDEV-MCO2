@@ -24,7 +24,7 @@ quill.on('text-change', updateTextarea);
 
 function capitalizeFLetter(tag) {
     return tag[0].toUpperCase() + tag.slice(1);
-  }
+}
 
 window.addEventListener("load", function(e) {
 
@@ -119,10 +119,18 @@ window.addEventListener("load", function(e) {
     const replyPublish = document.getElementById("publish-button-reply");
   
     reply.addEventListener("click", e => {
-      e.preventDefault();
-      replyModalTitle.textContent = "New Reply";
-      quill.root.innerHTML = ''; // Set the Quill editor's content directly
-      replyModal.show();
+      let mark = document.querySelector(".curruser")
+      const user = Number(mark.id.replace('mhm', ''))
+
+      if (user) {
+        e.preventDefault();
+        replyModalTitle.textContent = "New Reply";
+        quill.root.innerHTML = ''; // Set the Quill editor's content directly
+        replyModal.show();
+      }
+      else {
+        showErrorModal("You must login to do that!")
+        }
     });
   
     function showErrorModalComment(errorMessage) {

@@ -60,13 +60,14 @@ window.addEventListener("load", function(e) {
     let editModal = new bootstrap.Modal(document.getElementById("editModal"));
     const publish = document.getElementById("publish-button");
     edit.addEventListener("click", e => {
-        e.preventDefault();
+      e.preventDefault();
 
-        modalTitle.textContent = "Edit Post";
-        quill.root.innerHTML = body.textContent; // Set the Quill editor's content directly
-        quill.on('text-change', updateTextarea);
+      modalTitle.textContent = "Edit Post";
+      quill.root.innerHTML = body.textContent; // Set the Quill editor's content directly
+      quill.on('text-change', updateTextarea);
 
-        editModal.show();
+      editModal.show();
+
     })
 
     function showErrorModal(errorMessage) {
@@ -123,10 +124,18 @@ window.addEventListener("load", function(e) {
     const replyPublish = document.getElementById("publish-button-reply");
   
     reply.addEventListener("click", e => {
-      e.preventDefault();
-      replyModalTitle.textContent = "New Reply";
-      quill.root.innerHTML = ''; // Set the Quill editor's content directly
-      replyModal.show();
+      let mark = document.querySelector(".curruser")
+      const user = Number(mark.id.replace('mhm', ''))
+      
+      if (user) {
+        e.preventDefault();
+        replyModalTitle.textContent = "New Reply";
+        quill.root.innerHTML = ''; // Set the Quill editor's content directly
+        replyModal.show();
+
+      } else {
+          showErrorModal("You must login to do that!")
+      }
     });
   
     function showErrorModalComment(errorMessage) {

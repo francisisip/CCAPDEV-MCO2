@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/static/css/singlePost.css">
 <script type="module" src="/static/js/editPost.js" defer></script>
 <script type="module" src="/static/js/deletePost.js" defer></script>
-<script type="module" src="/static/js/replyPost.js" defer></script>
+<script src="/static/js/voteChangePost.js" defer></script>
 
 <div id="post-title">
     <div class="curruser" id="mhm{{user}}">
@@ -26,9 +26,13 @@
             <img src="{{post.author.profileImg}}" class="icon">
             </a>
             <div class="buttons{{post.isDeleted}}">
-                <span id="upvote" class="upvote" onclick="changeUpvote(this)"></span>
-                <span id="count" class="num">{{post.voteCount}}</span>
-                <span id="downvote" class="downvote" onclick="changeDownvote(this)"></span>
+                <div class="upvote">
+                    <a onclick="changeUpvote(this)" class="{{post.uvoteClass}}" id="uvote{{post.postID}}"></a>
+                </div>
+                <div class="vote-count" id="vcount{{post.postID}}">{{post.voteCount}}</div>
+                <div class="downvote">
+                <a onclick="changeDownvote(this)" class="{{post.dvoteClass}}" id="dvote{{post.postID}}"></a>
+                </div>
             </div>
         </div>       
         <div class="uinfo">
@@ -111,7 +115,7 @@
                 </div>
                 </div>
             </div>
-            <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -126,7 +130,7 @@
                 </div>
                 </div>
             </div>
-            <div class="modal fade" id="commentErrorModal" tabindex="-1" aria-labelledby="commentErrorModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal fade" id="commentErrorModal" tabindex="-1" aria-labelledby="commentErrorModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
