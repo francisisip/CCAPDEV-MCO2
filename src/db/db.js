@@ -189,6 +189,7 @@ const database = {
                     {
                         commentID: 'post2_3',
                         body: "ye",
+                        parentComment: "post2_1",
                         postID: 2,
                         userID: 5,
                         comments: []

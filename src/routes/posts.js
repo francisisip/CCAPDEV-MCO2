@@ -100,6 +100,12 @@ router.get('/:id/:cID', async (req, res) => {
             foundComment.isDeleted = ""
         }
 
+        if (foundComment.parentComment === "") {
+            foundComment.goBack = foundComment.postID
+        } else {
+            foundComment.goBack = foundComment.postID + "/" + foundComment.parentComment
+        }
+
         res.render('singleComment', {
             title: foundComment.author.username,
             post: foundPost,
