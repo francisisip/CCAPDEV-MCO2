@@ -2,6 +2,11 @@ function comparePasswords(plaintext, password){
   return plaintext === password;
 }
 
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 const express = require('express');
 const router = express.Router();
 const User = require('../db/models/user.js');
@@ -56,10 +61,11 @@ router.post("/register", async (req, res) => {
     console.log(req.body);
     try {
 
+        const validEmail = validateEmail(req.body.email);
         const emailExist = await User.findOne({email: req.body.email});
         const usernameExist = await User.findOne({username: req.body.username});
 
-        if (!usernameExist && !emailExist) {
+        if (!usernameExist && !emailExist && validEmail) {
             const newUser = new User({
                 username: req.body.username,
                 password: req.body.password,
@@ -79,7 +85,10 @@ router.post("/register", async (req, res) => {
                 message = "Username already exist.";
             }
             else if(emailExist){
-                message = "Email already exists.";
+                message = "Email address already exists.";
+            }
+            else if (!validEmail){
+                message = "Email address is not valid."
             }
             res.status(400).json({message: message}); 
         }
