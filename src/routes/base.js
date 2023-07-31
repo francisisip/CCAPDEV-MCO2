@@ -14,7 +14,7 @@ const { toLower, calcDate } = require('../utils/helper.js');
 const initialPosts = 15
 
 router.get('/', async (req, res) => {
-  const posts = await Post.find({}).sort({"_id": -1}).lean();
+  const posts = await Post.find({isDeleted: false}).sort({"_id": -1}).lean();
   let activeID
   let i = 0
   let buttonShown
