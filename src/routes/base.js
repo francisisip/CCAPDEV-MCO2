@@ -14,6 +14,7 @@ const { toLower, calcDate } = require('../utils/helper.js');
 const initialPosts = 15
 
 router.get('/', async (req, res) => {
+  const totalPosts = await Post.find({}).lean()
   const posts = await Post.find({isDeleted: false}).sort({"_id": -1}).lean();
   let activeID
   let i = 0
@@ -81,6 +82,7 @@ router.get('/', async (req, res) => {
   res.render('index', {
     title: "Home", 
     posts: posts,
+    totalPosts: totalPosts,
     user: activeID,
     initialShown: initialPosts,
     buttonShown: buttonShown,

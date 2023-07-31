@@ -39,6 +39,7 @@ const { toLower, calcDate } = require('../utils/helper.js')
 router.post('/', async (req, res) => {
     try {
         const newPost = new Post(req.body)
+        console.log(newPost)
         const post = await newPost.save();
         res.status(200).json(post)
     } catch(err) {
