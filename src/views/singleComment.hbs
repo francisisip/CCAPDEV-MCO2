@@ -6,7 +6,7 @@
     <div class="curruser" id="mhm{{user}}">
     </div>
     <div class="title-contents">
-        <a href="/posts/{{comment.postID}}"><i class="bi bi-backspace-fill"></i><span class="tag">Back to Main Post</span></a>
+        <a href="/posts/{{comment.goBack}}"><i class="bi bi-backspace-fill"></i><span class="tag">Go Back</span></a>
         <span id="title">Re: {{post.title}}</span>
         <span id="post-date">created {{calcDate comment.date}}
             {{#if comment.isEdited}}

@@ -24,6 +24,10 @@ const commentSchema = new Schema({
         type: Number,
         required: true
     },
+    parentComment: {
+        type: String,
+        default: ""
+    },
     isEdited: {
         type: Boolean,
         default: false,
