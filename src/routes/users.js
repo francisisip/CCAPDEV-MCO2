@@ -31,12 +31,14 @@ router.get("/:userID", async (req, res)=>{
     }).lean();
 
     const postsArray = await Post.find({
-        userID: req.params.userID
-    }).lean()
+        userID: req.params.userID,
+        isDeleted: false
+    }).sort({"_id": -1}).lean()
 
     const commentsArray = await Comment.find({
-        userID: req.params.userID
-    }).lean()
+        userID: req.params.userID,
+        isDeleted: false
+    }).sort({"_id": -1}).lean()
 
     for(let post of postsArray) {
         post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
@@ -81,6 +83,8 @@ router.get("/:userID", async (req, res)=>{
         comment.author = await User.findOne({userID: comment.userID}).select('username profileImg').lean()
     }
 
+    const userObject = await User.findOne({userID: activeID}).lean();
+
     if(userProfile){
         res.render("users", {
             user: activeID,
@@ -88,7 +92,8 @@ router.get("/:userID", async (req, res)=>{
             loadedProfile: userProfile,
             posts: postsArray,
             comments: commentsArray,
-            helpers: {toLower, calcDate}
+            helpers: {toLower, calcDate},
+            userObject: userObject
         });
     }
     else{
@@ -96,8 +101,17 @@ router.get("/:userID", async (req, res)=>{
             title: "Page not Found."
         });
     }
-    
- });
+
+    /*const editTab = window.querySelector('.nav-link[data-bs-toggle="pill"][href="#edit-info"]');
+    if (editTab) {
+      editTab.addEventListener('click', function (event) {
+        event.preventDefault();
+        const url = `/users/${req.params.userID}/edit`;
+        history.pushState(null, '', url);
+        window.location.href = url;
+      });
+    } */
+ }); 
 
 router.put("/:userID/edit", async (req, res)=>{
     try {

@@ -20,7 +20,7 @@
             <ul class="nav profile usernow" id="now{{user}}">
                 {{#if match}}
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#edit-info">Edit profile info</a>
+                    <a class="nav-link" data-bs-toggle="pill" id = "edit" href="#edit-info">Edit profile info</a>
                 </li>
                 {{/if}}
                 <li class="nav-item">
@@ -36,14 +36,21 @@
     <div class="content-container">
         <div id = "edit-info" class ="tab-pane fade">
             <div class="form-section">
-                <form action ="/edit" enctype="multipart/form-data">
+                <form action="/edit" method = "post" enctype="multipart/form-data">
                     <h1>Edit Profile</h1>
                    
                     <div class="form-group col">
                         <label for="profilePicture">Upload Profile picture:</label>
                         <input type="file" class="form-control" id="pfpupload" accept="image/*"> <br>
-                        <img id="profilePictureDisplay" class="profile-picture" src="../images/icon.jpg" alt="Profile Picture">
+                       <!-- <img id="profilePictureDisplay" class="profile-picture" src="../images/icon.jpg" alt="Profile Picture"> -->
                     </div>
+                    <div class="form-group">
+                        <label for="bio">Edit Bio:</label>
+                        <textarea id="bio" name="bio" rows="2" cols="50" placeholder = "Enter short bio (can be left blank)">{{loadedProfile.bio}}</textarea>
+                    </div>
+                    
+                   <button type="button" id = "submit-btn">Save Changes</button>
+                    <button type="button" class="cancel" id = "cancel-btn">Cancel</button>
                      <!--
                     <div class="form-row">
                         <div class="form-group col">
@@ -93,13 +100,6 @@
                         </div>
                     </div>
                     -->
-                    <div class="form-group">
-                        <label for="bio">Edit Bio:</label>
-                        <textarea id="bio" name="bio" rows="2" cols="50" placeholder="{{loadedProfile.bio}}"></textarea>
-                    </div>
-                    
-                   <button type="button" id = "submit-btn">Save Changes</button>
-                    <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
                 </form>
             </div>
         </div>
