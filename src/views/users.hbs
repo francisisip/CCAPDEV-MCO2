@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="/static/css/users.css">
 <link rel="stylesheet" href="/static/css/index.css">
+<script src="/static/js/profileEdit.js" defer></script>
+<script src="/static/js/index.js" defer></script>
 
 <div class="main-container">
+    <div class="usernow" id="now{{user}}"></div>
     <div class = "profile-container">
         <div class = "profile">
             <a class = "profile-photo-container">
@@ -17,7 +20,7 @@
             <p id = "eMail">{{loadedProfile.email}}</p>
             <p id = "bio">{{loadedProfile.bio}}</p> 
             <p>-------------------------------------</p>
-            <ul class="nav profile usernow" id="now{{user}}">
+            <ul class="nav profile">
                 {{#if match}}
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="pill" id = "edit" href="#edit-info">Edit profile info</a>
@@ -46,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label for="bio">Edit Bio:</label>
-                        <textarea id="bio" name="bio" rows="2" cols="50" placeholder = "Enter short bio (can be left blank)">{{loadedProfile.bio}}</textarea>
+                        <textarea id="newBio" name="bio" rows="2" cols="50" placeholder = "Enter short bio (can be left blank)">{{loadedProfile.bio}}</textarea>
                     </div>
                     
                    <button type="button" id = "submit-btn">Save Changes</button>
@@ -159,4 +162,3 @@
     </div>
 </div>
 
-<script src="/static/js/index.js" defer></script>

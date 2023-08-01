@@ -114,6 +114,8 @@ router.get("/:userID", async (req, res)=>{
  }); 
 
 router.put("/:userID/edit", async (req, res)=>{
+   console.log("andito ako")
+   
     try {
         const inp = req.params.userID; // Get the userID from the URL parameter
         console.log('in editing bio')
