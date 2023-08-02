@@ -8,6 +8,8 @@ const currUser = require('../db/models/currUser.js');
 //helpers
 const { toLower, calcDate } = require('../utils/helper.js')
 
+const initialPosts = 15;
+
 router.get('/search', async (req, res) => {
 
     try{
@@ -16,6 +18,8 @@ router.get('/search', async (req, res) => {
         let tags = req.query.tag || "All"; // 
 
         let activeID
+        let buttonShown
+        let i = 0
 
         await currUser.findOne({}).then(doc => {
             activeID = doc.get("userID", Number)
@@ -31,23 +35,32 @@ router.get('/search', async (req, res) => {
             sortBy[sort[0]] = "desc"; // sort most recent default
         }
 
-        let query = Post.find({
+        let totalPosts = Post.find({
             $or: [
               { title: { $regex: search, $options: "i" } }, // Search for 'search' term in the title
               { body: { $regex: search, $options: "i" } }   // Search for 'search' term in the body
             ]
-        });
+        }).sort(sortBy).lean();
 
         if (tags !== "All") {
-            query = query.where("tag", new RegExp(tags, "i"));
+          totalPosts = totalPosts.where("tag", new RegExp(tags, "i")).sort(sortBy).lean();
         }
 
-        const posts = await query.sort(sortBy).lean();
+        //const totalPosts = await query.sort(sortBy).lean();
+        const posts = await totalPosts.find({isDeleted: false}).lean();
         //const users = await User.find().collation({ locale: 'en', strength: 2 }).sort({"username": 1}).lean()
 
         for(let post of posts) {
             post.author = await User.findOne({userID: post.userID}).select('username profileImg').lean()
             post.commentsNo = post.comments.length
+            post.displayNum = i
+            i++
+
+            if(post.displayNum < initialPosts) {
+              post.shown = 'post-shown'
+            } else {
+              post.shown = 'post-hidden'
+            }
 
             let tag
             switch(post.tag) {
@@ -84,7 +97,13 @@ router.get('/search', async (req, res) => {
             post.voteCount = post.upvoteList.length - post.downvoteList.length
         }
 
-        console.log(posts);
+        const userObject = await User.findOne({userID: activeID}).lean();
+
+        if(posts.length <= initialPosts) {
+          buttonShown = 'none'
+        } else {
+          buttonShown = 'flex'
+        }
 
         if (req.query.sort === "upvoteList") {
           posts.sort((a, b) => b.voteCount - a.voteCount);
@@ -95,10 +114,14 @@ router.get('/search', async (req, res) => {
         }
 
         res.render('search', {
-            title: "Home", 
-            posts: posts,
-            user: activeID,
-            helpers: {toLower, calcDate}
+          title: "Home", 
+          posts: posts,
+          totalPosts: totalPosts,
+          user: activeID,
+          initialShown: initialPosts,
+          buttonShown: buttonShown,
+          helpers: {toLower, calcDate},
+          userObject: userObject
         });
 
     } catch (err) {

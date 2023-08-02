@@ -192,19 +192,18 @@
     <div class="thread-container usernow" id="now{{user}}">
 
         <!--start of forum posts/threads-->
-        <div class="posts-container" id="posts-container">
+        <div class="posts-container" id="posts-container{{initialShown}}">
             <!-- CONTENT OF POSTS WILL BE LOADED-->
             {{#if posts.length}}
                 {{#each posts}}
                     {{> posts}}
                 {{/each}}
 
-
-                <div class="see-more-container" id="see-more-container">
-                    <!-- SEE MORE BUTTON -->
-                    <button type="button" class="btn btn-secondary" id="see-more" onclick="loadMore()">See More</button>
+                <div class="see-more-container" id="see-more-container" style="display:{{buttonShown}}">
+                    <button type="button" class="btn btn-secondary" id="see-more">See More</button>
                 </div>
             {{else}}
+                <h2 style="text-align: center">No Posts to Display :c</h2>
             {{/if}}
 
         </div>
