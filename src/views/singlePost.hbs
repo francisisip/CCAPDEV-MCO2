@@ -10,7 +10,7 @@
 
     </div>
     <div class="title-contents">
-        <a href="search-loggedin.html"><i id="tagIcon" class="{{post.tagClass}}"></i><span id="tagName" class="tag">{{post.tag}}</span></a>
+        <a href="/search?tag={{post.tag}}"><i id="tagIcon" class="{{post.tagClass}}"></i><span id="tagName" class="tag">{{post.tag}}</span></a>
         <span id="title">{{post.title}}</span>
         <span id="post-date">created {{calcDate post.date}}
             {{#if post.isEdited}}

@@ -114,7 +114,7 @@ router.get('/search', async (req, res) => {
         }
 
         res.render('search', {
-          title: "Home", 
+          title: "Search", 
           posts: posts,
           totalPosts: totalPosts,
           user: activeID,

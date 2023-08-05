@@ -33,6 +33,10 @@ async function main() {
   const userRouter = require('./src/routes/users');
   app.use('/users', userRouter);
 
+  //use error routes
+  const errorRouter = require('./src/routes/error');
+  app.use(errorRouter);
+
   //connect to database
   await db.connect()
 
