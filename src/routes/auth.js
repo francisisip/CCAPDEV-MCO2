@@ -1,6 +1,6 @@
-function comparePasswords(plaintext, password){
-  return plaintext === password;
-}
+// function comparePasswords(plaintext, password){
+//   return plaintext === password;
+// }
 
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,7 +29,7 @@ router.post('/login', async (req,res)=>{
             return;
         }
 
-        const isMatch = comparePasswords(req.body.password, user.password)
+        const isMatch = await user.comparePasswords(req.body.password)
         if(!isMatch){
             res.status(400).json({message: "Incorrect password."});
             return;
@@ -40,7 +40,7 @@ router.post('/login', async (req,res)=>{
         const newID = testuser.userID
         const sname = 'session-user'
 
-        console.log(newID)
+        //console.log(newID)
         try{
             await currUser.findOneAndUpdate({name: sname}, {userID: newID})
             res.status(200).json({username: user.username, userID: user.userID});
