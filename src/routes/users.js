@@ -101,16 +101,6 @@ router.get("/:userID", async (req, res)=>{
             title: "Page not Found."
         });
     }
-
-    /*const editTab = window.querySelector('.nav-link[data-bs-toggle="pill"][href="#edit-info"]');
-    if (editTab) {
-      editTab.addEventListener('click', function (event) {
-        event.preventDefault();
-        const url = `/users/${req.params.userID}/edit`;
-        history.pushState(null, '', url);
-        window.location.href = url;
-      });
-    } */
  }); 
 
 router.put("/:userID/edit", async (req, res)=>{
@@ -120,7 +110,9 @@ router.put("/:userID/edit", async (req, res)=>{
         const inp = req.params.userID; // Get the userID from the URL parameter
         console.log('in editing bio')
         console.log(req.body.bio)
-        await User.findOneAndUpdate({userID: inp}, {bio: req.body.bio})
+        console.log(req.body.profileImg)
+        await User.findOneAndUpdate({userID: inp}, {bio: req.body.bio});
+        await User.findOneAndUpdate({userID: inp}, {profileImg: req.body.profileImg});
         res.json({ success: true, message: "User information updated successfully." });
       } catch (err) {
         // Handle any errors that occur during the update process

@@ -8,7 +8,7 @@
     <div class = "profile-container">
         <div class = "profile">
             <a class = "profile-photo-container">
-                <img class="profile-icon" src="{{loadedProfile.profileImg}}" alt="">
+                <img class="profile-icon" src="{{loadedProfile.profileImg}}" alt="" id="profileImage">
             </a>
             <br>
             <a>
@@ -42,10 +42,18 @@
                 <form action="/edit" method = "post" enctype="multipart/form-data">
                     <h1>Edit Profile</h1>
                    
-                    <div class="form-group col">
-                        <label for="profilePicture">Upload Profile picture:</label>
-                        <input type="file" class="form-control" id="pfpupload" accept="image/*"> <br>
-                       <!-- <img id="profilePictureDisplay" class="profile-picture" src="../images/icon.jpg" alt="Profile Picture"> -->
+                    <div class="form-group">
+                         <select id="icon-dropdown">
+                            <option value="icon1">Icon 1</option>
+                            <option value="icon2">Icon 2</option>
+                            <option value="icon3">Icon 3</option>
+                            <option value="icon4">Icon 4</option>
+                            <option value="icon5">Icon 5</option>
+                            <option value="icon6">Icon 6</option>
+                            <option value="icon7">Icon 7</option>
+                            <option value="icon8">Icon 8</option>
+                        </select>
+                        <img id="selected-icon" src="{{loadedProfile.profileImg}}" alt="Selected Icon" style="max-width: 100px;">
                     </div>
                     <div class="form-group">
                         <label for="bio">Edit Bio:</label>
@@ -54,55 +62,6 @@
                     
                    <button type="button" id = "submit-btn">Save Changes</button>
                     <button type="button" class="cancel" id = "cancel-btn">Cancel</button>
-                     <!--
-                    <div class="form-row">
-                        <div class="form-group col">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="{{loadedProfile.fName}}">
-                        </div>
-                    
-                        <div class="form-group col">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="{{loadedProfile.lName}}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label for="password">Old Password:</label>
-                            <input type="password" id="opassword" name="password" placeholder="Enter old password">
-                        </div>
-                    
-                        <div class="form-group col">
-                            <label for="confirmPassword">Confirm Old Password:</label>
-                            <input type="password" id="coPassword" name="confirmPassword" placeholder="Confirm old password">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col">
-                        <label for="password">New Password:</label>
-                        <input type="password" id="npassword" name="password" placeholder="Enter new password">
-                        </div>
-                    
-                        <div class="form-group col">
-                        <label for="confirmPassword">Confirm New Password:</label>
-                        <input type="password" id="cnPassword" name="confirmPassword" placeholder="Confirm new password">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="{{loadedProfile.email}}">
-                        </div>
-                    
-                        <div class="form-group col">
-                        <label for="confirmEmail">Confirm Email:</label>
-                        <input type="email" id="confirmEmail" name="confirmEmail" placeholder="{{loadedProfile.email}}">
-                        </div>
-                    </div>
-                    -->
                 </form>
             </div>
         </div>

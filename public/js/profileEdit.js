@@ -11,8 +11,11 @@ window.addEventListener('load', function (e) {
 
     const ibio = document.getElementById("newBio").value;
     console.log(ibio)
-
+    const ipfp = document.getElementById("icon-dropdown").value;
+    const npfp = '/static/img/' + ipfp + '.jpg';
+    console.log(npfp);
     myObj = {
+      profileImg: npfp,
       bio: ibio
     }
 
@@ -39,4 +42,28 @@ window.addEventListener('load', function (e) {
       }
 
     })
+
+    
+    const currPic =  document.getElementById("profileImage").src.split('/').pop().split('.').shift();
+
+    const selectElement = document.getElementById("icon-dropdown");
+
+    for (let i = 0; i < selectElement.options.length; i++) {
+      const option = selectElement.options[i];
+      if (option.value === currPic) {
+        option.selected = true;
+        break; 
+      }
+}
+
+    const iconDropdown = document.getElementById('icon-dropdown');
+    const selectedIcon = document.getElementById('selected-icon');
+
+    iconDropdown.addEventListener('change', function() {
+        const selectedValue = iconDropdown.value;
+        
+          selectedIcon.src = `/static/img/${selectedValue}.jpg`;
+
+    });
 })
+
