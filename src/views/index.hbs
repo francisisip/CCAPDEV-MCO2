@@ -146,7 +146,11 @@
         <!--create post-->
         <div class="create-post-container">
             <a class="icon-container usernow" id ="now{{user}}" href="">
-                <img class="user-icon" src="/static/img/icon{{user}}.jpg" alt="">
+                {{#if user}}
+                    <img class="user-icon" src="{{userObject.profileImg}}" alt="">
+                {{else}}
+                    <img class="user-icon" src="static/img/icon0.jpg" alt="">
+                {{/if}}
             </a>
             <a href="" id="create-post-button" class="create-post" data-bs-toggle="modal">
                 <div class="create-post-text">Create Post</div>
