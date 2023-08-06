@@ -10,7 +10,7 @@ const currUser = require('./models/currUser.js')
 const database = {
     //connect to database
     connect: function () {
-        mongoose.connect(process.env.MONGODB_URI, options)
+        mongoose.connect(process.env.PORT, options)
         .then(() => {
             console.log("Connected to MongoDB");
         })
@@ -154,7 +154,7 @@ const database = {
                     {
                         commentID: 'post2_1',
                         desc: "hahahahha XDDDDDDD",
-                        body: "hahahahha XDDDDDDD",
+                        body: "<p>hahahahha XDDDDDDD</p>",
                         postID: 2 ,
                         userID: 1,
                         comments: ['post2_3']
@@ -162,7 +162,7 @@ const database = {
                     {
                         commentID: 'post2_2',
                         desc: "delete this",
-                        body: "delete this",
+                        body: "<p>delete this</p>",
                         postID: 2,
                         userID: 3,
                         comments: []
@@ -170,7 +170,7 @@ const database = {
                     {
                         commentID: 'post3_1',
                         desc: "Will go try this out some time!",
-                        body: "Will go try this out some time!",
+                        body: "<p>Will go try this out some time!</p>",
                         postID: 3,
                         userID: 5,
                         comments: []
@@ -178,7 +178,7 @@ const database = {
                     {
                         commentID: 'post4_1',
                         desc: "I'd suggest Crosta though I'm not too sure on their vegan options.",
-                        body: "I'd suggest Crosta though I'm not too sure on their vegan options.",
+                        body: "<p>I'd suggest Crosta though I'm not too sure on their vegan options.</p>",
                         postID: 4,
                         userID: 4,
                         comments: []
@@ -186,7 +186,7 @@ const database = {
                     {
                         commentID: 'post5_1',
                         desc: "Nice read!",
-                        body: "Nice read!",
+                        body: "<p>Nice read!</p>",
                         postID: 5,
                         userID: 5,
                         comments: []
@@ -194,7 +194,7 @@ const database = {
                     {
                         commentID: 'post2_3',
                         desc: "ye",
-                        body: "ye",
+                        body: "<p>ye</p>",
                         parentComment: "post2_1",
                         postID: 2,
                         userID: 5,

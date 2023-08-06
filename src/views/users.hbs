@@ -14,12 +14,15 @@
             <a>
                 <p class = "profile-name">{{loadedProfile.username}}</p>
             </a>
-            <p>-------------------------------------</p>
-            <p class = "names" id = "fName">{{loadedProfile.fName}} {{loadedProfile.lName}}</p> 
-         
+            <p>--------------------------------------------</p>
+            <div class = "names-container">
+            <p class = "names" id = "fName">{{loadedProfile.fName}}</p>
+            <p class = "names" id = "lName">{{loadedProfile.lName}}</p>     
+            </div>
             <p id = "eMail">{{loadedProfile.email}}</p>
+            <p>--------------------------------------------</p>
             <p id = "bio">{{loadedProfile.bio}}</p> 
-            <p>-------------------------------------</p>
+            <p>--------------------------------------------</p>
             <ul class="nav profile">
                 {{#if match}}
                 <li class="nav-item">
@@ -45,6 +48,8 @@
                     <div class="form-group">
                          <label for="pfp">Select Profile Picture:</label>
                          <select id="icon-dropdown">
+                            <
+                            <option disabled selected value="icon0" id = "conditional" style="display: none;">Select profile picture</option>
                             <option value="icon1">Icon 1</option>
                             <option value="icon2">Icon 2</option>
                             <option value="icon3">Icon 3</option>
@@ -57,6 +62,17 @@
                         <br>
                         <br>
                         <img id="selected-icon" src="{{loadedProfile.profileImg}}" alt="Selected Icon" style="max-width: 200px;">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" name="firstName" value="{{loadedProfile.fName}}" placeholder = "first name here">
+                        </div>
+                    
+                        <div class="form-group col">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" name="lastName" value="{{loadedProfile.lName}}"  placeholder = "last name here">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="bio">Edit Bio:</label>

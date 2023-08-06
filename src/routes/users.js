@@ -35,13 +35,15 @@ router.get("/:userID", async (req, res)=>{
     const postsArray = await Post.find({
         userID: req.params.userID,
         isDeleted: false,
-        commentID: { $exists: false }
+        commentID: { $exists: false },
+        tag: { $exists: true }
     }).sort({"_id": -1}).lean()
 
     const commentsArray = await Comment.find({
         userID: req.params.userID,
         isDeleted: false,
-        commentID: { $exists: true }
+        commentID: { $exists: true },
+        tag: { $exists: false }
     }).sort({"_id": -1}).lean()
 
     for(let post of postsArray) {
@@ -119,6 +121,8 @@ router.put("/:userID/edit", async (req, res)=>{
         console.log(req.body.profileImg)
         await User.findOneAndUpdate({userID: inp}, {bio: req.body.bio});
         await User.findOneAndUpdate({userID: inp}, {profileImg: req.body.profileImg});
+        await User.findOneAndUpdate({userID: inp}, {fName: req.body.fName});
+        await User.findOneAndUpdate({userID: inp}, {lName: req.body.lName});
         res.json({ success: true, message: "User information updated successfully." });
       } catch (err) {
         // Handle any errors that occur during the update process
