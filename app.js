@@ -1,6 +1,10 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const db = require('./src/db/db.js');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const dotenv = require('dotenv');
+dotenv.config();
 
 async function main() {
   const app = express();
@@ -15,6 +19,18 @@ async function main() {
 
   //accessing json formats
   app.use(express.json());
+
+  app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ 
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+      httpOnly: true,
+    },
+  }));
 
   // use index routes
   const indexRouter = require('./src/routes/base');
@@ -39,8 +55,8 @@ async function main() {
   await db.connect()
 
   // Start the server
-  app.listen(process.env.PORT, () => {
-    console.log('Server started on http://localhost:' + process.env.PORT);
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
   });
 
   

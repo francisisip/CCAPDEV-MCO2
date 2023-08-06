@@ -55,9 +55,11 @@ router.get('/:id/:cID', async (req, res) => {
 
     let activeID
 
-    await currUser.findOne({}).then(doc => {
-        activeID = doc.get("userID", Number)
-    })
+    if(req.session.userID) {
+        activeID = req.session.userID
+      } else {
+        activeID = 0
+    }
 
     const userObject = await User.findOne({userID: activeID}).lean();
 
@@ -133,9 +135,11 @@ router.get('/:id', async (req, res) => {
 
     let activeID
 
-    await currUser.findOne({}).then(doc => {
-        activeID = doc.get("userID", Number)
-    })
+    if(req.session.userID) {
+        activeID = req.session.userID
+      } else {
+        activeID = 0
+    }
 
     const userObject = await User.findOne({userID: activeID}).lean();
 

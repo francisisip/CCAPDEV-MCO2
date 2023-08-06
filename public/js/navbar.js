@@ -14,12 +14,14 @@ logout.addEventListener("click", async e => {
     e.preventDefault()
 
     try {
-        const response = this.fetch('/logout', {
+        const response = await fetch('/auth/logout', {
             method: 'POST'
         })
 
         console.log("in here")
-        window.location.href = "/";
+        if(response.status === 200){
+            window.location.href = "/";
+        }
     }
     catch(err) {
         console.log(err)
