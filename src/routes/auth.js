@@ -2,23 +2,37 @@
 //   return plaintext === password;
 // }
 
+
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
+function validate(method) {
+    switch (method) {
+      case 'registerUser':
+        return [
+          body('username', "username doesn't exist").exists(),
+          body('email', 'Invalid email').exists().isEmail()
+        ];
+      default:
+        return [];
+    }
+  }
+  
 const express = require('express');
 const router = express.Router();
 const User = require('../db/models/user.js');
 const currUser = require('../db/models/currUser.js');
+const { body, validationResult } = require('express-validator'); 
 
 router.get('/login', (req, res) => {
-  res.render('login', { layout: 'auth', title: "Home"});
+  res.render('login', { layout: 'auth', title: "Login"});
 });
 
 router.get('/register', async (req, res) => {
     const users = await User.find({}).sort({"_id": -1}).lean()
-    res.render('register', { layout: 'auth', title: "Home", users: users});
+    res.render('register', { layout: 'auth', title: "Register", users: users});
 });
 
 router.post('/login', async (req,res)=>{
@@ -56,9 +70,12 @@ router.post('/login', async (req,res)=>{
     }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", validate('registerUser'), async (req, res) => {
     console.log("POST request received for /register");
+
     try {
+        const errors = validationResult(req);
+        console.log(errors)
 
         const validEmail = validateEmail(req.body.email);
         const emailExist = await User.findOne({email: req.body.email});
