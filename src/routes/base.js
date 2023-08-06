@@ -20,10 +20,12 @@ router.get('/', async (req, res) => {
   let i = 0
   let buttonShown
 
-  await currUser.findOne({}).then(doc => {
-    activeID = doc.get("userID", Number)
-  })
-  console.log(activeID)
+  console.log('current session Id =' + req.session.userID)
+  if(req.session.userID) {
+    activeID = req.session.userID
+  } else {
+    activeID = 0
+  }
 
   if(posts.length <= initialPosts) {
     buttonShown = 'none'

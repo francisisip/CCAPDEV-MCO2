@@ -21,9 +21,12 @@ router.get('/search', async (req, res) => {
         let buttonShown
         let i = 0
 
-        await currUser.findOne({}).then(doc => {
-            activeID = doc.get("userID", Number)
-        })
+        if(req.session.userID) {
+          activeID = req.session.userID
+        } else {
+          activeID = 0
+        }
+
         console.log(activeID)
 
         req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]); 

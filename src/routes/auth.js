@@ -1,19 +1,20 @@
-// function comparePasswords(plaintext, password){
-//   return plaintext === password;
-// }
+const express = require('express');
+const router = express.Router();
+const User = require('../db/models/user.js');
+const currUser = require('../db/models/currUser.js');
 
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-const express = require('express');
-const router = express.Router();
-const User = require('../db/models/user.js');
-const currUser = require('../db/models/currUser.js');
-
 router.get('/login', (req, res) => {
-  res.render('login', { layout: 'auth', title: "Home"});
+    console.log(req.session.userID)
+    if(req.session.userID) { 
+        res.redirect('/')
+    } else {
+        res.render('login', { layout: 'auth', title: "Home"});
+    }
 });
 
 router.get('/register', async (req, res) => {
@@ -38,11 +39,25 @@ router.post('/login', async (req,res)=>{
         //Respond with the user
         const testuser = await User.findOne({username: req.body.username})
         const newID = testuser.userID
-        const sname = 'session-user'
 
         //console.log(newID)
         try{
-            await currUser.findOneAndUpdate({name: sname}, {userID: newID})
+            if(req.body.checked) {
+                console.log('remember on')
+            }
+            else {
+                console.log('remember off')
+            }
+            //if remember me is on
+            if(req.body.checked) {
+                const now = new Date()
+                const expiration = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 21)
+                req.session.cookie.expires = expiration
+            }else {
+            }
+
+            req.session.userID = newID
+            req.session.save()
             res.status(200).json({username: user.username, userID: user.userID});
             return
         }
@@ -98,14 +113,18 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.post('/logout', async (req, res) => {
-    try{
-        await currUser.findOneAndUpdate({name: 'session-user'}, {userID: 0})
-        res.status(200)
-    }
-    catch(err) {
-        console.log(err)
-    }
-})
+router.post('/logout', (req, res) => {
+    console.log("POST request received for /logout");
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).send('Server error');
+        return;
+      }
+  
+      // Session successfully destroyed
+      res.status(200).send('Logout successful');
+    });
+});
 
 module.exports = router;

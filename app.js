@@ -3,6 +3,8 @@ dotenv.config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const db = require('./src/db/db.js');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 async function main() {
   const app = express();
@@ -17,6 +19,18 @@ async function main() {
 
   //accessing json formats
   app.use(express.json());
+
+  app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ 
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+      httpOnly: true,
+    },
+  }));
 
   // use index routes
   const indexRouter = require('./src/routes/base');

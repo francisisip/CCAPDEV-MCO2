@@ -11,6 +11,7 @@ window.addEventListener("load", async function(e){
     const username = this.document.querySelector("#username");
     const password = this.document.querySelector("#password");
     const login = this.document.querySelector(".login");
+    const check = this.document.querySelector("#rMe");
     let fields = [username, password];
 
     login?.addEventListener("click", async (e)=> {
@@ -31,7 +32,8 @@ window.addEventListener("load", async function(e){
 
         const myObj = { 
             username: username.value,
-            password: password.value
+            password: password.value,
+            checked: check.checked
         };
 
         const jString = JSON.stringify(myObj);

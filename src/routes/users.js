@@ -17,9 +17,11 @@ router.get("/:userID", async (req, res)=>{
     let activeID
     let valid = 0
 
-    await currUser.findOne({}).then(doc => {
-        activeID = doc.get("userID", Number)
-    })
+    if(req.session.userID) {
+        activeID = req.session.userID
+      } else {
+        activeID = 0
+    }
 
     if(Number(activeID) === Number(req.params.userID)){
         console.log('in here')
