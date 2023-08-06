@@ -40,7 +40,7 @@ async function main() {
 
   // Start the server
   app.listen(process.env.PORT, () => {
-    console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
+    console.log('Server started on http://localhost:' + process.env.PORT);
   });
 
   
