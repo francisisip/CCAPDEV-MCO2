@@ -119,6 +119,8 @@ router.put("/:userID/edit", async (req, res)=>{
         console.log(req.body.profileImg)
         await User.findOneAndUpdate({userID: inp}, {bio: req.body.bio});
         await User.findOneAndUpdate({userID: inp}, {profileImg: req.body.profileImg});
+        await User.findOneAndUpdate({userID: inp}, {fName: req.body.fName});
+        await User.findOneAndUpdate({userID: inp}, {lName: req.body.lName});
         res.json({ success: true, message: "User information updated successfully." });
       } catch (err) {
         // Handle any errors that occur during the update process

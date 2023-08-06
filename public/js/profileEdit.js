@@ -14,9 +14,15 @@ window.addEventListener('load', function (e) {
     const ipfp = document.getElementById("icon-dropdown").value;
     const npfp = '/static/img/' + ipfp + '.jpg';
     console.log(npfp);
+    const nfName = document.getElementById("firstName").value;
+    console.log(nfName);
+    const newlName = document.getElementById("lastName").value;
+    console.log(newlName);
     myObj = {
       profileImg: npfp,
-      bio: ibio
+      bio: ibio,
+      fName: nfName,
+      lName: newlName, 
     }
 
     const jString = JSON.stringify(myObj);
@@ -55,9 +61,15 @@ window.addEventListener('load', function (e) {
       console.log(ibio)
       const ipfp = document.getElementById("profileImage").src;
       console.log(ipfp);
+      const nfName = document.getElementById("firstName").value;
+      console.log(nfName);
+      const newlName = document.getElementById("lastName").value;
+      console.log(newlName);
       myObj = {
         profileImg: ipfp,
-        bio: ibio
+        fName: nfName,
+        lName: newlName, 
+        bio: ibio,
       }
   
       const jString = JSON.stringify(myObj);
@@ -86,7 +98,13 @@ window.addEventListener('load', function (e) {
     const currPic =  document.getElementById("profileImage").src.split('/').pop().split('.').shift();
 
     const selectElement = document.getElementById("icon-dropdown");
+    
+    const shouldDisplay = (currPic === "icon0"); // Set your condition here
 
+    if (shouldDisplay) {
+      const conditional = document.getElementById("conditional");
+      conditional.style.display = "block"; // Show the paragraph
+    }
     for (let i = 0; i < selectElement.options.length; i++) {
       const option = selectElement.options[i];
       if (option.value === currPic) {
