@@ -10,7 +10,7 @@ const currUser = require('./models/currUser.js')
 const database = {
     //connect to database
     connect: function () {
-        mongoose.connect("mongodb+srv://vincentburce:<FPkpGmAntLzug0oa>@ccapdev-omsilog.5lrv4tz.mongodb.net/Omsilog?retryWrites=true&w=majority", options)
+        mongoose.connect(MONGO_URI, options)
         .then(() => {
             console.log("Connected to MongoDB");
         })
