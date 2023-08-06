@@ -3,8 +3,6 @@ const exphbs = require('express-handlebars');
 const db = require('./src/db/db.js');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const dotenv = require('dotenv');
-dotenv.config();
 
 async function main() {
   const app = express();
@@ -55,8 +53,8 @@ async function main() {
   await db.connect()
 
   // Start the server
-  app.listen(process.env.SERVER_PORT, () => {
-    console.log('Server started on http://localhost:' + process.env.SERVER_PORT);
+  app.listen(process.env.PORT, () => {
+    console.log('Server started on http://localhost:' + process.env.PORT);
   });
 
   //generate sample data
