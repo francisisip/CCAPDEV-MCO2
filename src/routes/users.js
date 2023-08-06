@@ -32,12 +32,14 @@ router.get("/:userID", async (req, res)=>{
 
     const postsArray = await Post.find({
         userID: req.params.userID,
-        isDeleted: false
+        isDeleted: false,
+        commentID: { $exists: false }
     }).sort({"_id": -1}).lean()
 
     const commentsArray = await Comment.find({
         userID: req.params.userID,
-        isDeleted: false
+        isDeleted: false,
+        commentID: { $exists: true }
     }).sort({"_id": -1}).lean()
 
     for(let post of postsArray) {
