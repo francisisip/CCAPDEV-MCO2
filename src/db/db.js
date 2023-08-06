@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
-//const options = { useUnifiedTopology: true };
+
+const MONGO_URI = process.env.MONGO_URI;
+
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  mongoUrl: MONGO_URI, // Provide the MongoDB connection string
+};
 
 //import User, Comment, and Post from models
 const User = require('./models/user.js')
@@ -10,7 +17,7 @@ const currUser = require('./models/currUser.js')
 const database = {
     //connect to database
     connect: function () {
-        mongoose.connect(MONGO_URI)
+        mongoose.connect(options)
         .then(() => {
             console.log("Connected to MongoDB");
         })
