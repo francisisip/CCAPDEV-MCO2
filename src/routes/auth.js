@@ -72,9 +72,7 @@ router.post('/login', async (req,res)=>{
 
 router.post("/register", async (req, res) => {
     console.log("POST request received for /register");
-
     try {
-        console.log(errors)
 
         const validEmail = validateEmail(req.body.email);
         const emailExist = await User.findOne({email: req.body.email});
