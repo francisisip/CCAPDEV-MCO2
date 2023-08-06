@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-const mongoURI = process.env.MONGO_URI;
-
 //import User, Comment, and Post from models
 const User = require('./models/user.js')
 const Post = require('./models/post.js')
@@ -11,7 +9,7 @@ const currUser = require('./models/currUser.js')
 const database = {
     //connect to database
     connect: function () {
-        mongoose.connect(mongoURI)
+        mongoose.connect(MONGODB_URI)
         .then(() => {
             console.log("Connected to MongoDB");
         })
