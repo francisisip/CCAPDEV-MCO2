@@ -9,7 +9,7 @@ const currUser = require('../db/models/currUser.js')
 const { toLower, calcDate } = require('../utils/helper.js');
 
 router.get('/', (req, res) => {
-    res.send("In users");
+    res.redirect('/')
 })
 
 router.get("/:userID", async (req, res)=>{ 
@@ -98,7 +98,9 @@ router.get("/:userID", async (req, res)=>{
     }
     else{
         res.render("error", {
-            title: "Page not Found."
+            title: "Page not Found.",
+            user: activeID,
+            userObject: userObject
         });
     }
  }); 

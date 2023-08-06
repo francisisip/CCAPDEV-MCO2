@@ -17,9 +17,9 @@ async function countComments(comment) {
     }
   
     return totalComments;
-  }
+}
   
-  async function countTotalComments(post) {
+async function countTotalComments(post) {
     let totalComments = post.comments.length;
   
     for (const commentId of post.comments) {
@@ -31,7 +31,7 @@ async function countComments(comment) {
     }
   
     return totalComments;
-  }
+}
 
 const { toLower, calcDate } = require('../utils/helper.js')
 
@@ -59,13 +59,19 @@ router.get('/:id/:cID', async (req, res) => {
         activeID = doc.get("userID", Number)
     })
 
+    const userObject = await User.findOne({userID: activeID}).lean();
+
     try {
         // Find the post with the given postID
         const foundPost = await Post.findOne({ postID: postID }).lean();
 
         if (!foundPost) {
             // Handle the case when the post is not found
-            return res.status(404).send("Post not found");
+            return res.status(404).render('error', {
+                title: "Error", 
+                user: activeID,
+                userObject: userObject, 
+            });
         }
 
         // Find the comment with the given commentID within the foundPost
@@ -106,8 +112,6 @@ router.get('/:id/:cID', async (req, res) => {
             foundComment.goBack = foundComment.postID + "/" + foundComment.parentComment
         }
 
-        const userObject = await User.findOne({userID: activeID}).lean();
-
         res.render('singleComment', {
             title: foundComment.author.username,
             post: foundPost,
@@ -133,12 +137,18 @@ router.get('/:id', async (req, res) => {
         activeID = doc.get("userID", Number)
     })
 
+    const userObject = await User.findOne({userID: activeID}).lean();
+
     try {
         const foundPost = await Post.findOne({ postID: resourceId }).lean();
     
         if (!foundPost) {
-          // Handle the case when the post is not found
-          return res.status(404).send("Post not found");
+            // Handle the case when the post is not found
+            return res.status(404).render('error', {
+                title: "Error", 
+                user: activeID,
+                userObject: userObject, 
+            });
         }
 
     let tag;
@@ -196,8 +206,6 @@ router.get('/:id', async (req, res) => {
     foundPost.uvoteClass = 'upvote'
     foundPost.dvoteClass = 'downvote'
     }
-
-    const userObject = await User.findOne({userID: activeID}).lean();
 
     res.render('singlePost', { 
         title: foundPost.title, 
