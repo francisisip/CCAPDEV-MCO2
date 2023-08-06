@@ -1,5 +1,5 @@
 window.addEventListener('load', function (e) {
-  //listener for opening form
+  
   submit = document.getElementById("submit-btn")
 
   submit.addEventListener("click", async e => {
@@ -43,7 +43,46 @@ window.addEventListener('load', function (e) {
 
     })
 
+    cancel = document.getElementById("cancel-btn")
+    cancel.addEventListener("click", async e => {
     
+      e.preventDefault();
+  
+      let currUser = document.querySelector(".usernow");
+      let user = Number(currUser.id.replace('now', ''))
+  
+      const ibio = document.getElementById("bio").value;
+      console.log(ibio)
+      const ipfp = document.getElementById("profileImage").src;
+      console.log(ipfp);
+      myObj = {
+        profileImg: ipfp,
+        bio: ibio
+      }
+  
+      const jString = JSON.stringify(myObj);
+  
+      try {
+        const response = await fetch('/users/' + user + '/edit', {
+          method: "PUT",
+          body: jString,
+          headers: {
+              'Content-Type': 'application/json'
+          }
+        });
+  
+        console.log(response.status);
+        if (response.status === 200) {
+            window.location.reload();
+        } else {
+            console.log("nay");
+        }
+      
+      } catch (err) {
+          console.error(err);
+        }
+  
+      })
     const currPic =  document.getElementById("profileImage").src.split('/').pop().split('.').shift();
 
     const selectElement = document.getElementById("icon-dropdown");
@@ -54,7 +93,7 @@ window.addEventListener('load', function (e) {
         option.selected = true;
         break; 
       }
-}
+    }
 
     const iconDropdown = document.getElementById('icon-dropdown');
     const selectedIcon = document.getElementById('selected-icon');

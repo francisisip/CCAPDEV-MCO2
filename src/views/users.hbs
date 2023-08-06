@@ -15,8 +15,8 @@
                 <p class = "profile-name">{{loadedProfile.username}}</p>
             </a>
             <p>-------------------------------------</p>
-            <p class = "names" id = "fName">{{loadedProfile.fName}}</p> 
-            <p class = "names" id = "lName">{{loadedProfile.lName}}</p>
+            <p class = "names" id = "fName">{{loadedProfile.fName}} {{loadedProfile.lName}}</p> 
+         
             <p id = "eMail">{{loadedProfile.email}}</p>
             <p id = "bio">{{loadedProfile.bio}}</p> 
             <p>-------------------------------------</p>
@@ -43,6 +43,7 @@
                     <h1>Edit Profile</h1>
                    
                     <div class="form-group">
+                         <label for="pfp">Select Profile Picture:</label>
                          <select id="icon-dropdown">
                             <option value="icon1">Icon 1</option>
                             <option value="icon2">Icon 2</option>
@@ -53,7 +54,9 @@
                             <option value="icon7">Icon 7</option>
                             <option value="icon8">Icon 8</option>
                         </select>
-                        <img id="selected-icon" src="{{loadedProfile.profileImg}}" alt="Selected Icon" style="max-width: 100px;">
+                        <br>
+                        <br>
+                        <img id="selected-icon" src="{{loadedProfile.profileImg}}" alt="Selected Icon" style="max-width: 200px;">
                     </div>
                     <div class="form-group">
                         <label for="bio">Edit Bio:</label>

@@ -39,7 +39,7 @@ a {
     color: inherit !important; 
 }
 
-input[type=text] {
+input[type=select] {
     padding-left: 10px;
     box-sizing: border-box;
 }
