@@ -6,10 +6,17 @@ const Post = require('./models/post.js')
 const Comment = require('./models/comment.js')
 const currUser = require('./models/currUser.js')
 
+const MONGODB_URI = process.env.MONGODB_URI;
+
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
 const database = {
     //connect to database
     connect: function () {
-        mongoose.connect(MONGODB_URI)
+        mongoose.connect(MONGODB_URI, options)
         .then(() => {
             console.log("Connected to MongoDB");
         })
